@@ -4,8 +4,9 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/Library/Frameworks/R.framework/Resources/include",
-                "/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include"
+                "/Library/Frameworks/R.framework/Resources/include/",
+                "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/cpp11/include"
+
             ],
             "defines": [],
             "macFrameworkPath": [
