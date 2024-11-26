@@ -14,8 +14,13 @@
 #include <regex>
 #include <vector>
 #include <unordered_set>
+#include <unordered_map>
 
-
+//TODO:
+/*
+* overwrite the file
+* 
+*/
 
 // Structure to store mutation details
 struct MutationReport {
@@ -32,60 +37,94 @@ void initializeREnvironment() {
     Rf_initEmbeddedR(argc, (char **)argv);
 }
 
-// Function to mutate specific nodes in the AST
-SEXP mutateExpression(SEXP expr, std::vector<MutationReport>& reports, int lineNumber, std::unordered_set<SEXP>& visited) {
-    // Check if node has been visited
-    if (visited.find(expr) != visited.end()) {
-        std::cout << "Skipping already visited node." << std::endl;
+void printSEXP(SEXP expr) {
+
+    std::cout << "printing" << std::endl;
+    Rf_PrintValue(expr);
+    std::cout << "finishing printing" << std::endl;
+    return;
+}
+
+std::string generateNodeKey(SEXP expr) {
+    std::ostringstream oss;
+
+    // Add the type of the node
+    oss << "TYPEOF: " << TYPEOF(expr);
+
+    // For symbols, add their name
+    if (TYPEOF(expr) == SYMSXP) {
+        oss << " SYMBOL: " << CHAR(PRINTNAME(expr));
+    }
+    // For character strings, add their value
+    else if (TYPEOF(expr) == STRSXP) {
+        oss << " STRING: " << CHAR(STRING_ELT(expr, 0));
+    }
+    // For language constructs, add the function name
+    else if (TYPEOF(expr) == LANGSXP) {
+        SEXP fun = CAR(expr);
+        if (TYPEOF(fun) == SYMSXP) {
+            oss << " FUNC: " << CHAR(PRINTNAME(fun));
+        }
+    }
+
+    // Add the pointer address as a fallback
+    oss << " ADDRESS: " << expr;
+
+    return oss.str();
+}
+
+SEXP mutateExpression(SEXP expr, std::vector<MutationReport>& reports, int lineNumber, std::unordered_map<std::string, std::string>& mutationMap) {
+    // Generate a unique key for the current node
+    std::string nodeKey = generateNodeKey(expr);
+
+    // Check if this node has already been mutated
+    if (mutationMap.find(nodeKey) != mutationMap.end()) {
+        std::cout << "Skipping already mutated node: " << nodeKey << std::endl;
         return expr;
     }
-    visited.insert(expr);
 
-    std::cout << "Visiting new node, type: " << TYPEOF(expr) << std::endl;
+    if (TYPEOF(expr) == LANGSXP) {
+        SEXP fun = CAR(expr); // Get the function part of the language construct
 
-    if (TYPEOF(expr) == LANGSXP) {  // Check if it's a language construct
-        SEXP fun = CAR(expr);
+        std::cout << "Printing fun" << std::endl;
+        printSEXP(fun);
 
-        // Mutation: Replace "+" with "-"
-        if (fun == Rf_install("+")) {
+        std::cout << "Printing expr" << std::endl;
+        printSEXP(expr);
+
+        // Apply mutations only once
+        if (fun == Rf_install("+") && mutationMap[nodeKey] != "+ to -") {
             std::cout << "Applying mutation: + to -" << std::endl;
-            SETCAR(expr, Rf_install("-"));
+            SETCAR(expr, Rf_install("-")); // Mutate "+" to "-"
             reports.push_back({lineNumber, "Original: +", "Mutated: -", "+ to - mutation"});
-        } 
-        // Mutation: Replace "-" with "+"
-        else if (fun == Rf_install("-")) {
+            mutationMap[nodeKey] = "+ to -"; // Record the mutation
+            return expr; // Stop further traversal after mutation
+        } else if (fun == Rf_install("-") && mutationMap[nodeKey] != "- to +") {
             std::cout << "Applying mutation: - to +" << std::endl;
-            SETCAR(expr, Rf_install("+"));
+            SETCAR(expr, Rf_install("+")); // Mutate "-" to "+"
             reports.push_back({lineNumber, "Original: -", "Mutated: +", "- to + mutation"});
-        } 
-        // Mutation: Replace "*" with "/"
-        else if (fun == Rf_install("*")) {
-            std::cout << "Applying mutation: * to /" << std::endl;
-            SETCAR(expr, Rf_install("/"));
-            reports.push_back({lineNumber, "Original: *", "Mutated: /", "* to / mutation"});
+            mutationMap[nodeKey] = "- to +"; // Record the mutation
+            return expr; // Stop further traversal after mutation
         }
-        // Mutation: Replace ">" with "<"
-        else if (fun == Rf_install(">")) {
-            std::cout << "Applying mutation: > to <" << std::endl;
-            SETCAR(expr, Rf_install("<"));
-            reports.push_back({lineNumber, "Original: >", "Mutated: <", "> to < mutation"});
+
+        // Traverse child nodes recursively
+        SEXP next = CDR(expr);
+        while (next != R_NilValue) {
+            std::cout << "Printing next" << std::endl;
+            printSEXP(next);
+            mutateExpression(CAR(next), reports, lineNumber, mutationMap);
+            next = CDR(next);
         }
     }
 
-    // Recursively apply mutations to child nodes
-    for (SEXP next = CDR(expr); next != R_NilValue; next = CDR(next)) {
-        std::cout << "Recursively visiting child node." << std::endl;
-        mutateExpression(CAR(next), reports, lineNumber, visited);
-    }
-
-    std::cout << "Returning from node, type: " << TYPEOF(expr) << std::endl;
     return expr;
 }
 
-// Wrapper function to initialize the visited set
+// Wrapper function to initialize the mutation map
 SEXP mutateExpression(SEXP expr, std::vector<MutationReport>& reports, int lineNumber) {
-    std::unordered_set<SEXP> visited;
-    return mutateExpression(expr, reports, lineNumber, visited);
+    // Initialize an unordered_map to store mutations
+    std::unordered_map<std::string, std::string> mutationMap;
+    return mutateExpression(expr, reports, lineNumber, mutationMap);
 }
 
 // Function to print the AST structure using .Internal(inspect())
@@ -99,44 +138,56 @@ void inspectAST(SEXP expr) {
     }
 }
 
-void parseRFileAsBlock(const std::string &filePath, std::vector<MutationReport>& reports) {
+void parseRFileAsString(const std::string& filePath, std::vector<MutationReport>& reports) {
     std::ifstream rFile(filePath);
     if (!rFile.is_open()) {
         std::cerr << "Could not open file: " << filePath << std::endl;
         return;
     }
 
-    std::stringstream buffer;
-    buffer << rFile.rdbuf();
-    std::string fileContent = buffer.str();
+    std::string line;
+    int lineNumber = 0;
 
-    SEXP cmdSexp, cmdExpr = R_NilValue;
-    ParseStatus status;
+    while (std::getline(rFile, line)) {
+        lineNumber++;
+        std::cout << "Parsing line " << lineNumber << ": " << line << std::endl;
 
-    PROTECT(cmdSexp = Rf_allocVector(STRSXP, 1));
-    SET_STRING_ELT(cmdSexp, 0, Rf_mkChar(fileContent.c_str()));
+        // Trim leading and trailing whitespace
+        line.erase(0, line.find_first_not_of(" \t"));
+        line.erase(line.find_last_not_of(" \t") + 1);
 
-    PROTECT(cmdExpr = R_ParseVector(cmdSexp, -1, &status, R_NilValue));
-
-    if (status != PARSE_OK) {
-        std::cerr << "Error parsing file content" << std::endl;
-    } else {
-        for (int i = 0; i < Rf_length(cmdExpr); i++) {
-            int lineNumber = i + 1;
-            std::cout << "\nInspecting Expression " << lineNumber << " with .Internal(inspect()):" << std::endl;
-            inspectAST(VECTOR_ELT(cmdExpr, i));
-            mutateExpression(VECTOR_ELT(cmdExpr, i), reports, lineNumber);
+        if (line.empty()) {
+            std::cout << "Skipping empty line." << std::endl;
+            continue;
         }
+
+        // Parse the single line
+        SEXP cmdExpr = R_NilValue;
+        PROTECT(cmdExpr = R_ParseString(line.c_str()));
+
+        if (Rf_length(cmdExpr) == 0) {
+            std::cerr << "Parse error on line " << lineNumber << ": " << line << std::endl;
+            UNPROTECT(1);
+            continue; // Skip to the next line on parse failure
+        }
+
+        // Process each expression in the parsed line
+        for (int i = 0; i < Rf_length(cmdExpr); i++) {
+            //SEXP expr = VECTOR_ELT(cmdExpr, i);
+            inspectAST(cmdExpr);
+            mutateExpression(cmdExpr, reports, lineNumber);
+        }
+
+        UNPROTECT(1);
     }
 
-    UNPROTECT(2);
     rFile.close();
 }
 
-void runREmbeddedFileParsing(const std::string &filePath) {
+void runREmbeddedFileParsing(const std::string& filePath) {
     initializeREnvironment();
     std::vector<MutationReport> reports;
-    parseRFileAsBlock(filePath, reports);
+    parseRFileAsString(filePath, reports);
     Rf_endEmbeddedR(0);
 
     // Display mutation reports

@@ -1,4 +1,13 @@
-sum_function <- function(a, b) {
-  sum <- a + b
-  return(sum)
-}
+2
+2
+2
+3
+3
+3
+5
+5
+5
+4
+0
+4
+

@@ -1,7 +1,37 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [
+        {
+            "name": "Debug in Lima",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/asanaliamandykov.linux/MutatoR/a.out",
+            "args": [],  // Add any command-line arguments if required
+            "stopAtEntry": false, // Set to true if you want the debugger to stop at the program entry point
+            "cwd": "/home/asanaliamandykov.linux/MutatoR",
+            "environment": [
+                {
+                    "name": "R_HOME",
+                    "value": "/usr/lib/R"
+                }
+            ],
+            "externalConsole": false, // Set to true if you want to launch the program in an external console
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "logging": {
+                "trace": true,
+                "traceResponse": true,
+                "engineLogging": true,
+                "programOutput": true,
+                "exceptions": true
+            }
+        }
+    ]
 }

@@ -4,15 +4,11 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/Library/Frameworks/R.framework/Resources/include/",
-                "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/cpp11/include"
-
+                "/usr/share/R/include",
+                "/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include"
             ],
             "defines": [],
-            "macFrameworkPath": [
-                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
-            ],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/usr/bin/gcc",
             "cStandard": "c17",
             "cppStandard": "c++20",
             "intelliSenseMode": "macos-clang-arm64"
