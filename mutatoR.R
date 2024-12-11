@@ -1,13 +1,20 @@
 dyn.load("mutateR.so")
 
-# R function to mutate the R file
 mutate_file <- function(file_name) {
-  # Call the C++ function "C_mutate" defined in mutateR.cpp
-  mutated_code <- .Call("C_mutate", file_name)
+  dir.create("./mutations", showWarnings = FALSE)
+
+  mutated_expressions <- .Call("C_generate_mutations", file_name)
   
-  # Write the mutated content back to the file
-  writeLines(mutated_code, file_name)
-  
-  # Inform the user
-  cat("File mutated successfully:", file_name, "\n")
+  if (!is.list(mutated_expressions)) {
+    stop("Error: Expected a list of mutated expressions.")
+  }
+
+  # Save each mutated version as a separate file
+  for (i in seq_along(mutated_expressions)) {
+    mutated_code <- deparse(mutated_expressions[[i]])
+    output_file <- sprintf("./mutations/mutated_%03d.R", i)
+    writeLines(mutated_code, output_file)
+  }
+
+  cat("Mutations saved successfully in './mutations' directory.\n")
 }

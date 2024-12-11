@@ -73,59 +73,81 @@ std::string generateNodeKey(SEXP expr) {
     return oss.str();
 }
 
-SEXP mutateExpression(SEXP expr, std::vector<MutationReport>& reports, int lineNumber, std::unordered_map<std::string, std::string>& mutationMap) {
-    // Generate a unique key for the current node
-    std::string nodeKey = generateNodeKey(expr);
+// SEXP mutateExpression(SEXP expr, std::vector<MutationReport>& reports, int lineNumber, std::unordered_map<std::string, std::string>& mutationMap) {
+//     // Generate a unique key for the current node
+//     std::string nodeKey = generateNodeKey(expr);
 
-    // Check if this node has already been mutated
-    if (mutationMap.find(nodeKey) != mutationMap.end()) {
-        std::cout << "Skipping already mutated node: " << nodeKey << std::endl;
-        return expr;
-    }
+//     // Check if this node has already been mutated
+//     if (mutationMap.find(nodeKey) != mutationMap.end()) {
+//         std::cout << "Skipping already mutated node: " << nodeKey << std::endl;
+//         return expr;
+//     }
 
+//     if (TYPEOF(expr) == LANGSXP) {
+//         SEXP fun = CAR(expr); // Get the function part of the language construct
+
+//         std::cout << "Printing fun" << std::endl;
+//         printSEXP(fun);
+
+//         std::cout << "Printing expr" << std::endl;
+//         printSEXP(expr);
+
+//         // Apply mutations only once
+//         if (fun == Rf_install("+") && mutationMap[nodeKey] != "+ to -") {
+//             std::cout << "Applying mutation: + to -" << std::endl;
+//             SETCAR(expr, Rf_install("-")); // Mutate "+" to "-"
+//             reports.push_back({lineNumber, "Original: +", "Mutated: -", "+ to - mutation"});
+//             mutationMap[nodeKey] = "+ to -"; // Record the mutation
+//             return expr; // Stop further traversal after mutation
+//         } else if (fun == Rf_install("-") && mutationMap[nodeKey] != "- to +") {
+//             std::cout << "Applying mutation: - to +" << std::endl;
+//             SETCAR(expr, Rf_install("+")); // Mutate "-" to "+"
+//             reports.push_back({lineNumber, "Original: -", "Mutated: +", "- to + mutation"});
+//             mutationMap[nodeKey] = "- to +"; // Record the mutation
+//             return expr; // Stop further traversal after mutation
+//         }
+
+//         // Traverse child nodes recursively
+//         SEXP next = CDR(expr);
+//         while (next != R_NilValue) {
+//             std::cout << "Printing next" << std::endl;
+//             printSEXP(next);
+//             mutateExpression(CAR(next), reports, lineNumber, mutationMap);
+//             next = CDR(next);
+//         }
+//     }
+
+//     return expr;
+// }
+
+SEXP mutate_ast(SEXP expr) {
     if (TYPEOF(expr) == LANGSXP) {
-        SEXP fun = CAR(expr); // Get the function part of the language construct
+        SEXP fun = CAR(expr); // The function/operator of the expression
 
-        std::cout << "Printing fun" << std::endl;
-        printSEXP(fun);
-
-        std::cout << "Printing expr" << std::endl;
-        printSEXP(expr);
-
-        // Apply mutations only once
-        if (fun == Rf_install("+") && mutationMap[nodeKey] != "+ to -") {
-            std::cout << "Applying mutation: + to -" << std::endl;
-            SETCAR(expr, Rf_install("-")); // Mutate "+" to "-"
-            reports.push_back({lineNumber, "Original: +", "Mutated: -", "+ to - mutation"});
-            mutationMap[nodeKey] = "+ to -"; // Record the mutation
-            return expr; // Stop further traversal after mutation
-        } else if (fun == Rf_install("-") && mutationMap[nodeKey] != "- to +") {
-            std::cout << "Applying mutation: - to +" << std::endl;
-            SETCAR(expr, Rf_install("+")); // Mutate "-" to "+"
-            reports.push_back({lineNumber, "Original: -", "Mutated: +", "- to + mutation"});
-            mutationMap[nodeKey] = "- to +"; // Record the mutation
-            return expr; // Stop further traversal after mutation
+        if (fun == Rf_install("+")) {
+            std::cout << "[DEBUG] Mutating '+' to '-'" << std::endl;
+            SETCAR(expr, Rf_install("-"));
+        } else if (fun == Rf_install("-")) {
+            std::cout << "[DEBUG] Mutating '-' to '+'" << std::endl;
+            SETCAR(expr, Rf_install("+"));
         }
 
-        // Traverse child nodes recursively
+        // Traverse child nodes
         SEXP next = CDR(expr);
         while (next != R_NilValue) {
-            std::cout << "Printing next" << std::endl;
-            printSEXP(next);
-            mutateExpression(CAR(next), reports, lineNumber, mutationMap);
+            mutate_ast(CAR(next));
             next = CDR(next);
         }
     }
-
     return expr;
 }
 
 // Wrapper function to initialize the mutation map
-SEXP mutateExpression(SEXP expr, std::vector<MutationReport>& reports, int lineNumber) {
-    // Initialize an unordered_map to store mutations
-    std::unordered_map<std::string, std::string> mutationMap;
-    return mutateExpression(expr, reports, lineNumber, mutationMap);
-}
+// SEXP mutateExpression(SEXP expr, std::vector<MutationReport>& reports, int lineNumber) {
+//     // Initialize an unordered_map to store mutations
+//     std::unordered_map<std::string, std::string> mutationMap;
+//     return mutateExpression(expr, reports, lineNumber, mutationMap);
+// }
 
 // Function to print the AST structure using .Internal(inspect())
 void inspectAST(SEXP expr) {
@@ -147,6 +169,7 @@ void parseRFileAsString(const std::string& filePath, std::vector<MutationReport>
 
     std::string line;
     int lineNumber = 0;
+    std::ostringstream mutatedContent;
 
     while (std::getline(rFile, line)) {
         lineNumber++;
@@ -156,33 +179,50 @@ void parseRFileAsString(const std::string& filePath, std::vector<MutationReport>
         line.erase(0, line.find_first_not_of(" \t"));
         line.erase(line.find_last_not_of(" \t") + 1);
 
-        if (line.empty()) {
-            std::cout << "Skipping empty line." << std::endl;
+        if (line.empty() || line[0] == '#') { // Skip empty lines and comments
+            std::cout << "Skipping empty or comment line." << std::endl;
             continue;
         }
 
-        // Parse the single line
         SEXP cmdExpr = R_NilValue;
-        PROTECT(cmdExpr = R_ParseString(line.c_str()));
+        PROTECT(cmdExpr = R_ParseVector(Rf_mkString(line.c_str()), -1, NULL, R_NilValue));
 
         if (Rf_length(cmdExpr) == 0) {
             std::cerr << "Parse error on line " << lineNumber << ": " << line << std::endl;
             UNPROTECT(1);
-            continue; // Skip to the next line on parse failure
+            continue;
         }
 
         // Process each expression in the parsed line
         for (int i = 0; i < Rf_length(cmdExpr); i++) {
-            //SEXP expr = VECTOR_ELT(cmdExpr, i);
-            inspectAST(cmdExpr);
-            mutateExpression(cmdExpr, reports, lineNumber);
+            SEXP expr = VECTOR_ELT(cmdExpr, i);
+            inspectAST(expr); // Inspect AST
+
+            SEXP mutatedExpr = mutate_ast(expr); // Apply mutations
+            PROTECT(mutatedExpr);
+
+            // Convert mutated expression to string
+            SEXP deparseCall = PROTECT(Rf_lang2(Rf_install("deparse"), mutatedExpr));
+            SEXP deparseResult = PROTECT(R_tryEval(deparseCall, R_GlobalEnv, NULL));
+            if (Rf_isString(deparseResult)) {
+                std::string mutatedLine = CHAR(STRING_ELT(deparseResult, 0));
+                mutatedContent << mutatedLine << "\n";
+            } else {
+                std::cerr << "Failed to deparse mutated expression on line " << lineNumber << std::endl;
+            }
+
+            UNPROTECT(3); // mutatedExpr, deparseCall, deparseResult
         }
 
-        UNPROTECT(1);
+        UNPROTECT(1); // cmdExpr
     }
+
+    // Output the mutated content
+    std::cout << "Mutated Content:\n" << mutatedContent.str() << std::endl;
 
     rFile.close();
 }
+
 
 void runREmbeddedFileParsing(const std::string& filePath) {
     initializeREnvironment();
