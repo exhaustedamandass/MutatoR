@@ -1,0 +1,31 @@
+Package: mutatoR
+Title: A Mutation Testing Tool for R
+Version: 
+Authors@R: c(
+    person(given = "Assanali",
+           family = "Amandykov",
+           role = c("aut"),
+           email = "assanaliamandykov@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID")),
+    person(given = "Pierre",
+           family = "Donat-Bouillud",
+           role = c("aut", "cre"),
+           email = "Pierre.donat.bouillud@gmail.com",
+           comment = c(ORCID = "0000-0003-4455-1130"))
+)
+Description: A mutation testing tool designed to improve the quality of R codebases by 
+    systematically introducing small changes and ensuring that existing tests 
+    can detect them. Developed in C++ for performance and integrated seamlessly 
+    with R to aid in identifying weak spots in tests.
+License: no license yet
+Encoding: UTF-8
+LazyData: true
+SystemRequirements: C++11
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports:
+    pkgload
+Suggests:
+    testthat
+LinkingTo:
+    testthat

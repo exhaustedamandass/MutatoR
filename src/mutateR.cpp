@@ -28,6 +28,7 @@ std::vector<OperatorPos> gather_operators(SEXP expr, std::vector<int> path = {})
     if (TYPEOF(expr) == LANGSXP) {
         SEXP fun = CAR(expr);
         if (fun == Rf_install("+") || fun == Rf_install("-")) {
+            //CHAR(PRINTNAME(fun))
             OperatorPos op;
             op.path = path;
             op.operator_symbol = fun;
