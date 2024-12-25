@@ -48,3 +48,7 @@ mutate_file("sample/sample.R")
 4. **Other Mutation Operators:**
     - **negate_mutator:** Negates conditionals (`!x` to `x` and `x` to `!x`)
     - **scalar_value_mutator:** Replaces zeros with 42 and non-zeros with 0
+
+use makefile
+
+make
