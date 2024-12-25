@@ -17,131 +17,72 @@
 #include <unordered_map>
 
 
-struct OperatorPos {
-    std::vector<int> path;    // Path indices from root to reach this operator
-    SEXP operator_symbol;     // + or -
-};
+// C_mutate_single.cpp
+#include <R.h>
+#include <Rinternals.h>
+#include "ast/ASTHandler.hpp"
+#include "Mutator.hpp"
+#include <vector>
 
-// Recursively gather all operators (+ and -) and their locations in the AST
-std::vector<OperatorPos> gather_operators(SEXP expr, std::vector<int> path = {}) {
-    std::vector<OperatorPos> ops;
-    if (TYPEOF(expr) == LANGSXP) {
-        SEXP fun = CAR(expr);
-        if (fun == Rf_install("+") || fun == Rf_install("-")) {
-            //CHAR(PRINTNAME(fun))
-            OperatorPos op;
-            op.path = path;
-            op.operator_symbol = fun;
-            ops.push_back(op);
-        }
+// Function to Generate All Mutations for a Single SEXP
 
-        int i = 0;
-        for (SEXP next = CDR(expr); next != R_NilValue; next = CDR(next), i++) {
-            auto child_path = path;
-            child_path.push_back(i);
-            auto child_ops = gather_operators(CAR(next), child_path);
-            ops.insert(ops.end(), child_ops.begin(), child_ops.end());
-        }
+extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
+    if (TYPEOF(expr_sexp) != LANGSXP && TYPEOF(expr_sexp) != EXPRSXP) {
+        Rf_error("Input must be an R expression (LANGSXP or EXPRSXP)");
     }
-    return ops;
-}
 
-// Apply a given subset of operator flips to the original expression
-SEXP apply_mutations(SEXP expr, const std::vector<OperatorPos>& ops, int mask) {
-    SEXP mutated = Rf_duplicate(expr);
-    PROTECT(mutated);
+    // Handle EXPRSXP by taking the first element
+    if (TYPEOF(expr_sexp) == EXPRSXP) {
+        if (Rf_length(expr_sexp) < 1) {
+            Rf_error("EXPRSXP input has no expressions.");
+        }
+        expr_sexp = VECTOR_ELT(expr_sexp, 0);
+    }
 
-    for (int i = 0; i < (int)ops.size(); i++) {
-        if (mask & (1 << i)) {
-            // Flip this operator
-            const auto& op = ops[i];
-            SEXP node = mutated;
+    // Initialize ASTHandler and gather operators
+    ASTHandler astHandler;
+    std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp);
 
-            // Navigate down the path to find the operator node
-            for (int idx : op.path) {
-                SEXP nxt = CDR(node);
-                for (int j = 0; j < idx; j++) {
-                    nxt = CDR(nxt);
-                }
-                node = CAR(nxt);
+    int n = static_cast<int>(operators.size());
+    if (n == 0) {
+        Rf_warning("No operators found to mutate.");
+        SEXP emptyList = PROTECT(Rf_allocVector(VECSXP, 0));
+        UNPROTECT(1);
+        return emptyList;
+    }
+
+    // Initialize Mutator
+    Mutator mutator;
+
+    // We'll store the mutated expressions in this vector
+    std::vector<SEXP> mutatedExpressions;
+    // Rough upper bound: each operator can mutate to 3 new operators if we have 4 total
+    // =>  n * 3. That’s just an approximation for reserve().
+    mutatedExpressions.reserve(n * 3);
+
+    // For each operator, flip it to each alternative operator
+    static std::vector<SEXP> allArithmeticOps = {
+        Rf_install("+"),
+        Rf_install("-"),
+        Rf_install("*"),
+        Rf_install("/")
+    };
+
+    for (int i = 0; i < n; i++) {
+        SEXP originalSym = operators[i].op->getSymbol();
+        for (SEXP candidateSym : allArithmeticOps) {
+            if (candidateSym != originalSym) {
+                // produce one mutant
+                SEXP mutated = mutator.applySingleMutation(expr_sexp, operators, i, candidateSym);
+                mutatedExpressions.push_back(mutated);
             }
-
-            // Flip the operator
-            SEXP old_fun = CAR(node);
-            if (old_fun == Rf_install("+")) {
-                SETCAR(node, Rf_install("-"));
-            } else {
-                SETCAR(node, Rf_install("+"));
-            }
         }
     }
 
-    UNPROTECT(1);
-    return mutated;
-}
-
-// Generate all mutated versions of the expression by flipping subsets of operators
-std::vector<SEXP> generate_all_mutations(SEXP expr) {
-    std::vector<SEXP> results;
-    auto ops = gather_operators(expr);
-
-    // There are 2^n - 1 subsets of operators (excluding the empty subset)
-    int n = (int)ops.size();
-    for (int mask = 1; mask < (1 << n); mask++) {
-        SEXP mutated = apply_mutations(expr, ops, mask);
-        results.push_back(mutated);
-    }
-
-    return results;
-}
-
-extern "C" SEXP C_generate_mutations(SEXP file_name) {
-    if (TYPEOF(file_name) != STRSXP || Rf_length(file_name) < 1) {
-        Rf_error("Input must be a single string (file name).");
-    }
-
-    const char* filePath = CHAR(STRING_ELT(file_name, 0));
-    std::ifstream rFile(filePath);
-    if (!rFile.is_open()) {
-        Rf_error("Could not open file: %s", filePath);
-    }
-
-    std::vector<SEXP> collectedMutations;
-    std::string line;
-    while (std::getline(rFile, line)) {
-        // Trim and skip comments/empty
-        line.erase(0, line.find_first_not_of(" \t"));
-        if (line.empty() || line[0] == '#') {
-            continue;
-        }
-        line.erase(line.find_last_not_of(" \t") + 1);
-
-        SEXP strVec = PROTECT(Rf_allocVector(STRSXP, 1));
-        SET_STRING_ELT(strVec, 0, Rf_mkChar(line.c_str()));
-        ParseStatus status;
-        SEXP cmdExpr = PROTECT(R_ParseVector(strVec, -1, &status, R_NilValue));
-        UNPROTECT(1); // strVec
-
-        if (status != PARSE_OK || Rf_length(cmdExpr) < 1) {
-            UNPROTECT(1); // cmdExpr
-            continue;
-        }
-
-        // For each top-level expression on this line, generate all mutations
-        for (int i = 0; i < Rf_length(cmdExpr); i++) {
-            SEXP expr = VECTOR_ELT(cmdExpr, i);
-            auto mutations = generate_all_mutations(expr);
-            collectedMutations.insert(collectedMutations.end(), mutations.begin(), mutations.end());
-        }
-
-        UNPROTECT(1); // cmdExpr
-    }
-    rFile.close();
-
-    // Return as an R list
-    SEXP resultList = PROTECT(Rf_allocVector(VECSXP, collectedMutations.size()));
-    for (size_t i = 0; i < collectedMutations.size(); i++) {
-        SET_VECTOR_ELT(resultList, i, collectedMutations[i]);
+    // Create an R list of all mutated expressions
+    SEXP resultList = PROTECT(Rf_allocVector(VECSXP, mutatedExpressions.size()));
+    for (size_t i = 0; i < mutatedExpressions.size(); i++) {
+        SET_VECTOR_ELT(resultList, i, mutatedExpressions[i]);
     }
 
     UNPROTECT(1);
