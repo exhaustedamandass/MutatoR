@@ -4,3 +4,9 @@
 .httr-oauth
 .DS_Store
 .quarto
+*.so
+*.o
+*.out
+a.out
+mutations/*
+main.cpp

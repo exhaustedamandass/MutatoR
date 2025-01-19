@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/share/R/include",
+                "/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "macos-clang-arm64"        }
+    ],
+    "version": 4
+}
