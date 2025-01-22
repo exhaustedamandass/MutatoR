@@ -26,6 +26,7 @@
 
 // Function to Generate All Mutations for a Single SEXP
 
+// [[cpp11::register]]
 extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
     if (TYPEOF(expr_sexp) != LANGSXP && TYPEOF(expr_sexp) != EXPRSXP) {
         Rf_error("Input must be an R expression (LANGSXP or EXPRSXP)");

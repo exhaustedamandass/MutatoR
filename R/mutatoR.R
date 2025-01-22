@@ -3,7 +3,19 @@
 # 1. Load the shared library that contains 'C_generate_mutations'
 # dyn.load("mutateR.so")
 
+#' @useDynLib MutatoR, .registration = TRUE
+NULL
+
 # 2. Define a function to mutate a single file and run tests on each mutant
+
+#' Mutate a File and Run Tests
+#'
+#' This function parses an R script file, applies mutations to it using a C++ backend, and tests each mutated version.
+#'
+#' @param sample_file Path to the sample R script file to mutate.
+#' @param test_file Path to the R script file containing the tests to run on the mutated versions.
+#' @return A summary of the mutation testing results.
+#' @export
 mutate_file <- function(sample_file, test_file) {
   # Create a 'mutations' directory to store mutated versions
   dir.create("./mutations", showWarnings = FALSE)

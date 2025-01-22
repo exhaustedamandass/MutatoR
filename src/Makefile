@@ -13,7 +13,8 @@ CPP11 := /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cp
 LIBS = -L$(R_HOME)/lib -lR
 
 # Source Files
-SOURCES = ASTHandler.cpp \
+SOURCES = init.o \
+		  ASTHandler.cpp \
 		  mutateR.cpp \
           Mutator.cpp \
 		  PlusOperator.cpp \
