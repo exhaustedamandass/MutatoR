@@ -1,5 +1,8 @@
 // ASTHandler.cpp
 
+#include <map>
+#include <functional>
+#include <iostream>
 #include "ASTHandler.hpp"
 #include "PlusOperator.hpp"
 #include "MinusOperator.hpp"
@@ -29,30 +32,18 @@ void ASTHandler::gatherOperatorsRecursive(SEXP expr, std::vector<int> path, std:
             end_col    = ref_ptr[3];
         }
 
-        //TODO : refactor with a map instead if
+        std::map<SEXP, std::function<std::unique_ptr<Operator>()>> operator_map = {
+            {Rf_install("+"), []() { return std::make_unique<PlusOperator>(); }},
+            {Rf_install("-"), []() { return std::make_unique<MinusOperator>(); }},
+            {Rf_install("*"), []() { return std::make_unique<MultiplyOperator>(); }},
+            {Rf_install("/"), []() { return std::make_unique<DivideOperator>(); }}
+        };
 
-        if (fun == Rf_install("+")) {
-            auto plus_op = std::make_unique<PlusOperator>();
-            OperatorPos pos{path, std::move(plus_op), start_line, 
-            start_col, end_line, end_col, Rf_install("+")};
-            ops.push_back(std::move(pos));
-        }
-        else if (fun == Rf_install("-")) {
-            auto minus_op = std::make_unique<MinusOperator>();
-            OperatorPos pos{path, std::move(minus_op), start_line, 
-            start_col, end_line, end_col, Rf_install("-")};
-            ops.push_back(std::move(pos));
-        }
-        else if (fun == Rf_install("*")){
-            auto mul_op = std::make_unique<MultiplyOperator>();
-            OperatorPos pos{path, std::move(mul_op), start_line, 
-            start_col, end_line, end_col, Rf_install("*")};
-            ops.push_back(std::move(pos));
-        }
-        else if(fun == Rf_install("/")){
-            auto div_op = std::make_unique<DivideOperator>();
-            OperatorPos pos{path, std::move(div_op), start_line, 
-            start_col, end_line, end_col, Rf_install("/")};
+        auto it = operator_map.find(fun);
+        if (it != operator_map.end()) {
+            auto op = it->second();
+            OperatorPos pos{path, std::move(op), start_line, 
+            start_col, end_line, end_col, fun};
             ops.push_back(std::move(pos));
         }
 

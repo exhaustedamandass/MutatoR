@@ -1,4 +1,3 @@
-// MinusOperator.h
 #ifndef MINUS_OPERATOR_H
 #define MINUS_OPERATOR_H
 
@@ -11,6 +10,11 @@ public:
 
     std::string getType() const override {
         return "MinusOperator";
+    }
+
+    void flip(SEXP& node) const override {
+        static SEXP plusSym = Rf_install("+");
+        SETCAR(node, plusSym);
     }
 };
 

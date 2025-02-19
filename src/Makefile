@@ -26,7 +26,7 @@ SOURCES = init.o \
 OBJECTS = $(SOURCES:.cpp=.o)
 
 # Target Shared Library
-TARGET = mutateR.so
+TARGET = MutatoR.so
 
 # Default Rule
 all: $(TARGET)

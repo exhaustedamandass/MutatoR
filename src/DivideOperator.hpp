@@ -11,6 +11,11 @@ public:
     std::string getType() const override {
         return "DivideOperator";
     }
+
+    void flip(SEXP& node) const override {
+        static SEXP multSym = Rf_install("*");
+        SETCAR(node, multSym);
+    }
 };
 
 #endif 

@@ -26,7 +26,6 @@
 
 // Function to Generate All Mutations for a Single SEXP
 
-// [[cpp11::register]]
 extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
     if (TYPEOF(expr_sexp) != LANGSXP && TYPEOF(expr_sexp) != EXPRSXP) {
         Rf_error("Input must be an R expression (LANGSXP or EXPRSXP)");
@@ -43,7 +42,25 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
     // Initialize ASTHandler and gather operators
     ASTHandler astHandler;
     std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp);
+    // Debug: Display the gathered operators in the console
+    std::cout << "Operators vector has " << operators.size() << " operator(s):" << std::endl;
+    for (size_t i = 0; i < operators.size(); i++) {
+        const OperatorPos& op_pos = operators[i];
+        std::cout << "Operator[" << i << "]:" << std::endl;
+        std::cout << "  Path: ";
+        for (const auto& idx : op_pos.path) {
+            std::cout << idx << " ";
+        }
+        std::cout << std::endl;
+        std::cout << "  Operator Type: " << op_pos.op->getType() << std::endl;
+        std::cout << "  Start Position: (" << op_pos.start_line << ", " << op_pos.start_col << ")" << std::endl;
+        std::cout << "  End Position: (" << op_pos.end_line << ", " << op_pos.end_col << ")" << std::endl;
+        std::cout << "  Original Symbol: " << CHAR(PRINTNAME(op_pos.original_symbol)) << std::endl;
+    }
 
+    
+
+    // Debug: Print operators to the console
     int n = static_cast<int>(operators.size());
     if (n == 0) {
         Rf_warning("No operators found to mutate.");
@@ -55,29 +72,15 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
     // Initialize Mutator
     Mutator mutator;
 
-    // We'll store the mutated expressions in this vector
+    // We'll store the mutated expressions in this vector: one
+    // mutant per operator.
     std::vector<SEXP> mutatedExpressions;
-    // Rough upper bound: each operator can mutate to 3 new operators if we have 4 total
-    // =>  n * 3. That’s just an approximation for reserve().
-    mutatedExpressions.reserve(n * 3);
+    mutatedExpressions.reserve(n);
 
-    // For each operator, flip it to each alternative operator
-    static std::vector<SEXP> allArithmeticOps = {
-        Rf_install("+"),
-        Rf_install("-"),
-        Rf_install("*"),
-        Rf_install("/")
-    };
-
+    // For each operator, apply its specific flip method.
     for (int i = 0; i < n; i++) {
-        SEXP originalSym = operators[i].op->getSymbol();
-        for (SEXP candidateSym : allArithmeticOps) {
-            if (candidateSym != originalSym) {
-                // produce one mutant
-                SEXP mutated = mutator.applySingleMutation(expr_sexp, operators, i, candidateSym);
-                mutatedExpressions.push_back(mutated);
-            }
-        }
+        SEXP mutated = mutator.applyFlipMutation(expr_sexp, operators, i);
+        mutatedExpressions.push_back(mutated);
     }
 
     // Create an R list of all mutated expressions

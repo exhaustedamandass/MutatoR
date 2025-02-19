@@ -16,7 +16,7 @@ public:
     // Apply a given subset of operator flips to the original expression
     //SEXP applyMutations(SEXP expr, const std::vector<OperatorPos>& ops, int mask);
 
-    SEXP applySingleMutation(SEXP expr, const std::vector<OperatorPos>& ops,int whichOpIndex, SEXP newSym);
+    SEXP applyFlipMutation(SEXP expr, const std::vector<OperatorPos>& ops,int whichOpIndex);
 };
 
 #endif // MUTATOR_H

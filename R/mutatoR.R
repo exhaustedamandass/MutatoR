@@ -1,8 +1,5 @@
 # mutate_and_test.R
-
-# 1. Load the shared library that contains 'C_generate_mutations'
-# dyn.load("mutateR.so")
-
+library(testthat)
 #' @useDynLib MutatoR, .registration = TRUE
 NULL
 
@@ -10,10 +7,12 @@ NULL
 
 #' Mutate a File and Run Tests
 #'
-#' This function parses an R script file, applies mutations to it using a C++ backend, and tests each mutated version.
+#' This function parses an R script file, applies mutations to it 
+#' using a C++ backend, and tests each mutated version.
 #'
 #' @param sample_file Path to the sample R script file to mutate.
-#' @param test_file Path to the R script file containing the tests to run on the mutated versions.
+#' @param test_file Path to the R script file containing the tests to run on
+#'   the mutated versions.
 #' @return A summary of the mutation testing results.
 #' @export
 mutate_file <- function(sample_file, test_file) {
@@ -21,13 +20,14 @@ mutate_file <- function(sample_file, test_file) {
   dir.create("./mutations", showWarnings = FALSE)
 
   options(keep.source = TRUE)
-  # Instead of readLines() + parse(text=...), do parse(file=..., keep.source=TRUE)
+  # Instead of readLines() + parse(text=...),
+  # do parse(file=..., keep.source=TRUE)
   exprs <- parse(file = sample_file, keep.source = TRUE)
   str(exprs)
 
   # Call the C++ function
   mutated_expressions <- .Call("C_mutate_single", exprs)
-  
+
   if (!is.list(mutated_expressions)) {
     stop("Error: Expected a list of mutated expressions from C_mutate_single.")
   }
@@ -44,13 +44,13 @@ mutate_file <- function(sample_file, test_file) {
     if (is.null(mutation_info)) mutation_info <- "<no info>"
 
     test_result <- run_mutant_test(output_file, test_file)
-    status_str  <- if (test_result) "SURVIVED" else "KILLED"
+    status_str  <- if (!test_result) "SURVIVED" else "KILLED"
 
     cat(sprintf("Mutant %03d => %s\n", i, status_str))
     cat(sprintf("   Mutation info: %s\n", mutation_info))
     cat(sprintf("   Result: %s\n\n", status_str))
 
-    results[[i]] <- test_result
+    results[[i]] <- !test_result
   }
 
   # Summary
@@ -64,10 +64,10 @@ mutate_file <- function(sample_file, test_file) {
 # 3. Helper function to run a test on a single mutated version
 run_mutant_test <- function(mutant_file, test_file) {
   # 3a. Create an isolated environment so the mutated code does not
-  #     contaminate our current workspace. 
+  #     contaminate our current workspace.
   #     We'll load the mutated file in this environment.
-  mutant_env <- new.env(parent = baseenv())
-  
+  mutant_env <- new.env(parent = globalenv())
+
   # 3b. Source the mutated code
   tryCatch(
     expr = {
@@ -80,35 +80,18 @@ run_mutant_test <- function(mutant_file, test_file) {
   )
 
   # 3c. Now run the unit test. We'll use 'testthat' as an example.
-  #     The test file is expected to reference objects that are in
-  #     'mutant_env'.
-  #     We'll store the test results in a variable to see if it fails or passes.
+  #     The test file is expected to reference objects from 'mutant_env'.
+  #     To ensure that testthat functions (like test_that) are available,
+  #     we create a test environment that inherits from mutant_env, which in turn
+  #     inherits from the global environment where testthat is loaded.
   test_result <- tryCatch(
     expr = {
-      # We can use `testthat::test_file(...)`. 
-      # We'll create a new environment for testthat to run in, 
-      # but that environment must have access to the objects in `mutant_env`.
-      # One approach is to temporarily attach or merge the environment:
-      
-      # Example approach: 
-      #   1. Copy objects from `mutant_env` into the environment used by test_file
       test_env <- new.env(parent = mutant_env)
-      
-      #   2. Run the test in that environment
       testthat::test_file(test_file, env = test_env)
-      
-      # If the test suite doesn't throw an error or fail, test passes
-      # But we need to detect failures. test_file returns a summary object 
-      # that we can analyze or, by default, it prints to console.
-
-      # For simplicity, if no R error is thrown, assume PASS. 
-      # We'll refine below if needed.
-
-      TRUE  # meaning "SURVIVED" if no test fails
+      TRUE  # Mutant SURVIVED if no errors occur
     },
     error = function(e) {
-      # If the test code throws an error or fails, consider it KILLED
-      FALSE
+      FALSE  # Mutant is KILLED if an error is thrown
     }
   )
 

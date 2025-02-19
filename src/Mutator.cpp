@@ -1,16 +1,29 @@
 // Mutator.cpp
 #include <sstream>
+#include <iostream>  // Needed for std::cout
 #include "Mutator.hpp"
 
-SEXP Mutator::applySingleMutation(SEXP expr,
-                                  const std::vector<OperatorPos>& ops,
-                                  int whichOpIndex, 
-                                  SEXP newSym) 
+
+SEXP Mutator::applyFlipMutation(SEXP expr,
+                                const std::vector<OperatorPos>& ops,
+                                int whichOpIndex) 
 {
     SEXP mutated = Rf_duplicate(expr);
     PROTECT(mutated);
 
     const OperatorPos& op_pos = ops[whichOpIndex];
+
+    // // Debug: Print op_pos structure to the console
+    // std::cout << "OperatorPos:" << std::endl;
+    // std::cout << "  Path: ";
+    // for (const auto& idx : op_pos.path)
+    //     std::cout << idx << " ";
+    // std::cout << std::endl;
+    // std::cout << "  Operator Type: " << op_pos.op->getType() << std::endl;
+    // std::cout << "  Start Position: (" << op_pos.start_line 
+    //           << ", " << op_pos.start_col << ")" << std::endl;
+    // std::cout << "  End Position: (" << op_pos.end_line 
+    //           << ", " << op_pos.end_col << ")" << std::endl;
 
     // Build mutation message
     std::ostringstream msg;
@@ -18,9 +31,8 @@ SEXP Mutator::applySingleMutation(SEXP expr,
         << ", Col " << op_pos.end_col 
         << ": '" 
         << CHAR(PRINTNAME(op_pos.original_symbol))
-        << "' -> '"
-        << CHAR(PRINTNAME(newSym))
-        << "'";
+        << "' -> " 
+        << op_pos.op->getType();
 
     // Navigate to the operator node
     SEXP node = mutated;
@@ -32,9 +44,9 @@ SEXP Mutator::applySingleMutation(SEXP expr,
         node = CAR(nxt);
     }
 
-    // Actually set the operator symbol
-    SETCAR(node, newSym);
-
+    // Use the operator-specific flip method to perform the mutation
+    op_pos.op->flip(node);
+    // msg << " (flipped operator: " << CHAR(PRINTNAME(node)) << ")";
     // Attach the message as an attribute
     SEXP msg_sexp = Rf_mkString(msg.str().c_str());
     Rf_setAttrib(mutated, Rf_install("mutation_info"), msg_sexp);
