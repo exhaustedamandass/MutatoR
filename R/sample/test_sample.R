@@ -1,5 +1,5 @@
 library(testthat)
 
-test_that("x is 3", {
-  expect_equal(x, 3)
+test_that("result is 1", {
+  expect_equal(result, 1)
 })
