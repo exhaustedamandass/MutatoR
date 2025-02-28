@@ -35,7 +35,7 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
             Rf_error("EXPRSXP input has no expressions.");
         }
         expr_sexp = VECTOR_ELT(expr_sexp, 0);
-        std::cout << TYPEOF(expr_sexp) << std::endl;
+        //std::cout << TYPEOF(expr_sexp) << std::endl;
     }
 
     // Initialize ASTHandler and gather operators
@@ -46,20 +46,20 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
     // ASTHandler astHandler;
     // std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp);
     // Debug: Display the gathered operators in the console
-    std::cout << "Operators vector has " << operators.size() << " operator(s):" << std::endl;
-    for (size_t i = 0; i < operators.size(); i++) {
-        const OperatorPos& op_pos = operators[i];
-        std::cout << "Operator[" << i << "]:" << std::endl;
-        std::cout << "  Path: ";
-        for (const auto& idx : op_pos.path) {
-            std::cout << idx << " ";
-        }
-        std::cout << std::endl;
-        std::cout << "  Operator Type: " << op_pos.op->getType() << std::endl;
-        std::cout << "  Start Position: (" << op_pos.start_line << ", " << op_pos.start_col << ")" << std::endl;
-        std::cout << "  End Position: (" << op_pos.end_line << ", " << op_pos.end_col << ")" << std::endl;
-        std::cout << "  Original Symbol: " << CHAR(PRINTNAME(op_pos.original_symbol)) << std::endl;
-    }
+    // std::cout << "Operators vector has " << operators.size() << " operator(s):" << std::endl;
+    // for (size_t i = 0; i < operators.size(); i++) {
+    //     const OperatorPos& op_pos = operators[i];
+    //     std::cout << "Operator[" << i << "]:" << std::endl;
+    //     std::cout << "  Path: ";
+    //     for (const auto& idx : op_pos.path) {
+    //         std::cout << idx << " ";
+    //     }
+    //     std::cout << std::endl;
+    //     std::cout << "  Operator Type: " << op_pos.op->getType() << std::endl;
+    //     std::cout << "  Start Position: (" << op_pos.start_line << ", " << op_pos.start_col << ")" << std::endl;
+    //     std::cout << "  End Position: (" << op_pos.end_line << ", " << op_pos.end_col << ")" << std::endl;
+    //     std::cout << "  Original Symbol: " << CHAR(PRINTNAME(op_pos.original_symbol)) << std::endl;
+    // }
 
     // Debug: Print operators to the console
     int n = static_cast<int>(operators.size());
@@ -114,6 +114,17 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
             Rf_error("C_mutate_single did not return a list for expression %d.", i);
         }
         
+        std::cout << "logging from C_mutate_file" << std::endl;
+
+        Rf_PrintValue(cur_mutants);
+        for (int idx = 0; idx < Rf_length(cur_mutants); idx++) {
+            SEXP mutant = VECTOR_ELT(cur_mutants, idx);
+            SEXP mutation_info = Rf_getAttrib(mutant, Rf_install("mutation_info"));
+            if (mutation_info != R_NilValue) {
+                Rf_PrintValue(mutation_info);
+            }
+        }
+
         int n_mutants = Rf_length(cur_mutants);
         // For each mutant of the current expression, create a complete file mutant.
         for (int j = 0; j < n_mutants; j++) {
@@ -122,7 +133,16 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
             for (int k = 0; k < n_expr; k++) {
                 // If this is the expression we mutated, use the mutant.
                 if (k == i) {
-                    SET_VECTOR_ELT(new_mutant_file, k, VECTOR_ELT(cur_mutants, j));
+                    SEXP mutant = VECTOR_ELT(cur_mutants, j);
+                    SET_VECTOR_ELT(new_mutant_file, k, mutant);
+
+                    // Reassign the mutation_info attribute
+                    SEXP mutation_info = Rf_getAttrib(mutant, Rf_install("mutation_info"));
+                    if (mutation_info != R_NilValue) {
+                        std::cout << "adding mutation info attribute" << std::endl;
+                        Rf_PrintValue(mutation_info);
+                        Rf_setAttrib(VECTOR_ELT(new_mutant_file, k), Rf_install("mutation_info"), mutation_info);
+                    }
                 } else {
                     // Otherwise, copy the original expression.
                     SET_VECTOR_ELT(new_mutant_file, k, VECTOR_ELT(exprs, k));
@@ -137,6 +157,7 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
     SEXP resultList = PROTECT(Rf_allocVector(VECSXP, all_mutants.size()));
     for (size_t k = 0; k < all_mutants.size(); k++) {
         SET_VECTOR_ELT(resultList, k, all_mutants[k]);
+        // from line 152, bring unprotect here
     }
     UNPROTECT(1);
     

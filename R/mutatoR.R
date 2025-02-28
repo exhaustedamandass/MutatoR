@@ -44,9 +44,14 @@ mutate_file <- function(sample_file, test_file) {
     output_file <- sprintf("./mutations/mutated_%03d.R", i)
     writeLines(mutated_code, output_file)
     
-    # Retrieve the "mutation_info" attribute for display
-    mutation_info <- attr(mutated_expressions[[i]], "mutation_info")
-    if (is.null(mutation_info)) mutation_info <- "<no info>"
+    # Retrieve the "mutation_info" attribute for each expression
+    mutation_info_list <- sapply(mutated_expressions[[i]], function(expr) {
+      attr(expr, "mutation_info")
+    })
+    
+    # Combine mutation_info for display
+    mutation_info <- paste(mutation_info_list, collapse = "; ")
+    if (is.null(mutation_info) || mutation_info == "") mutation_info <- "<no info>"
     
     test_result <- run_mutant_test(output_file, test_file)
     status_str  <- if (test_result) "SURVIVED" else "KILLED"

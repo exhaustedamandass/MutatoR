@@ -37,12 +37,12 @@ std::vector<OperatorPos> ASTHandler::gatherOperators(SEXP expr) {
 void ASTHandler::gatherOperatorsRecursive(SEXP expr, std::vector<int> path, std::vector<OperatorPos>& ops) {
     if (TYPEOF(expr) == LANGSXP) {
         SEXP fun = CAR(expr);
-        std::cout << "fun now is" << std::endl;
-        Rf_PrintValue(fun);
-        std::cout << "expr now is" << std::endl;
-        Rf_PrintValue(expr);
-        SEXP src_ref_cur = Rf_getAttrib(expr, Rf_install("srcref"));
-        std::cout << Rf_length(src_ref_cur) << std::endl;
+        // std::cout << "fun now is" << std::endl;
+        // Rf_PrintValue(fun);
+        // std::cout << "expr now is" << std::endl;
+        // Rf_PrintValue(expr);
+        // SEXP src_ref_cur = Rf_getAttrib(expr, Rf_install("srcref"));
+        // std::cout << Rf_length(src_ref_cur) << std::endl;
         // get srcref
         
         int start_line=-1, start_col=-1, end_line=-1, end_col=-1;
