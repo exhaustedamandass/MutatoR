@@ -93,3 +93,52 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
     UNPROTECT(1);
     return resultList;
 }
+
+extern "C" SEXP C_mutate_file(SEXP exprs) {
+    // Ensure the input is a list of expressions (EXPRSXP)
+    if (TYPEOF(exprs) != EXPRSXP) {
+        Rf_error("Input must be an expression list (EXPRSXP).");
+    }
+    
+    int n_expr = Rf_length(exprs);
+    std::vector<SEXP> all_mutants;
+    
+    // Loop over each expression in the file
+    for (int i = 0; i < n_expr; i++) {
+        SEXP cur_expr = VECTOR_ELT(exprs, i);
+        // Get all mutants for the current expression
+        SEXP cur_mutants = C_mutate_single(cur_expr);
+        
+        // Verify that the return is a list of mutants
+        if (TYPEOF(cur_mutants) != VECSXP) {
+            Rf_error("C_mutate_single did not return a list for expression %d.", i);
+        }
+        
+        int n_mutants = Rf_length(cur_mutants);
+        // For each mutant of the current expression, create a complete file mutant.
+        for (int j = 0; j < n_mutants; j++) {
+            // Allocate a new EXPRSXP (list of expressions) for the mutated file.
+            SEXP new_mutant_file = PROTECT(Rf_allocVector(EXPRSXP, n_expr));
+            for (int k = 0; k < n_expr; k++) {
+                // If this is the expression we mutated, use the mutant.
+                if (k == i) {
+                    SET_VECTOR_ELT(new_mutant_file, k, VECTOR_ELT(cur_mutants, j));
+                } else {
+                    // Otherwise, copy the original expression.
+                    SET_VECTOR_ELT(new_mutant_file, k, VECTOR_ELT(exprs, k));
+                }
+            }
+            all_mutants.push_back(new_mutant_file);
+            UNPROTECT(1);
+        }
+    }
+    
+    // Create an R list to hold all mutated file variants.
+    SEXP resultList = PROTECT(Rf_allocVector(VECSXP, all_mutants.size()));
+    for (size_t k = 0; k < all_mutants.size(); k++) {
+        SET_VECTOR_ELT(resultList, k, all_mutants[k]);
+    }
+    UNPROTECT(1);
+    
+    return resultList;
+}

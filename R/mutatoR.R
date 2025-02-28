@@ -20,37 +20,42 @@ mutate_file <- function(sample_file, test_file) {
   dir.create("./mutations", showWarnings = FALSE)
 
   options(keep.source = TRUE)
-  # Instead of readLines() + parse(text=...),
-  # do parse(file=..., keep.source=TRUE)
+  # Parse the sample file with source information preserved
   exprs <- parse(file = sample_file, keep.source = TRUE)
   str(exprs)
 
-  # Call the C++ function
-  mutated_expressions <- .Call("C_mutate_single", exprs)
+  # Call the C++ function to generate mutated expressions
+  mutated_expressions <- .Call("C_mutate_file", exprs)
 
   if (!is.list(mutated_expressions)) {
-    stop("Error: Expected a list of mutated expressions from C_mutate_single.")
+    stop("Error: Expected a list of mutated expressions from C_mutate_file.")
   }
 
-  # Now loop over each mutated expression exactly once
+  # Loop over each mutated expression
   results <- list()
   for (i in seq_along(mutated_expressions)) {
-    mutated_code <- deparse(mutated_expressions[[i]])
+    # Deparse each individual expression and collapse into valid R code
+    code_lines <- sapply(mutated_expressions[[i]], function(expr) {
+      paste(deparse(expr), collapse = "\n")
+    })
+    mutated_code <- paste(code_lines, collapse = "\n")
+    
+    # Write the valid R code to a file
     output_file <- sprintf("./mutations/mutated_%03d.R", i)
     writeLines(mutated_code, output_file)
-
-    # For display, get the "mutation_info" attribute
+    
+    # Retrieve the "mutation_info" attribute for display
     mutation_info <- attr(mutated_expressions[[i]], "mutation_info")
     if (is.null(mutation_info)) mutation_info <- "<no info>"
-
+    
     test_result <- run_mutant_test(output_file, test_file)
-    status_str  <- if (!test_result) "SURVIVED" else "KILLED"
-
+    status_str  <- if (test_result) "SURVIVED" else "KILLED"
+    
     cat(sprintf("Mutant %03d => %s\n", i, status_str))
     cat(sprintf("   Mutation info: %s\n", mutation_info))
     cat(sprintf("   Result: %s\n\n", status_str))
-
-    results[[i]] <- !test_result
+    
+    results[[i]] <- test_result
   }
 
   # Summary
@@ -61,13 +66,14 @@ mutate_file <- function(sample_file, test_file) {
   cat(sprintf("  Survived:       %d\n", sum(unlist(results))))
 }
 
-# 3. Helper function to run a test on a single mutated version
+# if all tests pass, returns TRUE -> mutant SURVIVED
+# if any of tests fail, returns FALSE -> mutant KILLED
 run_mutant_test <- function(mutant_file, test_file) {
   # 3a. Create an isolated environment so the mutated code does not
   #     contaminate our current workspace.
   #     We'll load the mutated file in this environment.
   mutant_env <- new.env(parent = globalenv())
-
+  
   # 3b. Source the mutated code
   tryCatch(
     expr = {
@@ -78,24 +84,29 @@ run_mutant_test <- function(mutant_file, test_file) {
       return(FALSE)
     }
   )
-
-  # 3c. Now run the unit test. We'll use 'testthat' as an example.
+  
+  # 3c. Run the unit test using testthat without printing logs to the console.
   #     The test file is expected to reference objects from 'mutant_env'.
-  #     To ensure that testthat functions (like test_that) are available,
-  #     we create a test environment that inherits from mutant_env, which in turn
-  #     inherits from the global environment where testthat is loaded.
   test_result <- tryCatch(
     expr = {
       test_env <- new.env(parent = mutant_env)
-      testthat::test_file(test_file, env = test_env)
-      TRUE  # Mutant SURVIVED if no errors occur
+      # Run tests with a silent reporter to suppress logs.
+      results <- testthat::test_file(test_file, env = test_env
+      #,reporter = "silent"
+      )
+      # If any tests fail, the mutant is considered killed.
+      if (testthat::failed(results) > 0) {
+        FALSE
+      } else {
+        TRUE
+      }
     },
     error = function(e) {
-      FALSE  # Mutant is KILLED if an error is thrown
+      FALSE  # If an error occurs while running the tests, treat as a killed mutant.
     }
   )
-
-  # 3d. Return TRUE if the mutant SURVIVED (test passed),
-  #     FALSE if the mutant was KILLED (test failed).
+  
+  # 3d. Return TRUE if the mutant SURVIVED (all tests passed),
+  #     FALSE if the mutant was KILLED (at least one test failed).
   return(test_result)
 }
