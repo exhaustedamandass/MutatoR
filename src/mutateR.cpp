@@ -94,6 +94,15 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp) {
     return resultList;
 }
 
+bool isValidMutant(SEXP mutant) {
+    SEXP compiled_result = R_NilValue;
+    PROTECT(compiled_result = Rf_eval(mutant, R_GlobalEnv)); // Evaluate in the global environment
+
+    bool is_valid = (compiled_result != R_NilValue); // Check if the evaluation was successful
+    UNPROTECT(1); // Unprotect the compiled_result
+    return is_valid;
+}
+
 extern "C" SEXP C_mutate_file(SEXP exprs) {
     // Ensure the input is a list of expressions (EXPRSXP)
     if (TYPEOF(exprs) != EXPRSXP) {
@@ -145,11 +154,23 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
     
     // Create an R list to hold all mutated file variants.
     SEXP resultList = PROTECT(Rf_allocVector(VECSXP, all_mutants.size()));
+    size_t valid_count = 0; // To keep track of valid mutants
+
     for (size_t k = 0; k < all_mutants.size(); k++) {
-        SET_VECTOR_ELT(resultList, k, all_mutants[k]);
-        // TODO: from line 152, bring unprotect here
+        // Use the validation function to check if the mutant is valid
+        if (isValidMutant(all_mutants[k])) {
+            SET_VECTOR_ELT(resultList, valid_count, all_mutants[k]);
+            valid_count++; // Increment valid count
+        }
     }
-    UNPROTECT(1);
-    
-    return resultList;
+
+    // Resize the resultList to the number of valid mutants
+    SEXP final_resultList = PROTECT(Rf_allocVector(VECSXP, valid_count));
+    for (size_t i = 0; i < valid_count; i++) {
+        SET_VECTOR_ELT(final_resultList, i, VECTOR_ELT(resultList, i));
+    }
+    UNPROTECT(1); // Unprotect the original resultList
+
+    UNPROTECT(1); // Unprotect the final_resultList
+    return final_resultList;
 }
