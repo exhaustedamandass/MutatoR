@@ -31,7 +31,7 @@ mutate_file <- function(sample_file, test_file) {
     stop("Error: Expected a list of mutated expressions from C_mutate_file.")
   }
 
-  # Loop over each mutated expression
+  # Loop over each mutated expression (mutation on parsed expressions)
   results <- list()
   for (i in seq_along(mutated_expressions)) {
     # Deparse each individual expression and collapse into valid R code
@@ -46,7 +46,6 @@ mutate_file <- function(sample_file, test_file) {
     
     # Retrieve the "mutation_info" attribute for each expression
     mutation_info <- attr(mutated_expressions[[i]], "mutation_info")
-
     if (is.null(mutation_info) || mutation_info == "") mutation_info <- "<no info>"
     
     test_result <- run_mutant_test(output_file, test_file)
@@ -58,14 +57,61 @@ mutate_file <- function(sample_file, test_file) {
     
     results[[i]] <- test_result
   }
-
-  # Summary
+  
+  # --- New mutation strategy: string-level deletion ---
+  # Read the original sample file as text (a vector of lines)
+  original_lines <- readLines(sample_file)
+  num_lines <- length(original_lines)
+  
+  # Define how many string-level mutants to generate.
+  # Ensure that the number does not exceed the total number of lines.
+  num_deletion_mutants <- min(5, num_lines)
+  
+  for (j in 1:num_deletion_mutants) {
+    # Copy the original lines to mutate
+    lines_mutated <- original_lines
+    
+    # Randomly decide how many lines to delete (at least one, at most half the total)
+    n_delete <- sample(1:max(1, floor(num_lines / 2)), 1)
+    # Choose random indices to delete
+    delete_indices <- sort(sample(seq_len(num_lines), n_delete, replace = FALSE))
+    
+    # Remove the selected lines
+    mutated_lines <- lines_mutated[-delete_indices]
+    mutated_code <- paste(mutated_lines, collapse = "\n")
+    
+    # Continue numbering mutants after those generated above
+    mutant_index <- length(results) + 1
+    output_file <- sprintf("./mutations/mutated_%03d.R", mutant_index)
+    writeLines(mutated_code, output_file)
+    
+    # Create a simple description of the mutation for reporting
+    mutation_info <- sprintf("String-level deletion: deleted line(s) %s", paste(delete_indices, collapse = ", "))
+    
+    test_result <- run_mutant_test(output_file, test_file)
+    status_str  <- if (test_result) "SURVIVED" else "KILLED"
+    
+    cat(sprintf("Mutant %03d => %s\n", mutant_index, status_str))
+    cat(sprintf("Mutation info: %s\n", mutation_info))
+    cat(sprintf("   Result: %s\n\n", status_str))
+    
+    results[[mutant_index]] <- test_result
+  }
+  
+  # --- Final summary ---
+  total_mutants <- length(results)
+  killed <- sum(!unlist(results))
+  survived <- sum(unlist(results))
+  mutation_score <- (killed / total_mutants) * 100
+  
   cat("\nMutations saved in './mutations' directory.\n")
   cat("Summary:\n")
-  cat(sprintf("  Total mutants:  %d\n", length(results)))
-  cat(sprintf("  Killed:         %d\n", sum(!unlist(results))))
-  cat(sprintf("  Survived:       %d\n", sum(unlist(results))))
+  cat(sprintf("  Total mutants:    %d\n", total_mutants))
+  cat(sprintf("  Killed:           %d\n", killed))
+  cat(sprintf("  Survived:         %d\n", survived))
+  cat(sprintf("  Mutation Score:   %.2f%%\n", mutation_score))
 }
+
 
 # if all tests pass, returns TRUE -> mutant SURVIVED
 # if any of tests fail, returns FALSE -> mutant KILLED
