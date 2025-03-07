@@ -23,6 +23,24 @@
 #include "ASTHandler.hpp"
 #include "Mutator.hpp"
 #include <vector>
+    // Initialize ASTHandler and gather operators
+    // ASTHandler astHandler;
+    // std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp);
+    // Debug: Display the gathered operators in the console
+    // std::cout << "Operators vector has " << operators.size() << " operator(s):" << std::endl;
+    // for (size_t i = 0; i < operators.size(); i++) {
+    //     const OperatorPos& op_pos = operators[i];
+    //     std::cout << "Operator[" << i << "]:" << std::endl;
+    //     std::cout << "  Path: ";
+    //     for (const auto& idx : op_pos.path) {
+    //         std::cout << idx << " ";
+    //     }
+    //     std::cout << std::endl;
+    //     std::cout << "  Operator Type: " << op_pos.op->getType() << std::endl;
+    //     std::cout << "  Start Position: (" << op_pos.start_line << ", " << op_pos.start_col << ")" << std::endl;
+    //     std::cout << "  End Position: (" << op_pos.end_line << ", " << op_pos.end_col << ")" << std::endl;
+    //     std::cout << "  Original Symbol: " << CHAR(PRINTNAME(op_pos.original_symbol)) << std::endl;
+    // }
 
 // Function to Generate All Mutations for a Single SEXP
 extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
@@ -42,24 +60,6 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
     ASTHandler astHandler;
     std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp);
 
-    // Initialize ASTHandler and gather operators
-    // ASTHandler astHandler;
-    // std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp);
-    // Debug: Display the gathered operators in the console
-    // std::cout << "Operators vector has " << operators.size() << " operator(s):" << std::endl;
-    // for (size_t i = 0; i < operators.size(); i++) {
-    //     const OperatorPos& op_pos = operators[i];
-    //     std::cout << "Operator[" << i << "]:" << std::endl;
-    //     std::cout << "  Path: ";
-    //     for (const auto& idx : op_pos.path) {
-    //         std::cout << idx << " ";
-    //     }
-    //     std::cout << std::endl;
-    //     std::cout << "  Operator Type: " << op_pos.op->getType() << std::endl;
-    //     std::cout << "  Start Position: (" << op_pos.start_line << ", " << op_pos.start_col << ")" << std::endl;
-    //     std::cout << "  End Position: (" << op_pos.end_line << ", " << op_pos.end_col << ")" << std::endl;
-    //     std::cout << "  Original Symbol: " << CHAR(PRINTNAME(op_pos.original_symbol)) << std::endl;
-    // }
 
     // Debug: Print operators to the console
     int n = static_cast<int>(operators.size());
@@ -80,7 +80,7 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
 
     // For each operator, apply its specific flip method.
     for (int i = 0; i < n; i++) {
-        SEXP mutated = mutator.applyFlipMutation(expr_sexp, operators, i);
+        SEXP mutated = mutator.applyMutation(expr_sexp, operators, i);
         mutatedExpressions.push_back(mutated);
     }
 
@@ -157,7 +157,7 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
     SEXP resultList = PROTECT(Rf_allocVector(VECSXP, all_mutants.size()));
     for (size_t k = 0; k < all_mutants.size(); k++) {
         SET_VECTOR_ELT(resultList, k, all_mutants[k]);
-        // from line 152, bring unprotect here
+        // TODO: from line 152, bring unprotect here
     }
     UNPROTECT(1);
     
