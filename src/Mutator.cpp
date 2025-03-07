@@ -26,7 +26,11 @@ SEXP Mutator::applyFlipMutation(SEXP expr,
 
     // Build mutation message
     std::ostringstream msg;
-    msg << "'" << CHAR(PRINTNAME(op_pos.original_symbol))
+    msg << '\n';
+    msg 
+    << "From line/col: " << op_pos.start_line << "/" << op_pos.start_col << '\n'
+    << "To line/col: " << op_pos.end_line << "/" << op_pos.end_col << '\n'
+    << "'" << CHAR(PRINTNAME(op_pos.original_symbol))
         << "' -> '";
 
     // Navigate to the operator node

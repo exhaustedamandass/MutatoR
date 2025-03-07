@@ -44,9 +44,14 @@ bool isDeletable(SEXP expr) {
     return true;
 }
 
-std::vector<OperatorPos> ASTHandler::gatherOperators(SEXP expr) {
+std::vector<OperatorPos> ASTHandler::gatherOperators(SEXP expr, SEXP src_ref) {
     std::vector<OperatorPos> ops;
     std::vector<int> path;
+    int* ref_ptr = INTEGER(src_ref);
+    _start_line = ref_ptr[0];
+    _start_col  = ref_ptr[1];
+    _end_line   = ref_ptr[2];
+    _end_col    = ref_ptr[3];
     gatherOperatorsRecursive(expr, path, ops);
     return ops;
 }
@@ -54,7 +59,6 @@ std::vector<OperatorPos> ASTHandler::gatherOperators(SEXP expr) {
 void ASTHandler::gatherOperatorsRecursive(SEXP expr, std::vector<int> path, std::vector<OperatorPos>& ops) {
     if (TYPEOF(expr) == LANGSXP) {
         SEXP fun = CAR(expr);
-        int start_line=-1, start_col=-1, end_line=-1, end_col=-1;
 
         std::map<SEXP, std::function<std::unique_ptr<Operator>()>> operator_map = {
             {Rf_install("+"), []() { return std::make_unique<PlusOperator>(); }},
@@ -76,20 +80,20 @@ void ASTHandler::gatherOperatorsRecursive(SEXP expr, std::vector<int> path, std:
         auto it = operator_map.find(fun);
         if (it != operator_map.end()) {
             auto op = it->second();
-            OperatorPos pos{path, std::move(op), start_line, 
-            start_col, end_line, end_col, fun};
+            OperatorPos pos{path, std::move(op), _start_line, 
+            _start_col, _end_line, _end_col, fun};
             ops.push_back(std::move(pos));
         }
 
-        if (isDeletable(expr)) {
-            std::cout << "I am trying to delete" << std::endl;
-            Rf_PrintValue(expr);
-            std::cout << "DELETING!!!" << std::endl;
-            auto deleteOp = std::make_unique<DeleteOperator>(expr);
-            OperatorPos delPos{path, std::move(deleteOp), start_line, 
-            start_col, end_line, end_col, expr};
-            ops.push_back(std::move(delPos));
-        }
+        // if (isDeletable(expr)) {
+        //     std::cout << "I am trying to delete" << std::endl;
+        //     Rf_PrintValue(expr);
+        //     std::cout << "DELETING!!!" << std::endl;
+        //     auto deleteOp = std::make_unique<DeleteOperator>(expr);
+        //     OperatorPos delPos{path, std::move(deleteOp), _start_line, 
+        //     _start_col, _end_line, _end_col, expr};
+        //     ops.push_back(std::move(delPos));
+        // }
 
         // Traverse the child expressions
         int i = 0;

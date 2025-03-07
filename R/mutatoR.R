@@ -45,19 +45,15 @@ mutate_file <- function(sample_file, test_file) {
     writeLines(mutated_code, output_file)
     
     # Retrieve the "mutation_info" attribute for each expression
-    mutation_info_list <- sapply(mutated_expressions[[i]], function(expr) {
-      attr(expr, "mutation_info")
-    })
-    
-    # Combine mutation_info for display
-    mutation_info <- paste(mutation_info_list, collapse = "; ")
+    mutation_info <- attr(mutated_expressions[[i]], "mutation_info")
+
     if (is.null(mutation_info) || mutation_info == "") mutation_info <- "<no info>"
     
     test_result <- run_mutant_test(output_file, test_file)
     status_str  <- if (test_result) "SURVIVED" else "KILLED"
     
     cat(sprintf("Mutant %03d => %s\n", i, status_str))
-    cat(sprintf("   Mutation info: %s\n", mutation_info))
+    cat(sprintf("Mutation info: %s\n", mutation_info))
     cat(sprintf("   Result: %s\n\n", status_str))
     
     results[[i]] <- test_result

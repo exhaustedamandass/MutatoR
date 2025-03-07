@@ -43,22 +43,22 @@
     // }
 
 // Function to Generate All Mutations for a Single SEXP
-extern "C" SEXP C_mutate_single(SEXP expr_sexp) {
+extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp) {
     if (TYPEOF(expr_sexp) != LANGSXP && TYPEOF(expr_sexp) != EXPRSXP) {
         Rf_error("Input must be an R expression (LANGSXP or EXPRSXP)");
     }
+
     // Handle EXPRSXP by taking the first element
     if (TYPEOF(expr_sexp) == EXPRSXP) {
         if (Rf_length(expr_sexp) < 1) {
             Rf_error("EXPRSXP input has no expressions.");
         }
         expr_sexp = VECTOR_ELT(expr_sexp, 0);
-        //std::cout << TYPEOF(expr_sexp) << std::endl;
     }
 
     // Initialize ASTHandler and gather operators
     ASTHandler astHandler;
-    std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp);
+    std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp, src_ref_sexp);
 
 
     // Debug: Print operators to the console
@@ -100,29 +100,22 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
         Rf_error("Input must be an expression list (EXPRSXP).");
     }
     
+    SEXP src_ref = Rf_getAttrib(exprs, Rf_install("srcref"));
+    
     int n_expr = Rf_length(exprs);
     std::vector<SEXP> all_mutants;
     
     // Loop over each expression in the file
     for (int i = 0; i < n_expr; i++) {
         SEXP cur_expr = VECTOR_ELT(exprs, i);
+        SEXP cur_src_ref = VECTOR_ELT(src_ref, i);
+
         // Get all mutants for the current expression
-        SEXP cur_mutants = C_mutate_single(cur_expr);
+        SEXP cur_mutants = C_mutate_single(cur_expr, cur_src_ref);
         
         // Verify that the return is a list of mutants
         if (TYPEOF(cur_mutants) != VECSXP) {
             Rf_error("C_mutate_single did not return a list for expression %d.", i);
-        }
-        
-        std::cout << "logging from C_mutate_file" << std::endl;
-
-        Rf_PrintValue(cur_mutants);
-        for (int idx = 0; idx < Rf_length(cur_mutants); idx++) {
-            SEXP mutant = VECTOR_ELT(cur_mutants, idx);
-            SEXP mutation_info = Rf_getAttrib(mutant, Rf_install("mutation_info"));
-            if (mutation_info != R_NilValue) {
-                Rf_PrintValue(mutation_info);
-            }
         }
 
         int n_mutants = Rf_length(cur_mutants);
@@ -130,6 +123,7 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
         for (int j = 0; j < n_mutants; j++) {
             // Allocate a new EXPRSXP (list of expressions) for the mutated file.
             SEXP new_mutant_file = PROTECT(Rf_allocVector(EXPRSXP, n_expr));
+            SEXP mutation_info = R_NilValue;
             for (int k = 0; k < n_expr; k++) {
                 // If this is the expression we mutated, use the mutant.
                 if (k == i) {
@@ -137,17 +131,13 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
                     SET_VECTOR_ELT(new_mutant_file, k, mutant);
 
                     // Reassign the mutation_info attribute
-                    SEXP mutation_info = Rf_getAttrib(mutant, Rf_install("mutation_info"));
-                    if (mutation_info != R_NilValue) {
-                        std::cout << "adding mutation info attribute" << std::endl;
-                        Rf_PrintValue(mutation_info);
-                        Rf_setAttrib(VECTOR_ELT(new_mutant_file, k), Rf_install("mutation_info"), mutation_info);
-                    }
+                    mutation_info = Rf_getAttrib(mutant, Rf_install("mutation_info"));
                 } else {
                     // Otherwise, copy the original expression.
                     SET_VECTOR_ELT(new_mutant_file, k, VECTOR_ELT(exprs, k));
                 }
             }
+            Rf_setAttrib(new_mutant_file, Rf_install("mutation_info"), mutation_info);
             all_mutants.push_back(new_mutant_file);
             UNPROTECT(1);
         }
