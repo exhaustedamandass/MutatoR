@@ -43,7 +43,7 @@
     // }
 
 // Function to Generate All Mutations for a Single SEXP
-extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp) {
+extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp, bool is_inside_block) {
     if (TYPEOF(expr_sexp) != LANGSXP && TYPEOF(expr_sexp) != EXPRSXP) {
         Rf_error("Input must be an R expression (LANGSXP or EXPRSXP)");
     }
@@ -58,8 +58,7 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp) {
 
     // Initialize ASTHandler and gather operators
     ASTHandler astHandler;
-    std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp, src_ref_sexp);
-
+    std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp, src_ref_sexp, is_inside_block);
 
     // Debug: Print operators to the console
     int n = static_cast<int>(operators.size());
@@ -80,8 +79,9 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp) {
 
     // For each operator, apply its specific flip method.
     for (int i = 0; i < n; i++) {
-        SEXP mutated = mutator.applyMutation(expr_sexp, operators, i);
-        mutatedExpressions.push_back(mutated);
+        std::pair<SEXP, bool> result = mutator.applyMutation(expr_sexp, operators, i);
+        if(result.second)
+            mutatedExpressions.push_back(result.first);
     }
 
     // Create an R list of all mutated expressions
@@ -103,6 +103,25 @@ bool isValidMutant(SEXP mutant) {
     return is_valid;
 }
 
+std::vector<bool> detect_block_expressions(SEXP exprs, int n_expr) {
+  std::vector<bool> block_flags(n_expr, false);
+  
+  for (int i = 0; i < n_expr; i++) {
+    SEXP expr = VECTOR_ELT(exprs, i);
+    
+    // Check if the expression is a call (language object)
+    if (TYPEOF(expr) == LANGSXP) {
+      SEXP head = CAR(expr);
+      if (TYPEOF(head) == SYMSXP) {
+        std::string op_name = CHAR(PRINTNAME(head));
+        block_flags[i] = (op_name == "{");
+      }
+    }
+  }
+  
+  return block_flags;
+}
+
 extern "C" SEXP C_mutate_file(SEXP exprs) {
     // Ensure the input is a list of expressions (EXPRSXP)
     if (TYPEOF(exprs) != EXPRSXP) {
@@ -112,6 +131,9 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
     SEXP src_ref = Rf_getAttrib(exprs, Rf_install("srcref"));
     
     int n_expr = Rf_length(exprs);
+
+    std::vector<bool> is_inside_block = detect_block_expressions(exprs, n_expr);
+
     std::vector<SEXP> all_mutants;
     
     // Loop over each expression in the file
@@ -120,7 +142,7 @@ extern "C" SEXP C_mutate_file(SEXP exprs) {
         SEXP cur_src_ref = VECTOR_ELT(src_ref, i);
 
         // Get all mutants for the current expression
-        SEXP cur_mutants = C_mutate_single(cur_expr, cur_src_ref);
+        SEXP cur_mutants = C_mutate_single(cur_expr, cur_src_ref, is_inside_block[i]);
         
         // Verify that the return is a list of mutants
         if (TYPEOF(cur_mutants) != VECSXP) {

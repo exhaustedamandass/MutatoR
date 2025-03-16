@@ -4,7 +4,7 @@
 #include "Mutator.hpp"
 #include "DeleteOperator.hpp"
 
-SEXP Mutator::applyMutation(SEXP expr, 
+std::pair<SEXP, bool> Mutator::applyMutation(SEXP expr, 
                             const std::vector<OperatorPos>& ops,
                             int whichOpIndex)
 {
@@ -15,7 +15,7 @@ SEXP Mutator::applyMutation(SEXP expr,
     return applyFlipMutation(expr, ops, whichOpIndex);
 }
 
-SEXP Mutator::applyFlipMutation(SEXP expr,
+std::pair<SEXP, bool> Mutator::applyFlipMutation(SEXP expr,
                                 const std::vector<OperatorPos>& ops,
                                 int whichOpIndex) 
 {
@@ -51,11 +51,11 @@ SEXP Mutator::applyFlipMutation(SEXP expr,
     Rf_setAttrib(mutated, Rf_install("mutation_info"), msg_sexp);
 
     UNPROTECT(1);
-    return mutated;
+    return {mutated, true};
 }
 
 // In Mutator.cpp
-SEXP Mutator::applyDeleteMutation(SEXP expr, const std::vector<OperatorPos>& ops, int whichOpIndex) {
+std::pair<SEXP, bool> Mutator::applyDeleteMutation(SEXP expr, const std::vector<OperatorPos>& ops, int whichOpIndex) {
     // Duplicate the list using Rf_duplicate to avoid side effects on the original AST.
     SEXP duplicated_list = Rf_duplicate(expr);
 
@@ -64,10 +64,10 @@ SEXP Mutator::applyDeleteMutation(SEXP expr, const std::vector<OperatorPos>& ops
     const std::vector<int>& path = op_pos.path;
     if (path.empty()) {
         // If no path is specified, return an empty SEXP (R's NULL)
-        return R_NilValue;
+        return {R_NilValue, false};
     }
     int deleteIndex = path[0];
-
+    
     // Build mutation message
     std::ostringstream msg;
     msg << "Deleting node at index: " << deleteIndex << '\n';
@@ -75,6 +75,7 @@ SEXP Mutator::applyDeleteMutation(SEXP expr, const std::vector<OperatorPos>& ops
     << "From line/col: " << op_pos.start_line << "/" << op_pos.start_col << '\n'
     << "To line/col: " << op_pos.end_line << "/" << op_pos.end_col << '\n';
     // Special case: if the first node is to be deleted, return its CDR (i.e. the rest of the list).
+    // to avoid deleting the 0 index of an expression
     if (deleteIndex == 0) {
         SEXP newList = CDR(duplicated_list);
         
@@ -82,7 +83,7 @@ SEXP Mutator::applyDeleteMutation(SEXP expr, const std::vector<OperatorPos>& ops
         SEXP msg_sexp = Rf_mkString(msg.str().c_str());
         Rf_setAttrib(newList, Rf_install("mutation_info"), msg_sexp);
         
-        return newList;
+        return {newList, false};
     }
 
     // Traverse the duplicated pairlist to find the node immediately before the one to delete.
@@ -94,8 +95,9 @@ SEXP Mutator::applyDeleteMutation(SEXP expr, const std::vector<OperatorPos>& ops
     }
 
     // If the traversal fails (e.g., deleteIndex is out of bounds), return the list unchanged.
+    // don't add it to the actual mutated expression
     if (current == R_NilValue || CDR(current) == R_NilValue) {
-        return duplicated_list;
+        return {duplicated_list, false};
     }
 
     // Remove the target node by setting the current node's CDR to skip over the deleted node.
@@ -106,7 +108,7 @@ SEXP Mutator::applyDeleteMutation(SEXP expr, const std::vector<OperatorPos>& ops
     Rf_setAttrib(duplicated_list, Rf_install("mutation_info"), msg_sexp);
 
     // The duplicated_list now has the specified node removed.
-    return duplicated_list;
+    return {duplicated_list, true};
 }
 
 // TODO: extract the message stuff into a function

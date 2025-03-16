@@ -15,15 +15,18 @@ public:
     ~ASTHandler() = default;
 
     // Gather all operators in the AST
-    std::vector<OperatorPos> gatherOperators(SEXP expr, SEXP src_ref);
+    std::vector<OperatorPos> gatherOperators(SEXP expr, SEXP src_ref, bool is_inside_block);
 
 private:
     int _start_line;
     int _start_col;
     int _end_line;
     int _end_col;
+    bool _is_inside_block;
     // Recursive helper function
     void gatherOperatorsRecursive(SEXP expr, std::vector<int> path, std::vector<OperatorPos>& ops);
+
+    bool isDeletable(SEXP expr);
 };
 
 #endif // AST_HANDLER_H

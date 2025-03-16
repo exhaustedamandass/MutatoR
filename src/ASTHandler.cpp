@@ -20,13 +20,15 @@
 #include "LogicalAndOperator.hpp"
 #include "DeleteOperator.hpp"
         
-bool isDeletable(SEXP expr) {
-    // You might check: is expr a full statement, part of a block, etc.
-    // (Implement based on your mutation criteria)
+bool ASTHandler::isDeletable(SEXP expr) {
+    return _is_inside_block;
+}
+
+bool isBlock(SEXP expr){
     return true;
 }
 
-std::vector<OperatorPos> ASTHandler::gatherOperators(SEXP expr, SEXP src_ref) {
+std::vector<OperatorPos> ASTHandler::gatherOperators(SEXP expr, SEXP src_ref, bool is_inside_block) {
     std::vector<OperatorPos> ops;
     std::vector<int> path;
     int* ref_ptr = INTEGER(src_ref);
@@ -34,6 +36,7 @@ std::vector<OperatorPos> ASTHandler::gatherOperators(SEXP expr, SEXP src_ref) {
     _start_col  = ref_ptr[1];
     _end_line   = ref_ptr[2];
     _end_col    = ref_ptr[3];
+    _is_inside_block = is_inside_block;
     gatherOperatorsRecursive(expr, path, ops);
     return ops;
 }

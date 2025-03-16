@@ -18,3 +18,10 @@ result_ge <- (4 >= 3)
 
 # Complex Expression
 result_complex <- ifelse((1 + 2 == 3) & (4 > 2), 1, 0)
+
+{
+  x <- 10
+  y <- 5
+  result <- x + y
+  print(result)
+}

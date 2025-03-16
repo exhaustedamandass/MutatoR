@@ -41,7 +41,7 @@ mutate_file <- function(sample_file, test_file) {
     mutated_code <- paste(code_lines, collapse = "\n")
     
     # Write the valid R code to a file
-    output_file <- sprintf("./mutations/mutated_%03d.R", i)
+    output_file <- sprintf("./mutations_reduced/mutated_%03d.R", i)
     writeLines(mutated_code, output_file)
     
     # Retrieve the "mutation_info" attribute for each expression
@@ -72,7 +72,7 @@ mutate_file <- function(sample_file, test_file) {
     lines_mutated <- original_lines
     
     # Randomly decide how many lines to delete (at least one, at most half the total)
-    n_delete <- sample(1:max(1, floor(num_lines / 2)), 1)
+    n_delete <- 1
     # Choose random indices to delete
     delete_indices <- sort(sample(seq_len(num_lines), n_delete, replace = FALSE))
     
@@ -82,7 +82,7 @@ mutate_file <- function(sample_file, test_file) {
     
     # Continue numbering mutants after those generated above
     mutant_index <- length(results) + 1
-    output_file <- sprintf("./mutations/mutated_%03d.R", mutant_index)
+    output_file <- sprintf("./mutations_reduced/mutated_%03d.R", mutant_index)
     writeLines(mutated_code, output_file)
     
     # Create a simple description of the mutation for reporting
@@ -139,7 +139,7 @@ run_mutant_test <- function(mutant_file, test_file) {
       test_env <- new.env(parent = mutant_env)
       # Run tests with a silent reporter to suppress logs.
       results <- testthat::test_file(test_file, env = test_env
-      #,reporter = "silent"
+      # ,reporter = "silent"
       )
       # If any tests fail, the mutant is considered killed.
       if (testthat::failed(results) > 0) {

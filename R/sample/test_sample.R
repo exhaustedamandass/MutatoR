@@ -24,3 +24,7 @@ test_that("Comparison operations are correct", {
 test_that("Complex expression evaluates correctly", {
   expect_equal(result_complex, 1)
 })
+
+test_that("Addition works correctly", {
+  expect_equal(result, 15)
+})

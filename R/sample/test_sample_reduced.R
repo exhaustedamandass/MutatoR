@@ -1,5 +1,8 @@
 library(testthat)
 
-test_that("Arithmetic operations are correct", {
-  expect_equal(result_add, 3)
+test_that("Addition works correctly", {
+  x <- 10
+  y <- 5
+  result <- x + y
+  expect_equal(result, 15)
 })
