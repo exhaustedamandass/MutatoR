@@ -16,6 +16,8 @@ mutate_file <- function(sample_file) {
   
   mutated_file_paths <- list()
   
+  mutated_file_name <- basename(sample_file)
+
   # --- Generate mutants based on parsed expressions ---
   for (i in seq_along(mutated_expressions)) {
     # Convert each mutated expression back into R code
@@ -23,7 +25,7 @@ mutate_file <- function(sample_file) {
       paste(deparse(expr), collapse = "\n")
     })
     mutated_code <- paste(code_lines, collapse = "\n")
-    output_file <- sprintf("./mutations/mutated_%03d.R", i)
+    output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, i)
     writeLines(mutated_code, output_file)
     mutated_file_paths[[i]] <- output_file
   }
@@ -37,12 +39,13 @@ mutate_file <- function(sample_file) {
     lines_mutated <- original_lines
     # Delete a single random line
     n_delete <- 1
+    # add check for non-empty
     delete_indices <- sort(sample(seq_len(num_lines), n_delete, replace = FALSE))
     mutated_lines <- lines_mutated[-delete_indices]
     mutated_code <- paste(mutated_lines, collapse = "\n")
     
     mutant_index <- length(mutated_file_paths) + 1
-    output_file <- sprintf("./mutations/mutated_%03d.R", mutant_index)
+    output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, j)
     writeLines(mutated_code, output_file)
     mutated_file_paths[[mutant_index]] <- output_file
   }
@@ -57,10 +60,13 @@ run_package_test <- function(pkg_dir) {
   setwd(pkg_dir)
   
   test_result <- tryCatch({
-    results <- testthat::test_dir("R/sample/dplyr-main/tests/testthat", reporter = "silent")
+    results <- testthat::test_dir("tests/testthat"
+    , reporter = "silent"
+    )
     # If any tests failed, the mutant is considered killed (i.e., test_result = FALSE)
     testthat::failed(results) == 0
   }, error = function(e) {
+    # print(e)
     FALSE  # On error, consider the mutant as killed.
   })
   

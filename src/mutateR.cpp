@@ -44,9 +44,9 @@
 
 // Function to Generate All Mutations for a Single SEXP
 extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp, bool is_inside_block) {
-    if (TYPEOF(expr_sexp) != LANGSXP && TYPEOF(expr_sexp) != EXPRSXP) {
-        Rf_error("Input must be an R expression (LANGSXP or EXPRSXP)");
-    }
+    // if (TYPEOF(expr_sexp) != LANGSXP && TYPEOF(expr_sexp) != EXPRSXP && TYPEOF(expr_sexp) != NILSXP) {
+    //     Rf_error("Input must be an R expression (LANGSXP or EXPRSXP) This is %s", TYPEOF(expr_sexp));
+    // }
 
     // Handle EXPRSXP by taking the first element
     if (TYPEOF(expr_sexp) == EXPRSXP) {
