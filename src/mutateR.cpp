@@ -63,7 +63,7 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp, bool is_insid
     // Debug: Print operators to the console
     int n = static_cast<int>(operators.size());
     if (n == 0) {
-        Rf_warning("No operators found to mutate.");
+        // Rf_warning("No operators found to mutate.");
         SEXP emptyList = PROTECT(Rf_allocVector(VECSXP, 0));
         UNPROTECT(1);
         return emptyList;
@@ -123,76 +123,85 @@ std::vector<bool> detect_block_expressions(SEXP exprs, int n_expr) {
 }
 
 extern "C" SEXP C_mutate_file(SEXP exprs) {
-    // Ensure the input is a list of expressions (EXPRSXP)
+    PROTECT(exprs);
+    int nProtected = 1;
+
     if (TYPEOF(exprs) != EXPRSXP) {
         Rf_error("Input must be an expression list (EXPRSXP).");
     }
-    
+
     SEXP src_ref = Rf_getAttrib(exprs, Rf_install("srcref"));
-    
     int n_expr = Rf_length(exprs);
 
     std::vector<bool> is_inside_block = detect_block_expressions(exprs, n_expr);
 
     std::vector<SEXP> all_mutants;
-    
+
     // Loop over each expression in the file
     for (int i = 0; i < n_expr; i++) {
         SEXP cur_expr = VECTOR_ELT(exprs, i);
         SEXP cur_src_ref = VECTOR_ELT(src_ref, i);
 
-        // Get all mutants for the current expression
-        SEXP cur_mutants = C_mutate_single(cur_expr, cur_src_ref, is_inside_block[i]);
-        
-        // Verify that the return is a list of mutants
+        // PROTECT the return from C_mutate_single
+        SEXP cur_mutants = PROTECT(C_mutate_single(cur_expr, cur_src_ref, is_inside_block[i]));
+        nProtected++;  // we just PROTECTed cur_mutants
+
         if (TYPEOF(cur_mutants) != VECSXP) {
             Rf_error("C_mutate_single did not return a list for expression %d.", i);
         }
 
         int n_mutants = Rf_length(cur_mutants);
-        // For each mutant of the current expression, create a complete file mutant.
         for (int j = 0; j < n_mutants; j++) {
-            // Allocate a new EXPRSXP (list of expressions) for the mutated file.
             SEXP new_mutant_file = PROTECT(Rf_allocVector(EXPRSXP, n_expr));
-            SEXP mutation_info = R_NilValue;
+            nProtected++;
+
+            // Fill new_mutant_file ...
+            // e.g. copy the original expressions, except the jth one is replaced
+            // with the mutant version
             for (int k = 0; k < n_expr; k++) {
-                // If this is the expression we mutated, use the mutant.
                 if (k == i) {
                     SEXP mutant = VECTOR_ELT(cur_mutants, j);
                     SET_VECTOR_ELT(new_mutant_file, k, mutant);
-
-                    // Reassign the mutation_info attribute
-                    mutation_info = Rf_getAttrib(mutant, Rf_install("mutation_info"));
+                    // mutation info etc.
                 } else {
-                    // Otherwise, copy the original expression.
                     SET_VECTOR_ELT(new_mutant_file, k, VECTOR_ELT(exprs, k));
                 }
             }
-            Rf_setAttrib(new_mutant_file, Rf_install("mutation_info"), mutation_info);
             all_mutants.push_back(new_mutant_file);
-            UNPROTECT(1);
         }
-    }
-    
-    // Create an R list to hold all mutated file variants.
-    SEXP resultList = PROTECT(Rf_allocVector(VECSXP, all_mutants.size()));
-    size_t valid_count = 0; // To keep track of valid mutants
 
+        // Now that we have processed all mutants in cur_mutants,
+        // we can unprotect *just cur_mutants*:
+        UNPROTECT(1);
+        nProtected--;
+    }
+
+    // Now we have a big vector of all_mutants.
+    // Next we create a list to hold them
+    SEXP resultList = PROTECT(Rf_allocVector(VECSXP, all_mutants.size()));
+    nProtected++;
+
+    size_t valid_count = 0;
     for (size_t k = 0; k < all_mutants.size(); k++) {
-        // Use the validation function to check if the mutant is valid
+        // isValidMutant() calls Rf_eval, so we must keep them PROTECTed
         if (isValidMutant(all_mutants[k])) {
             SET_VECTOR_ELT(resultList, valid_count, all_mutants[k]);
-            valid_count++; // Increment valid count
+            valid_count++;
         }
     }
 
-    // Resize the resultList to the number of valid mutants
+    // Trim resultList
     SEXP final_resultList = PROTECT(Rf_allocVector(VECSXP, valid_count));
+    nProtected++;
     for (size_t i = 0; i < valid_count; i++) {
         SET_VECTOR_ELT(final_resultList, i, VECTOR_ELT(resultList, i));
     }
-    UNPROTECT(1); // Unprotect the original resultList
 
-    UNPROTECT(1); // Unprotect the final_resultList
+    // Once final_resultList is allocated and protected, 
+    // it now safely contains all the valid mutant objects.
+    // We can unprotect everything at once now.
+    UNPROTECT(nProtected);
+
     return final_resultList;
 }
+

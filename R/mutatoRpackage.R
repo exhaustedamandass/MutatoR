@@ -1,5 +1,5 @@
 # --- New version of mutate_file() that only generates mutants from a file ---
-mutate_file <- function(sample_file) {
+mutate_file_new <- function(sample_file) {
   # Create a directory to store mutated versions (if not already existing)
   dir.create("./mutations", showWarnings = FALSE)
   
@@ -10,24 +10,26 @@ mutate_file <- function(sample_file) {
   # Call the C++ function to generate mutated expressions
   mutated_expressions <- .Call("C_mutate_file", exprs)
   
-  if (!is.list(mutated_expressions)) {
-    stop("Error: Expected a list of mutated expressions from C_mutate_file.")
-  }
-  
   mutated_file_paths <- list()
   
   mutated_file_name <- basename(sample_file)
 
-  # --- Generate mutants based on parsed expressions ---
-  for (i in seq_along(mutated_expressions)) {
-    # Convert each mutated expression back into R code
-    code_lines <- sapply(mutated_expressions[[i]], function(expr) {
-      paste(deparse(expr), collapse = "\n")
-    })
-    mutated_code <- paste(code_lines, collapse = "\n")
-    output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, i)
-    writeLines(mutated_code, output_file)
-    mutated_file_paths[[i]] <- output_file
+  # Check if mutated_expressions is a valid list
+  if (!is.list(mutated_expressions) || length(mutated_expressions) == 0) {
+    cat("No mutated expressions generated, proceeding with string-level deletion.\n")
+  } else {
+    # --- Generate mutants based on parsed expressions ---
+    for (i in seq_along(mutated_expressions)) {
+      # Convert each mutated expression back into R code
+      code_lines <- sapply(mutated_expressions[[i]], function(expr) {
+        # print(expr)
+        paste(deparse(expr), collapse = "\n")
+      })
+      mutated_code <- paste(code_lines, collapse = "\n")
+      output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, i)
+      writeLines(mutated_code, output_file)
+      mutated_file_paths[[i]] <- output_file
+    }
   }
   
   # --- Additional mutation: string-level deletion ---
@@ -35,19 +37,23 @@ mutate_file <- function(sample_file) {
   num_lines <- length(original_lines)
   num_deletion_mutants <- min(5, num_lines)
   
+  # Filter out empty lines
+  non_empty_lines <- which(nzchar(original_lines))
+  
   for (j in 1:num_deletion_mutants) {
     lines_mutated <- original_lines
-    # Delete a single random line
+    # Delete a single random non-empty line
     n_delete <- 1
-    # add check for non-empty
-    delete_indices <- sort(sample(seq_len(num_lines), n_delete, replace = FALSE))
-    mutated_lines <- lines_mutated[-delete_indices]
-    mutated_code <- paste(mutated_lines, collapse = "\n")
-    
-    mutant_index <- length(mutated_file_paths) + 1
-    output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, j)
-    writeLines(mutated_code, output_file)
-    mutated_file_paths[[mutant_index]] <- output_file
+    if (length(non_empty_lines) > 0) {
+      delete_indices <- sort(sample(non_empty_lines, n_delete, replace = FALSE))
+      mutated_lines <- lines_mutated[-delete_indices]
+      mutated_code <- paste(mutated_lines, collapse = "\n")
+      
+      mutant_index <- length(mutated_file_paths) + 1
+      output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, j)
+      writeLines(mutated_code, output_file)
+      mutated_file_paths[[mutant_index]] <- output_file
+    }
   }
   
   return(mutated_file_paths)
@@ -61,12 +67,12 @@ run_package_test <- function(pkg_dir) {
   
   test_result <- tryCatch({
     results <- testthat::test_dir("tests/testthat"
-    , reporter = "silent"
+    # , reporter = "silent"
     )
     # If any tests failed, the mutant is considered killed (i.e., test_result = FALSE)
     testthat::failed(results) == 0
   }, error = function(e) {
-    # print(e)
+    print(e)
     FALSE  # On error, consider the mutant as killed.
   })
   
@@ -75,17 +81,22 @@ run_package_test <- function(pkg_dir) {
 
 # --- mutate_package() uses the new mutate_file() to generate mutants for every R file
 # and then runs the test suite for each mutated package copy ---
-mutate_package <- function(pkg_path) {
+mutate_package <- function(pkg_path, parallel = TRUE, cores = parallel::detectCores()) {
   # Identify R source files in the package's R/ directory.
   r_files <- list.files(file.path(pkg_path, "R"), full.names = TRUE, pattern = "\\.R$")
   package_mutants <- list()
   test_results <- list()
   
+  # so it doesnt fail with memory not aligned
+
+  # Create a list to store all mutant packages and their info
+  all_mutants <- list()
+  
   # Loop over each R file in the package
   for (file in r_files) {
     cat("Mutating file:", file, "\n")
     # Generate mutant versions for the current file (without running tests)
-    mutants <- mutate_file(file)
+    mutants <- mutate_file_new(file)
     
     # For every mutant, create a complete package copy with the mutant file replacing the original
     for (mutant_file in mutants) {
@@ -102,15 +113,47 @@ mutate_package <- function(pkg_path) {
       target_file <- file.path(tmp_pkg, basename(pkg_path), "R", basename(file))
       file.copy(mutant_file, target_file, overwrite = TRUE)
       
-      # Run tests on the mutant package.
-      # Change into the package copy directory.
+      # Store mutant info for parallel processing
+      mutant_id <- paste(basename(file), basename(mutant_file), sep = "_")
       pkg_copy_dir <- file.path(tmp_pkg, basename(pkg_path))
+      all_mutants[[mutant_id]] <- pkg_copy_dir
+    }
+  }
+  
+  # Run tests in parallel or sequentially
+  if (parallel && length(all_mutants) > 1) {
+    cat(sprintf("Running tests in parallel using %d cores...\n", cores))
+    
+    # Create a cluster with the specified number of cores
+    cl <- parallel::makeCluster(min(cores, length(all_mutants)))
+    on.exit(parallel::stopCluster(cl), add = TRUE)
+    
+    # Export the run_package_test function to the cluster
+    parallel::clusterExport(cl, "run_package_test", envir = globalenv())
+    
+    # Run tests in parallel
+    mutant_ids <- names(all_mutants)
+    pkg_dirs <- unname(all_mutants)
+    
+    # Use parLapply to run tests in parallel
+    parallel_results <- parallel::parLapply(cl, pkg_dirs, run_package_test)
+    
+    # Combine results
+    for (i in seq_along(mutant_ids)) {
+      package_mutants[[mutant_ids[i]]] <- pkg_dirs[i]
+      test_results[[mutant_ids[i]]] <- parallel_results[[i]]
+      status <- if (parallel_results[[i]]) "SURVIVED" else "KILLED"
+      cat(sprintf("Mutant %s: %s\n", mutant_ids[i], status))
+    }
+  } else {
+    # Run tests sequentially (original approach)
+    for (mutant_id in names(all_mutants)) {
+      pkg_copy_dir <- all_mutants[[mutant_id]]
       test_result <- run_package_test(pkg_copy_dir)
       status <- if (test_result) "SURVIVED" else "KILLED"
-      cat(sprintf("Mutant for %s from %s: %s\n", basename(file), basename(mutant_file), status))
+      cat(sprintf("Mutant %s: %s\n", mutant_id, status))
       
       # Record the mutant package location and test result
-      mutant_id <- paste(basename(file), basename(mutant_file), sep = "_")
       package_mutants[[mutant_id]] <- pkg_copy_dir
       test_results[[mutant_id]] <- test_result
     }
