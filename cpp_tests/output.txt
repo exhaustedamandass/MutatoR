@@ -1,0 +1,898 @@
+g++ -std=c++14 -Wall -Wextra -g -fPIC -I../src -I/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include -I/usr/share/R/include -c ASTHandlerTest.cpp -o ASTHandlerTest.o
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:3,
+                 from ../src/Operator.hpp:6,
+                 from ../src/OperatorPos.hpp:7,
+                 from ../src/ASTHandler.hpp:5,
+                 from ASTHandlerTest.cpp:4:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/R.hpp:5:2: error: #error R headers were included before cpp11 headers and at least one of R_NO_REMAP or STRICT_R_HEADERS was not defined.
+    5 | #error R headers were included before cpp11 headers \
+      |  ^~~~~
+In file included from ASTHandlerTest.cpp:3:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp: In function ‘SEXPREC* cpp11::detail::store::insert(SEXP)’:
+/usr/share/R/include/Rinternals.h:368:35: warning: unnecessary parentheses in declaration of ‘x’ [-Wparentheses]
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                   ^~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:295:3: note: in expansion of macro ‘PROTECT’
+  295 |   PROTECT(x);
+      |   ^~~~~~~
+/usr/share/R/include/Rinternals.h:368:35: note: remove parentheses
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                   ^~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:295:3: note: in expansion of macro ‘PROTECT’
+  295 |   PROTECT(x);
+      |   ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:295:11: error: declaration of ‘cpp11::Rf_protect x’ shadows a parameter
+  295 |   PROTECT(x);
+      |           ^
+/usr/share/R/include/Rinternals.h:368:36: note: in definition of macro ‘PROTECT’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                    ^
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/as.hpp:11,
+                 from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:5:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:290:25: note: ‘SEXPREC* x’ previously declared here
+  290 | inline SEXP insert(SEXP x) {
+      |                    ~~~~~^
+/usr/share/R/include/Rinternals.h:368:37: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXP)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                     ^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:305:15: note: in expansion of macro ‘PROTECT’
+  305 |   SEXP cell = PROTECT(Rf_cons(head, next));
+      |               ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:306:17: error: cannot convert ‘cpp11::Rf_protect’ to ‘SEXP’ {aka ‘SEXPREC*’}
+  306 |   SET_TAG(cell, x);
+      |                 ^
+      |                 |
+      |                 cpp11::Rf_protect
+/usr/share/R/include/Rinternals.h:322:27: note:   initializing argument 2 of ‘void SET_TAG(SEXP, SEXP)’
+  322 | void SET_TAG(SEXP x, SEXP y);
+      |                      ~~~~~^
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/data_frame.hpp:12,
+                 from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:7:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/list.hpp: In static member function ‘static void cpp11::r_vector<T>::get_region(SEXP, R_xlen_t, R_xlen_t, underlying_type*) [with T = SEXPREC*; SEXP = SEXPREC*; R_xlen_t = long int; underlying_type = SEXPREC*]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/list.hpp:52:45: warning: unused parameter ‘x’ [-Wunused-parameter]
+   52 | inline void r_vector<SEXP>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
+      |                                        ~~~~~^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/list.hpp:52:57: warning: unused parameter ‘i’ [-Wunused-parameter]
+   52 | inline void r_vector<SEXP>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
+      |                                                ~~~~~~~~~^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/list.hpp:52:69: warning: unused parameter ‘n’ [-Wunused-parameter]
+   52 | inline void r_vector<SEXP>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
+      |                                                            ~~~~~~~~~^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/list.hpp:53:76: warning: unused parameter ‘buf’ [-Wunused-parameter]
+   53 |                                        typename r_vector::underlying_type* buf) {
+      |                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/list.hpp: In static member function ‘static bool cpp11::r_vector<T>::const_iterator::use_buf(bool) [with T = SEXPREC*]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/list.hpp:58:58: warning: unused parameter ‘is_altrep’ [-Wunused-parameter]
+   58 | inline bool r_vector<SEXP>::const_iterator::use_buf(bool is_altrep) {
+      |                                                     ~~~~~^~~~~~~~~
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:8:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/doubles.hpp: In static member function ‘static const cpp11::r_vector<T>::underlying_type* cpp11::r_vector<T>::get_const_p(bool, SEXP) [with T = double; underlying_type = double; SEXP = SEXPREC*]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/doubles.hpp:42:10: warning: unused parameter ‘is_altrep’ [-Wunused-parameter]
+   42 |     bool is_altrep, SEXP data) {
+      |     ~~~~~^~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/environment.hpp: In member function ‘void cpp11::environment::remove(SEXP)’:
+/usr/share/R/include/Rinternals.h:368:35: warning: unnecessary parentheses in declaration of ‘name’ [-Wparentheses]
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                   ^~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/environment.hpp:53:5: note: in expansion of macro ‘PROTECT’
+   53 |     PROTECT(name);
+      |     ^~~~~~~
+/usr/share/R/include/Rinternals.h:368:35: note: remove parentheses
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                   ^~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/environment.hpp:53:5: note: in expansion of macro ‘PROTECT’
+   53 |     PROTECT(name);
+      |     ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/environment.hpp:53:13: error: declaration of ‘cpp11::Rf_protect name’ shadows a parameter
+   53 |     PROTECT(name);
+      |             ^~~~
+/usr/share/R/include/Rinternals.h:368:36: note: in definition of macro ‘PROTECT’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                    ^
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:9:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/environment.hpp:52:20: note: ‘SEXPREC* name’ previously declared here
+   52 |   void remove(SEXP name) {
+      |               ~~~~~^~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/environment.hpp:55:26: error: cannot convert ‘cpp11::Rf_protect’ to ‘SEXP’ {aka ‘SEXPREC*’}
+   55 |     R_removeVarFromFrame(name, env_);
+      |                          ^~~~
+      |                          |
+      |                          cpp11::Rf_protect
+/usr/share/R/include/Rinternals.h:513:27: note:   initializing argument 1 of ‘void R_removeVarFromFrame(SEXP, SEXP)’
+  513 | void R_removeVarFromFrame(SEXP, SEXP);
+      |                           ^~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/environment.hpp:52:20: warning: unused parameter ‘name’ [-Wunused-parameter]
+   52 |   void remove(SEXP name) {
+      |               ~~~~~^~~~
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:11:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/function.hpp: In member function ‘void cpp11::function::construct_call(SEXP) const’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/function.hpp:53:28: warning: unused parameter ‘val’ [-Wunused-parameter]
+   53 |   void construct_call(SEXP val) const {}
+      |                       ~~~~~^~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/function.hpp: In function ‘void cpp11::detail::r_message(const char*)’:
+/usr/share/R/include/Rinternals.h:368:37: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXP)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                     ^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/function.hpp:96:17: note: in expansion of macro ‘PROTECT’
+   96 |   SEXP x_char = PROTECT(Rf_mkCharCE(x, CE_UTF8));
+      |                 ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:368:37: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXP)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                     ^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/function.hpp:97:19: note: in expansion of macro ‘PROTECT’
+   97 |   SEXP x_string = PROTECT(Rf_ScalarString(x_char));
+      |                   ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:368:37: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXP)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                                     ^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/function.hpp:99:15: note: in expansion of macro ‘PROTECT’
+   99 |   SEXP call = PROTECT(Rf_lang2(fn, x_string));
+      |               ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:12:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/integers.hpp: In static member function ‘static const cpp11::r_vector<T>::underlying_type* cpp11::r_vector<T>::get_const_p(bool, SEXP) [with T = int; underlying_type = int; SEXP = SEXPREC*]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/integers.hpp:43:10: warning: unused parameter ‘is_altrep’ [-Wunused-parameter]
+   43 |     bool is_altrep, SEXP data) {
+      |     ~~~~~^~~~~~~~~
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:15:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/logicals.hpp: In static member function ‘static const cpp11::r_vector<T>::underlying_type* cpp11::r_vector<T>::get_const_p(bool, SEXP) [with T = cpp11::r_bool; underlying_type = int; SEXP = SEXPREC*]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/logicals.hpp:42:10: warning: unused parameter ‘is_altrep’ [-Wunused-parameter]
+   42 |     bool is_altrep, SEXP data) {
+      |     ~~~~~^~~~~~~~~
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:22:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/raws.hpp: In static member function ‘static const cpp11::r_vector<T>::underlying_type* cpp11::r_vector<T>::get_const_p(bool, SEXP) [with T = unsigned char; underlying_type = unsigned char; SEXP = SEXPREC*]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/raws.hpp:40:10: warning: unused parameter ‘is_altrep’ [-Wunused-parameter]
+   40 |     bool is_altrep, SEXP data) {
+      |     ~~~~~^~~~~~~~~
+In file included from /home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11.hpp:24:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/strings.hpp: In static member function ‘static void cpp11::r_vector<T>::get_region(SEXP, R_xlen_t, R_xlen_t, underlying_type*) [with T = cpp11::r_string; SEXP = SEXPREC*; R_xlen_t = long int; underlying_type = SEXPREC*]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/strings.hpp:49:49: warning: unused parameter ‘x’ [-Wunused-parameter]
+   49 | inline void r_vector<r_string>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
+      |                                            ~~~~~^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/strings.hpp:49:61: warning: unused parameter ‘i’ [-Wunused-parameter]
+   49 | inline void r_vector<r_string>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
+      |                                                    ~~~~~~~~~^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/strings.hpp:49:73: warning: unused parameter ‘n’ [-Wunused-parameter]
+   49 | inline void r_vector<r_string>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
+      |                                                                ~~~~~~~~~^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/strings.hpp:50:80: warning: unused parameter ‘buf’ [-Wunused-parameter]
+   50 |                                            typename r_vector::underlying_type* buf) {
+      |                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/strings.hpp: In static member function ‘static bool cpp11::r_vector<T>::const_iterator::use_buf(bool) [with T = cpp11::r_string]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/strings.hpp:55:62: warning: unused parameter ‘is_altrep’ [-Wunused-parameter]
+   55 | inline bool r_vector<r_string>::const_iterator::use_buf(bool is_altrep) {
+      |                                                         ~~~~~^~~~~~~~~
+In file included from /usr/include/gtest/gtest.h:72,
+                 from ASTHandlerTest.cpp:1:
+ASTHandlerTest.cpp: In lambda function:
+ASTHandlerTest.cpp:54:55: error: ‘DeleteOperator’ does not name a type
+   54 |                                   return dynamic_cast<DeleteOperator*>(pos.op.get()) != nullptr;
+      |                                                       ^~~~~~~~~~~~~~
+ASTHandlerTest.cpp:54:69: error: expected ‘>’ before ‘*’ token
+   54 |                                   return dynamic_cast<DeleteOperator*>(pos.op.get()) != nullptr;
+      |                                                                     ^
+ASTHandlerTest.cpp:54:69: error: expected ‘(’ before ‘*’ token
+ASTHandlerTest.cpp:54:70: error: expected primary-expression before ‘>’ token
+   54 |                                   return dynamic_cast<DeleteOperator*>(pos.op.get()) != nullptr;
+      |                                                                      ^
+ASTHandlerTest.cpp:54:96: error: expected ‘)’ before ‘;’ token
+   54 |                                   return dynamic_cast<DeleteOperator*>(pos.op.get()) != nullptr;
+      |                                                                                                ^
+ASTHandlerTest.cpp: In lambda function:
+ASTHandlerTest.cpp:62:52: error: ‘DeleteOperator’ does not name a type
+   62 |                                return dynamic_cast<DeleteOperator*>(pos.op.get()) != nullptr;
+      |                                                    ^~~~~~~~~~~~~~
+ASTHandlerTest.cpp:62:66: error: expected ‘>’ before ‘*’ token
+   62 |                                return dynamic_cast<DeleteOperator*>(pos.op.get()) != nullptr;
+      |                                                                  ^
+ASTHandlerTest.cpp:62:66: error: expected ‘(’ before ‘*’ token
+ASTHandlerTest.cpp:62:67: error: expected primary-expression before ‘>’ token
+   62 |                                return dynamic_cast<DeleteOperator*>(pos.op.get()) != nullptr;
+      |                                                                   ^
+ASTHandlerTest.cpp:62:93: error: expected ‘)’ before ‘;’ token
+   62 |                                return dynamic_cast<DeleteOperator*>(pos.op.get()) != nullptr;
+      |                                                                                             ^
+In file included from /usr/include/gtest/gtest-printers.h:122,
+                 from /usr/include/gtest/gtest-matchers.h:49,
+                 from /usr/include/gtest/internal/gtest-death-test-internal.h:47,
+                 from /usr/include/gtest/gtest-death-test.h:43,
+                 from /usr/include/gtest/gtest.h:65:
+ASTHandlerTest.cpp: In member function ‘virtual void ASTHandlerTest_GatherArithmeticOperators_Test::TestBody()’:
+ASTHandlerTest.cpp:84:30: error: ‘PlusOperator’ was not declared in this scope; did you mean ‘Operator’?
+   84 |     EXPECT_TRUE(dynamic_cast<PlusOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~
+ASTHandlerTest.cpp:84:5: error: expected primary-expression before ‘(’ token
+   84 |     EXPECT_TRUE(dynamic_cast<PlusOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp:84:30: error: ‘PlusOperator’ does not name a type; did you mean ‘Operator’?
+   84 |     EXPECT_TRUE(dynamic_cast<PlusOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~
+ASTHandlerTest.cpp:84:42: error: expected ‘>’ before ‘*’ token
+   84 |     EXPECT_TRUE(dynamic_cast<PlusOperator*>(ops[0].op.get()) != nullptr);
+      |                                          ^
+ASTHandlerTest.cpp:84:42: error: expected ‘(’ before ‘*’ token
+ASTHandlerTest.cpp:84:43: error: expected primary-expression before ‘>’ token
+   84 |     EXPECT_TRUE(dynamic_cast<PlusOperator*>(ops[0].op.get()) != nullptr);
+      |                                           ^
+ASTHandlerTest.cpp:84:5: error: expected ‘)’ before ‘;’ token
+   84 |     EXPECT_TRUE(dynamic_cast<PlusOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp:100:30: error: ‘MinusOperator’ was not declared in this scope; did you mean ‘Operator’?
+  100 |     EXPECT_TRUE(dynamic_cast<MinusOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~
+ASTHandlerTest.cpp:100:5: error: expected primary-expression before ‘(’ token
+  100 |     EXPECT_TRUE(dynamic_cast<MinusOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp:100:30: error: ‘MinusOperator’ does not name a type; did you mean ‘Operator’?
+  100 |     EXPECT_TRUE(dynamic_cast<MinusOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~
+ASTHandlerTest.cpp:100:43: error: expected ‘>’ before ‘*’ token
+  100 |     EXPECT_TRUE(dynamic_cast<MinusOperator*>(ops[0].op.get()) != nullptr);
+      |                                           ^
+ASTHandlerTest.cpp:100:43: error: expected ‘(’ before ‘*’ token
+ASTHandlerTest.cpp:100:44: error: expected primary-expression before ‘>’ token
+  100 |     EXPECT_TRUE(dynamic_cast<MinusOperator*>(ops[0].op.get()) != nullptr);
+      |                                            ^
+ASTHandlerTest.cpp:100:5: error: expected ‘)’ before ‘;’ token
+  100 |     EXPECT_TRUE(dynamic_cast<MinusOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp: In member function ‘virtual void ASTHandlerTest_GatherComparisonOperators_Test::TestBody()’:
+ASTHandlerTest.cpp:121:30: error: ‘EqualOperator’ was not declared in this scope; did you mean ‘Operator’?
+  121 |     EXPECT_TRUE(dynamic_cast<EqualOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~
+ASTHandlerTest.cpp:121:5: error: expected primary-expression before ‘(’ token
+  121 |     EXPECT_TRUE(dynamic_cast<EqualOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp:121:30: error: ‘EqualOperator’ does not name a type; did you mean ‘Operator’?
+  121 |     EXPECT_TRUE(dynamic_cast<EqualOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~
+ASTHandlerTest.cpp:121:43: error: expected ‘>’ before ‘*’ token
+  121 |     EXPECT_TRUE(dynamic_cast<EqualOperator*>(ops[0].op.get()) != nullptr);
+      |                                           ^
+ASTHandlerTest.cpp:121:43: error: expected ‘(’ before ‘*’ token
+ASTHandlerTest.cpp:121:44: error: expected primary-expression before ‘>’ token
+  121 |     EXPECT_TRUE(dynamic_cast<EqualOperator*>(ops[0].op.get()) != nullptr);
+      |                                            ^
+ASTHandlerTest.cpp:121:5: error: expected ‘)’ before ‘;’ token
+  121 |     EXPECT_TRUE(dynamic_cast<EqualOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp:137:30: error: ‘LessThanOperator’ was not declared in this scope
+  137 |     EXPECT_TRUE(dynamic_cast<LessThanOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~~~~
+ASTHandlerTest.cpp:137:5: error: expected primary-expression before ‘(’ token
+  137 |     EXPECT_TRUE(dynamic_cast<LessThanOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp:137:30: error: ‘LessThanOperator’ does not name a type
+  137 |     EXPECT_TRUE(dynamic_cast<LessThanOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~~~~
+ASTHandlerTest.cpp:137:46: error: expected ‘>’ before ‘*’ token
+  137 |     EXPECT_TRUE(dynamic_cast<LessThanOperator*>(ops[0].op.get()) != nullptr);
+      |                                              ^
+ASTHandlerTest.cpp:137:46: error: expected ‘(’ before ‘*’ token
+ASTHandlerTest.cpp:137:47: error: expected primary-expression before ‘>’ token
+  137 |     EXPECT_TRUE(dynamic_cast<LessThanOperator*>(ops[0].op.get()) != nullptr);
+      |                                               ^
+ASTHandlerTest.cpp:137:5: error: expected ‘)’ before ‘;’ token
+  137 |     EXPECT_TRUE(dynamic_cast<LessThanOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp: In member function ‘virtual void ASTHandlerTest_GatherLogicalOperators_Test::TestBody()’:
+ASTHandlerTest.cpp:158:30: error: ‘LogicalAndOperator’ was not declared in this scope
+  158 |     EXPECT_TRUE(dynamic_cast<LogicalAndOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~~~~~~
+ASTHandlerTest.cpp:158:5: error: expected primary-expression before ‘(’ token
+  158 |     EXPECT_TRUE(dynamic_cast<LogicalAndOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp:158:30: error: ‘LogicalAndOperator’ does not name a type
+  158 |     EXPECT_TRUE(dynamic_cast<LogicalAndOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~~~~~~
+ASTHandlerTest.cpp:158:48: error: expected ‘>’ before ‘*’ token
+  158 |     EXPECT_TRUE(dynamic_cast<LogicalAndOperator*>(ops[0].op.get()) != nullptr);
+      |                                                ^
+ASTHandlerTest.cpp:158:48: error: expected ‘(’ before ‘*’ token
+ASTHandlerTest.cpp:158:49: error: expected primary-expression before ‘>’ token
+  158 |     EXPECT_TRUE(dynamic_cast<LogicalAndOperator*>(ops[0].op.get()) != nullptr);
+      |                                                 ^
+ASTHandlerTest.cpp:158:5: error: expected ‘)’ before ‘;’ token
+  158 |     EXPECT_TRUE(dynamic_cast<LogicalAndOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp:174:30: error: ‘LogicalOrOperator’ was not declared in this scope
+  174 |     EXPECT_TRUE(dynamic_cast<LogicalOrOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~~~~~
+ASTHandlerTest.cpp:174:5: error: expected primary-expression before ‘(’ token
+  174 |     EXPECT_TRUE(dynamic_cast<LogicalOrOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp:174:30: error: ‘LogicalOrOperator’ does not name a type
+  174 |     EXPECT_TRUE(dynamic_cast<LogicalOrOperator*>(ops[0].op.get()) != nullptr);
+      |                              ^~~~~~~~~~~~~~~~~
+ASTHandlerTest.cpp:174:47: error: expected ‘>’ before ‘*’ token
+  174 |     EXPECT_TRUE(dynamic_cast<LogicalOrOperator*>(ops[0].op.get()) != nullptr);
+      |                                               ^
+ASTHandlerTest.cpp:174:47: error: expected ‘(’ before ‘*’ token
+ASTHandlerTest.cpp:174:48: error: expected primary-expression before ‘>’ token
+  174 |     EXPECT_TRUE(dynamic_cast<LogicalOrOperator*>(ops[0].op.get()) != nullptr);
+      |                                                ^
+ASTHandlerTest.cpp:174:5: error: expected ‘)’ before ‘;’ token
+  174 |     EXPECT_TRUE(dynamic_cast<LogicalOrOperator*>(ops[0].op.get()) != nullptr);
+      |     ^~~~~~~~~~~
+ASTHandlerTest.cpp: In member function ‘virtual void ASTHandlerTest_PathTracking_Test::TestBody()’:
+ASTHandlerTest.cpp:212:26: error: ‘PlusOperator’ does not name a type; did you mean ‘Operator’?
+  212 |         if (dynamic_cast<PlusOperator*>(op.op.get())) {
+      |                          ^~~~~~~~~~~~
+      |                          Operator
+ASTHandlerTest.cpp:212:38: error: expected ‘>’ before ‘*’ token
+  212 |         if (dynamic_cast<PlusOperator*>(op.op.get())) {
+      |                                      ^
+ASTHandlerTest.cpp:212:38: error: expected ‘(’ before ‘*’ token
+  212 |         if (dynamic_cast<PlusOperator*>(op.op.get())) {
+      |                                      ^
+      |                                      (
+ASTHandlerTest.cpp:212:39: error: expected primary-expression before ‘>’ token
+  212 |         if (dynamic_cast<PlusOperator*>(op.op.get())) {
+      |                                       ^
+ASTHandlerTest.cpp:212:54: error: expected ‘)’ before ‘{’ token
+  212 |         if (dynamic_cast<PlusOperator*>(op.op.get())) {
+      |            ~                                         ^~
+      |                                                      )
+ASTHandlerTest.cpp:220:5: error: expected primary-expression before ‘}’ token
+  220 |     }
+      |     ^
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/attribute_proxy.hpp: In instantiation of ‘cpp11::attribute_proxy<T>& cpp11::attribute_proxy<T>::operator=(std::initializer_list<C>) [with C = int; T = cpp11::writable::r_vector<SEXPREC*>]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/data_frame.hpp:74:68:   required from here
+/usr/share/R/include/Rinternals.h:368:25: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXP)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                         ^~~~~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/attribute_proxy.hpp:39:18: note: in expansion of macro ‘PROTECT’
+   39 |     SEXP value = PROTECT(as_sexp(rhs));
+      |                  ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/attribute_proxy.hpp: In instantiation of ‘cpp11::attribute_proxy<T>& cpp11::attribute_proxy<T>::operator=(C) [with C = const char*; T = cpp11::writable::r_vector<SEXPREC*>]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/data_frame.hpp:75:29:   required from here
+/usr/share/R/include/Rinternals.h:368:25: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(cpp11::enable_if_c_string<const char*, SEXPREC*>)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                         ^~~~~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/attribute_proxy.hpp:31:18: note: in expansion of macro ‘PROTECT’
+   31 |     SEXP value = PROTECT(as_sexp(rhs));
+      |                  ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘cpp11::enable_if_c_string<const char*, SEXPREC*>’ {aka ‘SEXPREC*’} to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘cpp11::enable_if_c_string<const char*, SEXPREC*>’ {aka ‘SEXPREC*’} to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/as.hpp: In instantiation of ‘SEXPREC* cpp11::detail::as_sexp_strings(const Container&, AsCstring&&) [with Container = std::initializer_list<const char*>; AsCstring = cpp11::as_sexp<std::initializer_list<const char*> >(const std::initializer_list<const char*>&)::<lambda(const char*)>; SEXP = SEXPREC*]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/as.hpp:324:33:   required from ‘cpp11::enable_if_c_string<T, SEXPREC*> cpp11::as_sexp(const Container&) [with Container = std::initializer_list<const char*>; T = const char*; enable_if_c_string<T, SEXPREC*> = SEXPREC*]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/as.hpp:328:53:   required from here
+/usr/share/R/include/Rinternals.h:368:25: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXPREC*)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                         ^~~~~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/as.hpp:292:12: note: in expansion of macro ‘PROTECT’
+  292 |     data = PROTECT(safe[Rf_allocVector](STRSXP, size));
+      |            ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXPREC*’ to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXPREC*’ to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp: In instantiation of ‘static SEXPREC* cpp11::writable::r_vector<T>::reserve_data(SEXP, bool, R_xlen_t) [with T = SEXPREC*; SEXP = SEXPREC*; R_xlen_t = long int]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1092:47:   required from ‘void cpp11::writable::r_vector<T>::reserve(R_xlen_t) [with T = SEXPREC*; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:916:3:   required from ‘cpp11::writable::r_vector<T>::r_vector(const V&) [with V = std::initializer_list<cpp11::writable::r_vector<SEXPREC*> >; W = std::decay<const cpp11::writable::r_vector<SEXPREC*>&>; T = SEXPREC*]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/data_frame.hpp:86:70:   required from here
+/usr/share/R/include/Rinternals.h:368:25: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXP)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                         ^~~~~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1323:14: note: in expansion of macro ‘PROTECT’
+ 1323 |   SEXP out = PROTECT(resize_data(x, is_altrep, size));
+      |              ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp: In instantiation of ‘static SEXPREC* cpp11::writable::r_vector<T>::resize_data(SEXP, bool, R_xlen_t) [with T = SEXPREC*; SEXP = SEXPREC*; R_xlen_t = long int]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1323:14:   required from ‘static SEXPREC* cpp11::writable::r_vector<T>::reserve_data(SEXP, bool, R_xlen_t) [with T = SEXPREC*; SEXP = SEXPREC*; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1092:47:   required from ‘void cpp11::writable::r_vector<T>::reserve(R_xlen_t) [with T = SEXPREC*; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:916:3:   required from ‘cpp11::writable::r_vector<T>::r_vector(const V&) [with V = std::initializer_list<cpp11::writable::r_vector<SEXPREC*> >; W = std::decay<const cpp11::writable::r_vector<SEXPREC*>&>; T = SEXPREC*]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/data_frame.hpp:86:70:   required from here
+/usr/share/R/include/Rinternals.h:368:25: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXPREC*)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                         ^~~~~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1349:14: note: in expansion of macro ‘PROTECT’
+ 1349 |   SEXP out = PROTECT(safe[Rf_allocVector](get_sexptype(), size));
+      |              ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXPREC*’ to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXPREC*’ to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp: In instantiation of ‘static SEXPREC* cpp11::writable::r_vector<T>::reserve_data(SEXP, bool, R_xlen_t) [with T = double; SEXP = SEXPREC*; R_xlen_t = long int]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1092:47:   required from ‘void cpp11::writable::r_vector<T>::reserve(R_xlen_t) [with T = double; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1077:3:   required from ‘void cpp11::writable::r_vector<T>::resize(R_xlen_t) [with T = double; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:898:3:   required from ‘cpp11::writable::r_vector<T>::r_vector(R_xlen_t) [with T = double; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/doubles.hpp:83:30:   required from here
+/usr/share/R/include/Rinternals.h:368:25: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXP)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                         ^~~~~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1323:14: note: in expansion of macro ‘PROTECT’
+ 1323 |   SEXP out = PROTECT(resize_data(x, is_altrep, size));
+      |              ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp: In instantiation of ‘static SEXPREC* cpp11::writable::r_vector<T>::reserve_data(SEXP, bool, R_xlen_t) [with T = int; SEXP = SEXPREC*; R_xlen_t = long int]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1092:47:   required from ‘void cpp11::writable::r_vector<T>::reserve(R_xlen_t) [with T = int; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1077:3:   required from ‘void cpp11::writable::r_vector<T>::resize(R_xlen_t) [with T = int; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:898:3:   required from ‘cpp11::writable::r_vector<T>::r_vector(R_xlen_t) [with T = int; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/integers.hpp:88:37:   required from here
+/usr/share/R/include/Rinternals.h:368:25: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXP)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                         ^~~~~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1323:14: note: in expansion of macro ‘PROTECT’
+ 1323 |   SEXP out = PROTECT(resize_data(x, is_altrep, size));
+      |              ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXP’ {aka ‘SEXPREC*’} to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp: In instantiation of ‘static SEXPREC* cpp11::writable::r_vector<T>::resize_data(SEXP, bool, R_xlen_t) [with T = double; SEXP = SEXPREC*; R_xlen_t = long int]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1323:14:   required from ‘static SEXPREC* cpp11::writable::r_vector<T>::reserve_data(SEXP, bool, R_xlen_t) [with T = double; SEXP = SEXPREC*; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1092:47:   required from ‘void cpp11::writable::r_vector<T>::reserve(R_xlen_t) [with T = double; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1077:3:   required from ‘void cpp11::writable::r_vector<T>::resize(R_xlen_t) [with T = double; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:898:3:   required from ‘cpp11::writable::r_vector<T>::r_vector(R_xlen_t) [with T = double; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/doubles.hpp:83:30:   required from here
+/usr/share/R/include/Rinternals.h:368:25: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXPREC*)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                         ^~~~~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1349:14: note: in expansion of macro ‘PROTECT’
+ 1349 |   SEXP out = PROTECT(safe[Rf_allocVector](get_sexptype(), size));
+      |              ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXPREC*’ to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXPREC*’ to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp: In instantiation of ‘static SEXPREC* cpp11::writable::r_vector<T>::resize_data(SEXP, bool, R_xlen_t) [with T = int; SEXP = SEXPREC*; R_xlen_t = long int]’:
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1323:14:   required from ‘static SEXPREC* cpp11::writable::r_vector<T>::reserve_data(SEXP, bool, R_xlen_t) [with T = int; SEXP = SEXPREC*; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1092:47:   required from ‘void cpp11::writable::r_vector<T>::reserve(R_xlen_t) [with T = int; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1077:3:   required from ‘void cpp11::writable::r_vector<T>::resize(R_xlen_t) [with T = int; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:898:3:   required from ‘cpp11::writable::r_vector<T>::r_vector(R_xlen_t) [with T = int; R_xlen_t = long int]’
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/integers.hpp:88:37:   required from here
+/usr/share/R/include/Rinternals.h:368:25: error: no matching function for call to ‘cpp11::Rf_protect::Rf_protect(SEXPREC*)’
+  368 | #define PROTECT(s)      Rf_protect(s)
+      |                         ^~~~~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/r_vector.hpp:1349:14: note: in expansion of macro ‘PROTECT’
+ 1349 |   SEXP out = PROTECT(safe[Rf_allocVector](get_sexptype(), size));
+      |              ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect()’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   candidate expects 0 arguments, 1 provided
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(const cpp11::Rf_protect&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXPREC*’ to ‘const cpp11::Rf_protect&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note: candidate: ‘constexpr cpp11::Rf_protect::Rf_protect(cpp11::Rf_protect&&)’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+/usr/share/R/include/Rinternals.h:996:33: note:   no known conversion for argument 1 from ‘SEXPREC*’ to ‘cpp11::Rf_protect&&’
+  996 | #define protect                 Rf_protect
+      |                                 ^~~~~~~~~~
+/home/asanaliamandykov.linux/R/aarch64-unknown-linux-gnu-library/4.3/cpp11/include/cpp11/protect.hpp:157:8: note: in expansion of macro ‘protect’
+  157 | struct protect {
+      |        ^~~~~~~
+make: *** [Makefile:72: ASTHandlerTest.o] Error 1

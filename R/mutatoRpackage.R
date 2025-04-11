@@ -1,4 +1,3 @@
-# --- New version of mutate_file() that only generates mutants from a file ---
 mutate_file_new <- function(sample_file) {
   # Create a directory to store mutated versions (if not already existing)
   dir.create("./mutations", showWarnings = FALSE)
@@ -22,13 +21,21 @@ mutate_file_new <- function(sample_file) {
     for (i in seq_along(mutated_expressions)) {
       # Convert each mutated expression back into R code
       code_lines <- sapply(mutated_expressions[[i]], function(expr) {
-        # print(expr)
         paste(deparse(expr), collapse = "\n")
       })
       mutated_code <- paste(code_lines, collapse = "\n")
       output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, i)
       writeLines(mutated_code, output_file)
-      mutated_file_paths[[i]] <- output_file
+      
+      # Retrieve and store mutation info
+      mutation_info <- attr(mutated_expressions[[i]], "mutation_info")
+      print(mutation_info)
+      if (is.null(mutation_info) || mutation_info == "") mutation_info <- "<no info>"
+      
+      mutated_file_paths[[i]] <- list(
+        path = output_file,
+        mutation_info = mutation_info
+      )
     }
   }
   
@@ -52,7 +59,14 @@ mutate_file_new <- function(sample_file) {
       mutant_index <- length(mutated_file_paths) + 1
       output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, j)
       writeLines(mutated_code, output_file)
-      mutated_file_paths[[mutant_index]] <- output_file
+      
+      # Create mutation info for string-level deletion
+      mutation_info <- sprintf("String-level deletion: deleted line(s) %s", paste(delete_indices, collapse = ", "))
+      
+      mutated_file_paths[[mutant_index]] <- list(
+        path = output_file,
+        mutation_info = mutation_info
+      )
     }
   }
   
@@ -66,100 +80,144 @@ run_package_test <- function(pkg_dir) {
   setwd(pkg_dir)
   
   test_result <- tryCatch({
-    results <- testthat::test_dir("tests/testthat"
-    # , reporter = "silent"
-    )
-    # If any tests failed, the mutant is considered killed (i.e., test_result = FALSE)
-    testthat::failed(results) == 0
+    # First try to load/compile the package
+    devtools_result <- tryCatch({
+      devtools::load_all(quiet = TRUE)
+      TRUE
+    }, error = function(e) {
+      cat("Compilation error:", conditionMessage(e), "\n")
+      NULL  # Return NULL for compilation errors
+    })
+    
+    # Only run tests if compilation succeeded
+    if (!is.null(devtools_result)) {
+      results <- testthat::test_dir("tests/testthat")
+      # If any tests failed, the mutant is considered killed
+      testthat::failed(results) == 0
+    } else {
+      NULL
+    }
   }, error = function(e) {
     print(e)
-    FALSE  # On error, consider the mutant as killed.
+    NULL
   })
   
   return(test_result)
 }
 
-# --- mutate_package() uses the new mutate_file() to generate mutants for every R file
-# and then runs the test suite for each mutated package copy ---
-mutate_package <- function(pkg_path, parallel = TRUE, cores = parallel::detectCores()) {
-  # Identify R source files in the package's R/ directory.
+mutate_package <- function(pkg_path, cores = parallel::detectCores()) {
   r_files <- list.files(file.path(pkg_path, "R"), full.names = TRUE, pattern = "\\.R$")
-  package_mutants <- list()
-  test_results <- list()
   
-  # so it doesnt fail with memory not aligned
-
-  # Create a list to store all mutant packages and their info
   all_mutants <- list()
   
-  # Loop over each R file in the package
   for (file in r_files) {
     cat("Mutating file:", file, "\n")
-    # Generate mutant versions for the current file (without running tests)
     mutants <- mutate_file_new(file)
     
-    # For every mutant, create a complete package copy with the mutant file replacing the original
+    # For every mutant, create a complete package copy with the mutant file replacing the original.
     for (mutant_file in mutants) {
-      # Create a temporary directory to hold the mutated package
+      # Create a temporary directory to hold the mutated package.
       tmp_pkg <- tempfile(pattern = "pkg_mutation_")
       dir.create(tmp_pkg)
       
       # Copy the entire package into the temporary directory.
-      # The package copy will be placed in tmp_pkg/<package_name>
       file.copy(pkg_path, tmp_pkg, recursive = TRUE)
       
       # Construct the path to the file in the copied package.
-      # If pkg_path is "myPackage", then the copy is in tmp_pkg/myPackage/
       target_file <- file.path(tmp_pkg, basename(pkg_path), "R", basename(file))
-      file.copy(mutant_file, target_file, overwrite = TRUE)
+      file.copy(mutant_file$path, target_file, overwrite = TRUE)
       
-      # Store mutant info for parallel processing
-      mutant_id <- paste(basename(file), basename(mutant_file), sep = "_")
-      pkg_copy_dir <- file.path(tmp_pkg, basename(pkg_path))
-      all_mutants[[mutant_id]] <- pkg_copy_dir
+      # Create a unique mutant identifier.
+      mutant_id <- paste(basename(file), basename(mutant_file$path), sep = "_")
+      
+      # Store the package copy directory and mutation info for later lookup.
+      all_mutants[[mutant_id]] <- list(
+        pkg_copy_dir = file.path(tmp_pkg, basename(pkg_path)),
+        mutation_info = mutant_file$mutation_info
+      )
     }
   }
   
-  # Run tests in parallel or sequentially
-  if (parallel && length(all_mutants) > 1) {
+  package_mutants <- list()
+  test_results <- list()
+  
+  # --- Running tests ---
+  if (length(all_mutants) > 1) {
     cat(sprintf("Running tests in parallel using %d cores...\n", cores))
     
-    # Create a cluster with the specified number of cores
-    cl <- parallel::makeCluster(min(cores, length(all_mutants)))
-    on.exit(parallel::stopCluster(cl), add = TRUE)
+    # Setup furrr parallel processing
+    future::plan(future::multisession, workers = min(cores, length(all_mutants)))
     
-    # Export the run_package_test function to the cluster
-    parallel::clusterExport(cl, "run_package_test", envir = globalenv())
-    
-    # Run tests in parallel
     mutant_ids <- names(all_mutants)
-    pkg_dirs <- unname(all_mutants)
+    pkg_dirs <- sapply(all_mutants, function(x) x$pkg_copy_dir)
     
-    # Use parLapply to run tests in parallel
-    parallel_results <- parallel::parLapply(cl, pkg_dirs, run_package_test)
+    # Create a named list for future mapping
+    pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
     
-    # Combine results
-    for (i in seq_along(mutant_ids)) {
-      package_mutants[[mutant_ids[i]]] <- pkg_dirs[i]
-      test_results[[mutant_ids[i]]] <- parallel_results[[i]]
-      status <- if (parallel_results[[i]]) "SURVIVED" else "KILLED"
-      cat(sprintf("Mutant %s: %s\n", mutant_ids[i], status))
-    }
-  } else {
-    # Run tests sequentially (original approach)
-    for (mutant_id in names(all_mutants)) {
-      pkg_copy_dir <- all_mutants[[mutant_id]]
-      test_result <- run_package_test(pkg_copy_dir)
-      status <- if (test_result) "SURVIVED" else "KILLED"
-      cat(sprintf("Mutant %s: %s\n", mutant_id, status))
+    # Run tests in parallel with progress bar
+    parallel_results <- furrr::future_map(
+      pkg_dir_list, 
+      run_package_test,
+      .progress = TRUE,
+      .options = furrr::furrr_options(seed = TRUE)
+    )
+    
+    # Process the parallel test results
+    for (mutant_id in mutant_ids) {
+      test_result <- parallel_results[[mutant_id]]
+      pkg_copy_dir <- all_mutants[[mutant_id]]$pkg_copy_dir
       
-      # Record the mutant package location and test result
-      package_mutants[[mutant_id]] <- pkg_copy_dir
+      if (is.null(test_result)) {
+        cat(sprintf("Mutant %s: Compilation failed, not included in results.\n", mutant_id))
+        next
+      }
+      
+      status <- if (test_result) "SURVIVED" else "KILLED"
+      mutation_info <- all_mutants[[mutant_id]]$mutation_info
+      
+      cat(sprintf("Mutant %s: %s\n", mutant_id, status))
+      cat(sprintf("Mutation info: %s\n", mutation_info))
+      cat(sprintf("   Result: %s\n\n", status))
+      
+      package_mutants[[mutant_id]] <- list(
+        path = pkg_copy_dir,
+        mutation_info = mutation_info,
+        result = test_result
+      )
+      test_results[[mutant_id]] <- test_result
+    }
+    
+    # Clean up the parallel workers
+    future::plan(future::sequential)
+    
+  } else {
+    # Run tests sequentially if only one mutant is available.
+    for (mutant_id in names(all_mutants)) {
+      pkg_copy_dir <- all_mutants[[mutant_id]]$pkg_copy_dir
+      test_result <- run_package_test(pkg_copy_dir)
+      
+      if (is.null(test_result)) {
+        cat(sprintf("Mutant %s: Compilation failed, not included in results.\n", mutant_id))
+        next
+      }
+      
+      status <- if (test_result) "SURVIVED" else "KILLED"
+      mutation_info <- all_mutants[[mutant_id]]$mutation_info
+      
+      cat(sprintf("Mutant %s: %s\n", mutant_id, status))
+      cat(sprintf("Mutation info: %s\n", mutation_info))
+      cat(sprintf("   Result: %s\n\n", status))
+      
+      package_mutants[[mutant_id]] <- list(
+        path = pkg_copy_dir,
+        mutation_info = mutation_info,
+        result = test_result
+      )
       test_results[[mutant_id]] <- test_result
     }
   }
   
-  # Summarize test results:
+  # Summarize test results.
   total_mutants <- length(test_results)
   survived <- sum(unlist(test_results))
   killed <- total_mutants - survived
