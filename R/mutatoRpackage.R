@@ -6,8 +6,23 @@ mutate_file_new <- function(sample_file) {
   # Parse the sample file while preserving source information
   exprs <- parse(file = sample_file, keep.source = TRUE)
   
-  # Call the C++ function to generate mutated expressions
-  mutated_expressions <- .Call("C_mutate_file", exprs)
+  # Add debugging info
+  cat("Parsed expressions:", length(exprs), "\n")
+  
+  # Ensure the srcref attribute exists
+  if (is.null(attr(exprs, "srcref"))) {
+    warning("Source references are missing. This might cause problems.")
+    # Create dummy srcrefs to prevent crash
+    attr(exprs, "srcref") <- lapply(1:length(exprs), function(i) c(1L, 1L, 1L, 1L))
+  }
+  
+  # Call the C++ function with tryCatch
+  mutated_expressions <- tryCatch({
+    .Call("C_mutate_file", exprs)
+  }, error = function(e) {
+    cat("Error in C_mutate_file:", conditionMessage(e), "\n")
+    list()  # Return empty list on error
+  })
   
   mutated_file_paths <- list()
   
@@ -20,9 +35,25 @@ mutate_file_new <- function(sample_file) {
     # --- Generate mutants based on parsed expressions ---
     for (i in seq_along(mutated_expressions)) {
       # Convert each mutated expression back into R code
-      code_lines <- sapply(mutated_expressions[[i]], function(expr) {
-        paste(deparse(expr), collapse = "\n")
+      code_lines <- tryCatch({
+        if (!is.list(mutated_expressions[[i]]) && !is.language(mutated_expressions[[i]])) {
+          warning(paste("Invalid mutation detected, skipping mutation", i))
+          NULL
+        } else {
+          sapply(mutated_expressions[[i]], function(expr) {
+            if (is.null(expr) || !is.language(expr)) return("")
+            paste(deparse(expr), collapse = "\n")
+          })
+        }
+      }, error = function(e) {
+        warning(paste("Error processing mutation", i, ":", conditionMessage(e)))
+        NULL
       })
+      
+      if (is.null(code_lines) || length(code_lines) == 0) {
+        next  # Skip this mutation
+      }
+      
       mutated_code <- paste(code_lines, collapse = "\n")
       output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, i)
       writeLines(mutated_code, output_file)
@@ -76,7 +107,14 @@ mutate_file_new <- function(sample_file) {
 # --- Helper function to run all tests in tests/testthat/ of a package ---
 run_package_test <- function(pkg_dir) {
   old_dir <- getwd()
-  on.exit(setwd(old_dir))
+  on.exit({
+    setwd(old_dir)
+    # Close any graphics devices that might have been opened
+    if (requireNamespace("grDevices", quietly = TRUE)) {
+      while (grDevices::dev.cur() > 1) grDevices::dev.off()
+    }
+  }, add = TRUE)
+  
   setwd(pkg_dir)
   
   test_result <- tryCatch({
@@ -86,20 +124,22 @@ run_package_test <- function(pkg_dir) {
       TRUE
     }, error = function(e) {
       cat("Compilation error:", conditionMessage(e), "\n")
-      NULL  # Return NULL for compilation errors
+      FALSE  # Return FALSE for compilation errors instead of NULL
     })
     
     # Only run tests if compilation succeeded
-    if (!is.null(devtools_result)) {
+    if (devtools_result) {
       results <- testthat::test_dir("tests/testthat")
-      # If any tests failed, the mutant is considered killed
-      testthat::failed(results) == 0
+      cat("\nTest results: n_fail =", results$n_fail, ", n_pass =", results$n_pass, "\n")
+      all_pass <- results$n_fail == 0
+      cat("All tests pass:", all_pass, "=> Mutant", if(all_pass) "SURVIVED" else "KILLED", "\n")
+      all_pass
     } else {
-      NULL
+      FALSE  # Return FALSE instead of NULL
     }
   }, error = function(e) {
     print(e)
-    NULL
+    FALSE  # Return FALSE instead of NULL
   })
   
   return(test_result)
@@ -146,17 +186,20 @@ mutate_package <- function(pkg_path, cores = parallel::detectCores()) {
     cat(sprintf("Running tests in parallel using %d cores...\n", cores))
     
     # Setup furrr parallel processing
-    future::plan(future::multisession, workers = min(cores, length(all_mutants)))
+    future::plan(future::multisession, 
+                 workers = min(cores, length(all_mutants)),
+                 cleanup = TRUE,
+                 earlySignal = TRUE)
     
     mutant_ids <- names(all_mutants)
     pkg_dirs <- sapply(all_mutants, function(x) x$pkg_copy_dir)
-    
+
     # Create a named list for future mapping
     pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
-    
+
     # Run tests in parallel with progress bar
     parallel_results <- furrr::future_map(
-      pkg_dir_list, 
+      pkg_dir_list,
       run_package_test,
       .progress = TRUE,
       .options = furrr::furrr_options(seed = TRUE)
@@ -167,12 +210,13 @@ mutate_package <- function(pkg_path, cores = parallel::detectCores()) {
       test_result <- parallel_results[[mutant_id]]
       pkg_copy_dir <- all_mutants[[mutant_id]]$pkg_copy_dir
       
-      if (is.null(test_result)) {
-        cat(sprintf("Mutant %s: Compilation failed, not included in results.\n", mutant_id))
-        next
+      # Handle NULL or empty results properly
+      if (is.null(test_result) || length(test_result) == 0) {
+        cat(sprintf("Mutant %s: Compilation/test execution failed, marking as KILLED.\n", mutant_id))
+        test_result <- FALSE  # Treat failures as killed mutants
       }
       
-      status <- if (test_result) "SURVIVED" else "KILLED"
+      status <- if (isTRUE(test_result)) "SURVIVED" else "KILLED"
       mutation_info <- all_mutants[[mutant_id]]$mutation_info
       
       cat(sprintf("Mutant %s: %s\n", mutant_id, status))
@@ -189,6 +233,7 @@ mutate_package <- function(pkg_path, cores = parallel::detectCores()) {
     
     # Clean up the parallel workers
     future::plan(future::sequential)
+    gc()  # Force garbage collection to clean up connections
     
   } else {
     # Run tests sequentially if only one mutant is available.

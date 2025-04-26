@@ -75,7 +75,7 @@ bool isValidMutant(SEXP mutant) {
 
 std::vector<bool> detect_block_expressions(SEXP exprs, int n_expr) {
     std::vector<bool> block_flags(n_expr, false);
-    bool inside_block = false;
+    std::vector<bool> in_block_stack;  // Stack to track nested blocks
     
     for (int i = 0; i < n_expr; i++) {
         SEXP expr = VECTOR_ELT(exprs, i);
@@ -86,22 +86,29 @@ std::vector<bool> detect_block_expressions(SEXP exprs, int n_expr) {
             if (TYPEOF(head) == SYMSXP) {
                 std::string op_name = CHAR(PRINTNAME(head));
                 if (op_name == "{") {
-                    inside_block = true;
+                    // Start of a new block
+                    in_block_stack.push_back(true);
+                    
                     // Process expressions inside this block
                     SEXP block_body = CDR(expr);
                     while (block_body != R_NilValue) {
-                        // Mark all expressions inside the block
                         block_flags[i] = true;
                         block_body = CDR(block_body);
                     }
                 } else if (op_name == "}") {
-                    inside_block = false;
+                    // End of current block
+                    if (!in_block_stack.empty()) {
+                        in_block_stack.pop_back();
+                    }
+                } else if (!in_block_stack.empty()) {
+                    // We're inside at least one block
+                    block_flags[i] = true;
                 }
             }
         }
         
-        // Mark expression if we're inside a block
-        if (inside_block) {
+        // Mark expression as in block if we're inside any block
+        if (!in_block_stack.empty()) {
             block_flags[i] = true;
         }
     }

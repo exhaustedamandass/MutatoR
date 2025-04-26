@@ -56,59 +56,95 @@ std::pair<SEXP, bool> Mutator::applyFlipMutation(SEXP expr,
 
 // In Mutator.cpp
 std::pair<SEXP, bool> Mutator::applyDeleteMutation(SEXP expr, const std::vector<OperatorPos>& ops, int whichOpIndex) {
-    // Duplicate the list using Rf_duplicate to avoid side effects on the original AST.
+    // Duplicate the list to avoid side effects on the original AST
     SEXP duplicated_list = Rf_duplicate(expr);
+    PROTECT(duplicated_list);
 
     const OperatorPos& op_pos = ops[whichOpIndex];
-    // Retrieve the deletion operator's path.
     const std::vector<int>& path = op_pos.path;
+    
     if (path.empty()) {
-        // If no path is specified, return an empty SEXP (R's NULL)
+        UNPROTECT(1);
         return {R_NilValue, false};
     }
-    int deleteIndex = path[0];
     
     // Build mutation message
     std::ostringstream msg;
-    msg << "Deleting node at index: " << deleteIndex << '\n';
-    msg 
-    << "From line/col: " << op_pos.start_line << "/" << op_pos.start_col << '\n'
-    << "To line/col: " << op_pos.end_line << "/" << op_pos.end_col << '\n';
-    // Special case: if the first node is to be deleted, return its CDR (i.e. the rest of the list).
-    // to avoid deleting the 0 index of an expression
-    if (deleteIndex == 0) {
-        SEXP newList = CDR(duplicated_list);
-        
-        // Assign mutation info
-        SEXP msg_sexp = Rf_mkString(msg.str().c_str());
-        Rf_setAttrib(newList, Rf_install("mutation_info"), msg_sexp);
-        
-        return {newList, false};
+    msg << "Deleting node at path: ";
+    for (size_t i = 0; i < path.size(); i++) {
+        msg << path[i];
+        if (i < path.size() - 1) msg << "/";
     }
-
-    // Traverse the duplicated pairlist to find the node immediately before the one to delete.
+    msg << '\n';
+    msg << "From line/col: " << op_pos.start_line << "/" << op_pos.start_col << '\n'
+        << "To line/col: " << op_pos.end_line << "/" << op_pos.end_col << '\n';
+    
+    // Navigate to the parent node containing the element to delete
+    SEXP parent = duplicated_list;
     SEXP current = duplicated_list;
-    int currentIndex = 0;
-    while (current != R_NilValue && currentIndex < (deleteIndex - 1)) {
-        current = CDR(current);
-        ++currentIndex;
-    }
-
-    // If the traversal fails (e.g., deleteIndex is out of bounds), return the list unchanged.
-    // don't add it to the actual mutated expression
-    if (current == R_NilValue || CDR(current) == R_NilValue) {
+    
+    // If we're deleting the root expression itself
+    if (path.size() == 1 && path[0] == 0) {
+        UNPROTECT(1);
+        // We can't delete the root expression
         return {duplicated_list, false};
     }
-
-    // Remove the target node by setting the current node's CDR to skip over the deleted node.
-    SETCDR(current, CDDR(current));
-
-    // Assign mutation info to the mutated list
-    SEXP msg_sexp = Rf_mkString(msg.str().c_str());
-    Rf_setAttrib(duplicated_list, Rf_install("mutation_info"), msg_sexp);
-
-    // The duplicated_list now has the specified node removed.
-    return {duplicated_list, true};
+    
+    // Navigate to the parent of the node to delete
+    for (size_t i = 0; i < path.size() - 1; i++) {
+        int idx = path[i];
+        SEXP iter = parent;
+        for (int j = 0; j < idx; j++) {
+            if (CDR(iter) == R_NilValue) {
+                UNPROTECT(1);
+                return {duplicated_list, false}; // Path is invalid
+            }
+            iter = CDR(iter);
+        }
+        parent = CAR(iter);
+        
+        // Check if we've reached a non-LANGSXP node, which would be an error
+        if (TYPEOF(parent) != LANGSXP) {
+            UNPROTECT(1);
+            return {duplicated_list, false};
+        }
+    }
+    
+    // Now parent points to the node containing the element to delete
+    int deleteIndex = path.back();
+    
+    // Special handling for the first element (which is the function/operator symbol)
+    if (deleteIndex == 0) {
+        // We can't delete the function/operator symbol of a call
+        UNPROTECT(1);
+        return {duplicated_list, false};
+    }
+    
+    // Navigate to the element just before the one to delete
+    SEXP prev = parent;
+    for (int i = 0; i < deleteIndex - 1; i++) {
+        prev = CDR(prev);
+        if (prev == R_NilValue) {
+            UNPROTECT(1);
+            return {duplicated_list, false}; // Path is invalid
+        }
+    }
+    
+    // If the element to delete exists, remove it by skipping it in the list
+    if (CDR(prev) != R_NilValue) {
+        SETCDR(prev, CDDR(prev));
+        
+        // Add mutation info
+        SEXP msg_sexp = PROTECT(Rf_mkString(msg.str().c_str()));
+        Rf_setAttrib(duplicated_list, Rf_install("mutation_info"), msg_sexp);
+        UNPROTECT(1); // msg_sexp
+        
+        UNPROTECT(1); // duplicated_list
+        return {duplicated_list, true};
+    }
+    
+    UNPROTECT(1); // duplicated_list
+    return {duplicated_list, false};
 }
 
 // TODO: extract the message stuff into a function
