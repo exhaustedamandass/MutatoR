@@ -1,284 +1,202 @@
-mutate_file_new <- function(sample_file) {
-  # Create a directory to store mutated versions (if not already existing)
-  dir.create("./mutations", showWarnings = FALSE)
-  
-  options(keep.source = TRUE)
-  # Parse the sample file while preserving source information
-  exprs <- parse(file = sample_file, keep.source = TRUE)
-  
-  # Add debugging info
-  cat("Parsed expressions:", length(exprs), "\n")
-  
-  # Ensure the srcref attribute exists
-  if (is.null(attr(exprs, "srcref"))) {
-    warning("Source references are missing. This might cause problems.")
-    # Create dummy srcrefs to prevent crash
-    attr(exprs, "srcref") <- lapply(1:length(exprs), function(i) c(1L, 1L, 1L, 1L))
+# Utility: delete individual lines to create "string-deletion" mutants
+delete_line_mutants <- function(src_file,
+                                out_dir   = "mutations",
+                                file_base = NULL,
+                                max_del   = 5,
+                                start_idx = 1) {
+  if (is.null(file_base)) file_base <- basename(src_file)
+  lines     <- readLines(src_file)
+  non_empty <- which(nzchar(lines))
+  count     <- min(max_del, length(lines))
+  if (length(non_empty) == 0) {
+    warning("No non-empty lines to delete.")
+    return(list())
   }
-  
-  # Call the C++ function with tryCatch
-  mutated_expressions <- tryCatch({
-    .Call("C_mutate_file", exprs)
-  }, error = function(e) {
-    cat("Error in C_mutate_file:", conditionMessage(e), "\n")
-    list()  # Return empty list on error
-  })
-  
-  mutated_file_paths <- list()
-  
-  mutated_file_name <- basename(sample_file)
-
-  # Check if mutated_expressions is a valid list
-  if (!is.list(mutated_expressions) || length(mutated_expressions) == 0) {
-    cat("No mutated expressions generated, proceeding with string-level deletion.\n")
-  } else {
-    # --- Generate mutants based on parsed expressions ---
-    for (i in seq_along(mutated_expressions)) {
-      # Convert each mutated expression back into R code
-      code_lines <- tryCatch({
-        if (!is.list(mutated_expressions[[i]]) && !is.language(mutated_expressions[[i]])) {
-          warning(paste("Invalid mutation detected, skipping mutation", i))
-          NULL
-        } else {
-          sapply(mutated_expressions[[i]], function(expr) {
-            if (is.null(expr) || !is.language(expr)) return("")
-            paste(deparse(expr), collapse = "\n")
-          })
-        }
-      }, error = function(e) {
-        warning(paste("Error processing mutation", i, ":", conditionMessage(e)))
-        NULL
-      })
-      
-      if (is.null(code_lines) || length(code_lines) == 0) {
-        next  # Skip this mutation
-      }
-      
-      mutated_code <- paste(code_lines, collapse = "\n")
-      output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, i)
-      writeLines(mutated_code, output_file)
-      
-      # Retrieve and store mutation info
-      mutation_info <- attr(mutated_expressions[[i]], "mutation_info")
-      print(mutation_info)
-      if (is.null(mutation_info) || mutation_info == "") mutation_info <- "<no info>"
-      
-      mutated_file_paths[[i]] <- list(
-        path = output_file,
-        mutation_info = mutation_info
-      )
-    }
+  mutants <- vector("list", count)
+  for (i in seq_len(count)) {
+    idx      <- sample(non_empty, 1)
+    out_file <- file.path(out_dir, sprintf("%s_%03d.R", file_base, start_idx + i - 1))
+    writeLines(lines[-idx], out_file)
+    mutants[[i]] <- list(
+      path = out_file,
+      info = sprintf("deleted line %d", idx)
+    )
   }
-  
-  # --- Additional mutation: string-level deletion ---
-  original_lines <- readLines(sample_file)
-  num_lines <- length(original_lines)
-  num_deletion_mutants <- min(5, num_lines)
-  
-  # Filter out empty lines
-  non_empty_lines <- which(nzchar(original_lines))
-  
-  for (j in 1:num_deletion_mutants) {
-    lines_mutated <- original_lines
-    # Delete a single random non-empty line
-    n_delete <- 1
-    if (length(non_empty_lines) > 0) {
-      delete_indices <- sort(sample(non_empty_lines, n_delete, replace = FALSE))
-      mutated_lines <- lines_mutated[-delete_indices]
-      mutated_code <- paste(mutated_lines, collapse = "\n")
-      
-      mutant_index <- length(mutated_file_paths) + 1
-      output_file <- sprintf("./mutations/%s_%03d.R", mutated_file_name, j)
-      writeLines(mutated_code, output_file)
-      
-      # Create mutation info for string-level deletion
-      mutation_info <- sprintf("String-level deletion: deleted line(s) %s", paste(delete_indices, collapse = ", "))
-      
-      mutated_file_paths[[mutant_index]] <- list(
-        path = output_file,
-        mutation_info = mutation_info
-      )
-    }
-  }
-  
-  return(mutated_file_paths)
+  mutants
 }
 
-# --- Helper function to run all tests in tests/testthat/ of a package ---
-run_package_test <- function(pkg_dir) {
-  old_dir <- getwd()
-  on.exit({
-    setwd(old_dir)
-    # Close any graphics devices that might have been opened
+# Generate AST-based and line-deletion mutants for a single R file
+mutate_file <- function(src_file, out_dir = "mutations") {
+  dir.create(out_dir, showWarnings = FALSE)
+  options(keep.source = TRUE)
+
+  parsed <- parse(src_file, keep.source = TRUE)
+  if (is.null(attr(parsed, "srcref"))) {
+    attr(parsed, "srcref") <- lapply(parsed, function(x) c(1L,1L,1L,1L))
+  }
+
+  raw_mutations <- tryCatch(
+    .Call("C_mutate_file", parsed),
+    error = function(e) {
+      message("C_mutate_file error: ", e$message)
+      list()
+    }
+  )
+
+  results   <- list()
+  base_name <- basename(src_file)
+  idx       <- 1L
+
+  # AST-driven mutants
+  for (m in raw_mutations) {
+    if (!is.list(m) && !is.language(m)) next
+    code <- tryCatch(
+      vapply(m, function(x) {
+        if (!is.language(x)) "" else paste(deparse(x), collapse = "\n")
+      }, character(1)),
+      error = function(e) NULL
+    )
+    if (length(code) == 0) next
+
+    out_file <- file.path(out_dir, sprintf("%s_%03d.R", base_name, idx))
+    writeLines(paste(code, collapse = "\n"), out_file)
+
+    info <- attr(m, "mutation_info")
+    if (is.null(info) || info == "") info <- "<no info>"
+
+    results[[length(results) + 1]] <- list(path = out_file, info = info)
+    idx <- idx + 1L
+  }
+
+  # Fallback string-deletion mutants
+  results <- c(
+    results,
+    delete_line_mutants(src_file, out_dir, base_name,
+                        max_del   = 5,
+                        start_idx = length(results) + 1L)
+  )
+
+  results
+}
+
+# High-level: mutate every R file in a package, run tests in parallel, and summarize
+mutate_package <- function(pkg_dir, cores = parallel::detectCores()) {
+  r_files <- list.files(file.path(pkg_dir, "R"),
+                        pattern   = "\\.R$",
+                        full.names = TRUE)
+
+  mutants <- list()
+  for (src in r_files) {
+    for (m in mutate_file(src)) {
+      temp_root <- tempfile("mut_pkg_")
+      pkg_copy   <- file.path(temp_root, basename(pkg_dir))
+      dir.create(pkg_copy, recursive = TRUE)
+      file.copy(pkg_dir, temp_root, recursive = TRUE)
+
+      target <- file.path(pkg_copy, "R", basename(src))
+      file.copy(m$path, target, overwrite = TRUE)
+
+      id <- paste(basename(src), basename(m$path), sep = "_")
+      mutants[[id]] <- list(pkg = pkg_copy, info = m$info)
+    }
+  }
+
+  run_tests <- function(pkg_dir) {
+    # Close any open graphics devices before running tests
     if (requireNamespace("grDevices", quietly = TRUE)) {
       while (grDevices::dev.cur() > 1) grDevices::dev.off()
     }
-  }, add = TRUE)
-  
-  setwd(pkg_dir)
-  
-  test_result <- tryCatch({
-    # First try to load/compile the package
-    devtools_result <- tryCatch({
-      devtools::load_all(quiet = TRUE)
-      TRUE
-    }, error = function(e) {
-      cat("Compilation error:", conditionMessage(e), "\n")
-      FALSE  # Return FALSE for compilation errors instead of NULL
-    })
-    
-    # Only run tests if compilation succeeded
-    if (devtools_result) {
-      results <- testthat::test_dir("tests/testthat")
-      cat("\nTest results: n_fail =", results$n_fail, ", n_pass =", results$n_pass, "\n")
-      all_pass <- results$n_fail == 0
-      cat("All tests pass:", all_pass, "=> Mutant", if(all_pass) "SURVIVED" else "KILLED", "\n")
-      all_pass
-    } else {
-      FALSE  # Return FALSE instead of NULL
-    }
-  }, error = function(e) {
-    print(e)
-    FALSE  # Return FALSE instead of NULL
-  })
-  
-  return(test_result)
-}
+    old_wd <- getwd()
+    on.exit({
+      setwd(old_wd)
+      if (requireNamespace("grDevices", quietly = TRUE)) {
+        while (grDevices::dev.cur() > 1) grDevices::dev.off()
+      }
+    }, add = TRUE)
+    setwd(pkg_dir)
 
-mutate_package <- function(pkg_path, cores = parallel::detectCores()) {
-  r_files <- list.files(file.path(pkg_path, "R"), full.names = TRUE, pattern = "\\.R$")
-  
-  all_mutants <- list()
-  
-  for (file in r_files) {
-    cat("Mutating file:", file, "\n")
-    mutants <- mutate_file_new(file)
-    
-    # For every mutant, create a complete package copy with the mutant file replacing the original.
-    for (mutant_file in mutants) {
-      # Create a temporary directory to hold the mutated package.
-      tmp_pkg <- tempfile(pattern = "pkg_mutation_")
-      dir.create(tmp_pkg)
-      
-      # Copy the entire package into the temporary directory.
-      file.copy(pkg_path, tmp_pkg, recursive = TRUE)
-      
-      # Construct the path to the file in the copied package.
-      target_file <- file.path(tmp_pkg, basename(pkg_path), "R", basename(file))
-      file.copy(mutant_file$path, target_file, overwrite = TRUE)
-      
-      # Create a unique mutant identifier.
-      mutant_id <- paste(basename(file), basename(mutant_file$path), sep = "_")
-      
-      # Store the package copy directory and mutation info for later lookup.
-      all_mutants[[mutant_id]] <- list(
-        pkg_copy_dir = file.path(tmp_pkg, basename(pkg_path)),
-        mutation_info = mutant_file$mutation_info
-      )
-    }
+    loaded <- tryCatch(
+      { devtools::load_all(quiet = TRUE); TRUE },
+      error = function(e) {
+        message("Load error: ", e$message)
+        FALSE
+      }
+    )
+    if (!loaded) return(FALSE)
+
+    passed <- tryCatch(
+      {
+        tr <- testthat::test_dir("tests/testthat", reporter = "silent")
+        num_failed <- sum(tr$failed)
+        num_failed == 0
+      },
+      error = function(e) {
+        message("Test error: ", e$message)
+        FALSE
+      }
+    )
+    passed
   }
-  
+
+  # Set up parallel processing
+  future::plan(future::multisession, 
+               workers = min(cores, length(mutants)),
+               earlySignal = TRUE)
+
+  mutant_ids <- names(mutants)
+  pkg_dirs <- sapply(mutants, function(x) x$pkg)
+  pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
+
+  # Run tests in parallel with progress bar
+  parallel_results <- furrr::future_map(
+    pkg_dir_list,
+    function(pkg) suppressMessages(suppressWarnings(run_tests(pkg))),
+    .progress = TRUE,
+    .options = furrr::furrr_options(seed = TRUE)
+  )
+
+  # Process the parallel test results
   package_mutants <- list()
   test_results <- list()
-  
-  # --- Running tests ---
-  if (length(all_mutants) > 1) {
-    cat(sprintf("Running tests in parallel using %d cores...\n", cores))
-    
-    # Setup furrr parallel processing
-    future::plan(future::multisession, 
-                 workers = min(cores, length(all_mutants)),
-                 cleanup = TRUE,
-                 earlySignal = TRUE)
-    
-    mutant_ids <- names(all_mutants)
-    pkg_dirs <- sapply(all_mutants, function(x) x$pkg_copy_dir)
+  for (mutant_id in mutant_ids) {
+    test_result <- parallel_results[[mutant_id]]
+    pkg_copy_dir <- mutants[[mutant_id]]$pkg
 
-    # Create a named list for future mapping
-    pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
+    if (is.null(test_result) || length(test_result) == 0) {
+      cat(sprintf("Mutant %s: Compilation/test execution failed, marking as KILLED.\n", mutant_id))
+      test_result <- FALSE
+    }
 
-    # Run tests in parallel with progress bar
-    parallel_results <- furrr::future_map(
-      pkg_dir_list,
-      run_package_test,
-      .progress = TRUE,
-      .options = furrr::furrr_options(seed = TRUE)
+    status <- if (isTRUE(test_result)) "SURVIVED" else "KILLED"
+    mutation_info <- mutants[[mutant_id]]$info
+
+    cat(sprintf("Mutant %s: %s\n", mutant_id, status))
+    cat(sprintf("Mutation info: %s\n", mutation_info))
+    cat(sprintf("   Result: %s\n\n", status))
+
+    package_mutants[[mutant_id]] <- list(
+      path = pkg_copy_dir,
+      mutation_info = mutation_info,
+      result = test_result
     )
-    
-    # Process the parallel test results
-    for (mutant_id in mutant_ids) {
-      test_result <- parallel_results[[mutant_id]]
-      pkg_copy_dir <- all_mutants[[mutant_id]]$pkg_copy_dir
-      
-      # Handle NULL or empty results properly
-      if (is.null(test_result) || length(test_result) == 0) {
-        cat(sprintf("Mutant %s: Compilation/test execution failed, marking as KILLED.\n", mutant_id))
-        test_result <- FALSE  # Treat failures as killed mutants
-      }
-      
-      status <- if (isTRUE(test_result)) "SURVIVED" else "KILLED"
-      mutation_info <- all_mutants[[mutant_id]]$mutation_info
-      
-      cat(sprintf("Mutant %s: %s\n", mutant_id, status))
-      cat(sprintf("Mutation info: %s\n", mutation_info))
-      cat(sprintf("   Result: %s\n\n", status))
-      
-      package_mutants[[mutant_id]] <- list(
-        path = pkg_copy_dir,
-        mutation_info = mutation_info,
-        result = test_result
-      )
-      test_results[[mutant_id]] <- test_result
-    }
-    
-    # Clean up the parallel workers
-    future::plan(future::sequential)
-    gc()  # Force garbage collection to clean up connections
-    
-  } else {
-    # Run tests sequentially if only one mutant is available.
-    for (mutant_id in names(all_mutants)) {
-      pkg_copy_dir <- all_mutants[[mutant_id]]$pkg_copy_dir
-      test_result <- run_package_test(pkg_copy_dir)
-      
-      if (is.null(test_result)) {
-        cat(sprintf("Mutant %s: Compilation failed, not included in results.\n", mutant_id))
-        next
-      }
-      
-      status <- if (test_result) "SURVIVED" else "KILLED"
-      mutation_info <- all_mutants[[mutant_id]]$mutation_info
-      
-      cat(sprintf("Mutant %s: %s\n", mutant_id, status))
-      cat(sprintf("Mutation info: %s\n", mutation_info))
-      cat(sprintf("   Result: %s\n\n", status))
-      
-      package_mutants[[mutant_id]] <- list(
-        path = pkg_copy_dir,
-        mutation_info = mutation_info,
-        result = test_result
-      )
-      test_results[[mutant_id]] <- test_result
-    }
+    test_results[[mutant_id]] <- test_result
   }
-  
-  # Summarize test results.
+
+  # Clean up the parallel workers
+  future::plan(future::sequential)
+  gc()  # Force garbage collection to clean up connections
+
+  # Summarize test results
   total_mutants <- length(test_results)
   survived <- sum(unlist(test_results))
   killed <- total_mutants - survived
-  mutation_score <- (killed / total_mutants) * 100
-  
+  mutation_score <- if (total_mutants > 0) (killed / total_mutants) * 100 else 0
+
   cat("\nMutation Testing Summary:\n")
   cat(sprintf("  Total mutants:    %d\n", total_mutants))
   cat(sprintf("  Killed:           %d\n", killed))
   cat(sprintf("  Survived:         %d\n", survived))
   cat(sprintf("  Mutation Score:   %.2f%%\n", mutation_score))
-  
-  return(list(package_mutants = package_mutants, test_results = test_results))
-}
 
-# --- Example usage ---
-# Suppose your package is located in the directory "myPackage"
-# This will process each file under myPackage/R/,
-# generate mutants, create package copies, run tests, and summarize results.
-# mutants_info <- mutate_package("myPackage")
+  invisible(list(package_mutants = package_mutants, test_results = test_results))
+}

@@ -17,7 +17,6 @@
 #include <unordered_set>
 #include <unordered_map>
 
-// C_mutate_single.cpp
 #include <R.h>
 #include <Rinternals.h>
 #include "ASTHandler.hpp"

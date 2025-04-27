@@ -1,1753 +1,1458 @@
-Mutating file: R/sample/cucumber-master/R/detect.R 
-Parsed expressions: 2 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/doc-opts.R 
-Parsed expressions: 1 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/expression.R 
-Parsed expressions: 1 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/hooks.R 
-Parsed expressions: 9 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/normalize_feature.R 
-Parsed expressions: 2 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/parameter.R 
-Parsed expressions: 6 
-[1] "\nFrom line/col: 86/1\nTo line/col: 113/1\n'-' -> '+'"
-Mutating file: R/sample/cucumber-master/R/parse_docstring.R 
-Parsed expressions: 1 
-[1] "\nFrom line/col: 2/1\nTo line/col: 5/1\n'-' -> '+'"
-Mutating file: R/sample/cucumber-master/R/parse_table.R 
-Parsed expressions: 1 
-[1] "\nFrom line/col: 6/1\nTo line/col: 37/1\n'-' -> '+'"
-[1] "\nFrom line/col: 6/1\nTo line/col: 37/1\n'-' -> '+'"
-[1] "\nFrom line/col: 6/1\nTo line/col: 37/1\n'-' -> '+'"
-[1] "\nFrom line/col: 6/1\nTo line/col: 37/1\n'-' -> '+'"
-Mutating file: R/sample/cucumber-master/R/parse_token.R 
-Parsed expressions: 3 
-[1] "\nFrom line/col: 69/1\nTo line/col: 119/1\n'-' -> '+'"
-Mutating file: R/sample/cucumber-master/R/run.R 
-Parsed expressions: 1 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/step.R 
-Parsed expressions: 11 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/test.R 
-Parsed expressions: 7 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/tokenize.R 
-Parsed expressions: 10 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/validate.R 
-Parsed expressions: 3 
-No mutated expressions generated, proceeding with string-level deletion.
-Mutating file: R/sample/cucumber-master/R/zzz.R 
-Parsed expressions: 2 
-No mutated expressions generated, proceeding with string-level deletion.
-Running tests in parallel using 4 cores...
-✔ | F W  S  OK | Context
-⠏ |          0 | detect                                         ⠸ |          4 | detect                                         ✔ |         13 | detect
-⠏ |          0 | examples                                       ✔ |      1   0 | examples
-⠏ |          0 | expression                                     ✔ |          1 | expression
-⠏ |          0 | hooks                                          ⠼ |          5 | hooks                                          ✔ |          5 | hooks
-⠏ |          0 | normalize_feature                              ✔ |          3 | normalize_feature
-⠏ |          0 | parameter                                      ⠼ | 1        4 | parameter                                      ⠴ | 2        4 | parameter                                      ✖ | 2        6 | parameter
-────────────────────────────────────────────────────────────────
-Failure ('test-parameter.R:86:5'): string: should detect strings in single quotes
-`result` (`actual`) not equal to c("a", "1", "1.1", "a1", "1a", "1.1a") (`expected`).
-
-`actual`:   "a'" "1'" "1.1'" "a1'" "1a'" "1.1a'"
-`expected`: "a"  "1"  "1.1"  "a1"  "1a"  "1.1a" 
-
-Failure ('test-parameter.R:103:5'): string: should detect strings with double quotes
-`result` (`actual`) not equal to c("a", "1", "1.1", "a1", "1a", "1.1a") (`expected`).
-
-`actual`:   "a\"" "1\"" "1.1\"" "a1\"" "1a\"" "1.1a\""
-`expected`: "a"   "1"   "1.1"   "a1"   "1a"   "1.1a"  
-────────────────────────────────────────────────────────────────
-⠏ |          0 | parse_docstring                                ✔ |          1 | parse_docstring
-⠏ |          0 | parse_table                                    ⠸ |          4 | parse_table                                    ✔ |          4 | parse_table
-⠏ |          0 | parse_token                                    ⠋ |          1 | parse_token                                    ⠙ |          2 | parse_token                                    ⠹ |          3 | parse_token                                    ⠦ |          7 | parse_token                                    ⠙ |         22 | parse_token                                    v |         30 | parse_token
-⠏ |          0 | Feature: Multiple site support                 ⠸ |         14 | Feature: Multiple site support                 v |         18 | Feature: Multiple site support
-⠏ |          0 | Feature: Multiple site support                 ✔ |          9 | Feature: Multiple site support
-⠏ |          0 | run                                            ⠏ |          0 | Feature: The Maker                             v |          6 | Feature: The Maker
-⠏ |          0 | Feature: The Maker                             ✔ |         12 | Feature: The Maker
-⠏ |          0 | step                                           ✔ |          1 | step
-⠏ |          0 | tokenize                                       ⠴ |          6 | tokenize                                       ⠹ |         13 | tokenize                                       ✔ |         14 | tokenize
-⠏ |          0 | validate                                       ✔ |      2   0 | validate
-
-══ Results ═════════════════════════════════════════════════════
-Duration: 2.4 s
-
-── Skipped tests (3) ───────────────────────────────────────────
-• On CRAN (3): 'test-examples.R:39:3', 'test-validate.R:3:5',
-  'test-validate.R:32:7'
-
-── Failed tests ────────────────────────────────────────────────
-Failure ('test-parameter.R:86:5'): string: should detect strings in single quotes
-`result` (`actual`) not equal to c("a", "1", "1.1", "a1", "1a", "1.1a") (`expected`).
-
-`actual`:   "a'" "1'" "1.1'" "a1'" "1a'" "1.1a'"
-`expected`: "a"  "1"  "1.1"  "a1"  "1a"  "1.1a" 
-
-Failure ('test-parameter.R:103:5'): string: should detect strings with double quotes
-`result` (`actual`) not equal to c("a", "1", "1.1", "a1", "1a", "1.1a") (`expected`).
-
-`actual`:   "a\"" "1\"" "1.1\"" "a1\"" "1a\"" "1.1a\""
-`expected`: "a"   "1"   "1.1"   "a1"   "1a"   "1.1a"  
-
-[ FAIL 2 | WARN 0 | SKIP 3 | PASS 123 ]
-✔ | F W  S  OK | Context
-⠏ |          0 | detect                                         ✔ |         13 | detect
-⠏ |          0 | examples                                       ✔ |      1   0 | examples
-⠏ |          0 | expression                                     ✔ |          1 | expression
-⠏ |          0 | hooks                                          ✔ |          5 | hooks
-⠏ |          0 | normalize_feature                              ✔ |          3 | normalize_feature
-⠏ |          0 | parameter                                      ✔ |          8 | parameter
-⠏ |          0 | parse_docstring                                ✖ | 1        0 | parse_docstring
-────────────────────────────────────────────────────────────────
-Failure ('test-parse_docstring.R:15:5'): parse_docstring: should remove the first and last lines of a docstring
-`result` (`actual`) not equal to c("a", "b") (`expected`).
-
-`actual`:   "\"\"\"" "\"\"\""
-`expected`: "a"      "b"     
-────────────────────────────────────────────────────────────────
-⠏ |          0 | parse_table                                    ✔ |          4 | parse_table
-⠏ |          0 | parse_token                                    ⠹ |          3 | parse_token                                    ⠙ |         22 | parse_token                                    v |         30 | parse_token
-⠏ |          0 | Feature: Multiple site support                 v |         18 | Feature: Multiple site support
-⠏ |          0 | Feature: Multiple site support                 ✔ |          9 | Feature: Multiple site support
-⠏ |          0 | run                                            ⠏ |          0 | Feature: The Maker                             v |          6 | Feature: The Maker
-⠏ |          0 | Feature: The Maker                             ✔ |         12 | Feature: The Maker
-⠏ |          0 | step                                           ✔ |          1 | step
-⠏ |          0 | tokenize                                       ⠙ |         12 | tokenize                                       ✔ |         14 | tokenize
-⠏ |          0 | validate                                       ✔ |      2   0 | validate
-
-══ Results ═════════════════════════════════════════════════════
-── Skipped tests (3) ───────────────────────────────────────────
-• On CRAN (3): 'test-examples.R:39:3', 'test-validate.R:3:5',
-  'test-validate.R:32:7'
-
-── Failed tests ────────────────────────────────────────────────
-Failure ('test-parse_docstring.R:15:5'): parse_docstring: should remove the first and last lines of a docstring
-`result` (`actual`) not equal to c("a", "b") (`expected`).
-
-`actual`:   "\"\"\"" "\"\"\""
-`expected`: "a"      "b"     
-
-[ FAIL 1 | WARN 0 | SKIP 3 | PASS 124 ]
-✔ | F W  S  OK | Context
-⠏ |          0 | detect                                         ⠙ |          2 | detect                                         ⠙ |         12 | detect                                         ✔ |         13 | detect
-⠏ |          0 | examples                                       ✔ |      1   0 | examples
-⠏ |          0 | expression                                     ✔ |          1 | expression
-⠏ |          0 | hooks                                          ⠸ |          4 | hooks                                          ✔ |          5 | hooks
-⠏ |          0 | normalize_feature                              ✔ |          3 | normalize_feature
-⠏ |          0 | parameter                                      ✔ |          8 | parameter
-⠏ |          0 | parse_docstring                                ✔ |          1 | parse_docstring
-⠏ |          0 | parse_table                                    ⠋ | 1        0 | parse_table                                    ⠙ | 2        0 | parse_table                                    ⠸ | 4        0 | parse_table                                    ✖ | 4        0 | parse_table
-────────────────────────────────────────────────────────────────
-Error ('test-parse_table.R:10:5'): parse_table: should parse Data Table with 1 row
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(+1, -length(x))])`: i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:10:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...)
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...)
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:4:9
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:30:5'): parse_table: should parse Data Table with header only
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(+1, -length(x))])`: i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:30:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:52:5'): parse_table: should parse Data Table with many rows
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(+1, -length(x))])`: i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:52:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:73:5'): parse_table: should parse Data Table with escaped characters
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(+1, -length(x))])`: i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:73:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-────────────────────────────────────────────────────────────────
-⠏ |          0 | parse_token                                    ⠙ |          2 | parse_token                                    ⠹ |          3 | parse_token                                    ⠦ |          7 | parse_token                                    ⠙ | 1       21 | parse_token                                    x | 1       21 | parse_token
---------------------------------------------------------------------------------
-Error ('test-parse_token.R:386:27'): parse_token: should parse a Scenario Outline to a call list
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(.x, .f, ..., .progress = .progress)`: i In index: 1.
-Caused by error in `map()`:
-i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
---------------------------------------------------------------------------------
-⠏ |          0 | Feature: Multiple site support                 ⠙ |         12 | Feature: Multiple site support                 v |         18 | Feature: Multiple site support
-⠏ |          0 | Feature: Multiple site support                 ⠋ | 1        0 | Feature: Multiple site support                 ✖ | 1        0 | Feature: Multiple site support
-────────────────────────────────────────────────────────────────
-Error ('test-parse_token.R:598:27'): parse_token: should parse a Feature with Background and Scenario Outline
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(.x, .f, ..., .progress = .progress)`: i In index: 1.
-Caused by error in `map()`:
-i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-────────────────────────────────────────────────────────────────
-⠏ |          0 | run                                            ⠏ |          0 | Feature: The Maker                             v |          6 | Feature: The Maker
-⠏ |          0 | Feature: The Maker                             ✔ |         12 | Feature: The Maker
-⠏ |          0 | step                                           ✔ |          1 | step
-⠏ |          0 | tokenize                                       ⠇ |          9 | tokenize                                       ✔ |         14 | tokenize
-⠏ |          0 | validate                                       ✔ |      2   0 | validate
-
-══ Results ═════════════════════════════════════════════════════
-Duration: 2.9 s
-
-── Skipped tests (3) ───────────────────────────────────────────
-• On CRAN (3): 'test-examples.R:39:3', 'test-validate.R:3:5',
-  'test-validate.R:32:7'
-
-── Failed tests ────────────────────────────────────────────────
-Error ('test-parse_table.R:10:5'): parse_table: should parse Data Table with 1 row
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(+1, -length(x))])`: i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:10:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...)
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...)
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:4:9
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:30:5'): parse_table: should parse Data Table with header only
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(+1, -length(x))])`: i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:30:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:52:5'): parse_table: should parse Data Table with many rows
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(+1, -length(x))])`: i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:52:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:73:5'): parse_table: should parse Data Table with escaped characters
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(+1, -length(x))])`: i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:73:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_token.R:386:27'): parse_token: should parse a Scenario Outline to a call list
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(.x, .f, ..., .progress = .progress)`: i In index: 1.
-Caused by error in `map()`:
-i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-
-Error ('test-parse_token.R:598:27'): parse_token: should parse a Feature with Background and Scenario Outline
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(.x, .f, ..., .progress = .progress)`: i In index: 1.
-Caused by error in `map()`:
-i In index: 1.
-Caused by error in `x[c(+1, -length(x))]`:
-! only 0's may be mixed with negative subscripts
-
-[ FAIL 6 | WARN 0 | SKIP 3 | PASS 103 ]
-✔ | F W  S  OK | Context
-⠏ |          0 | detect                                         ✔ |         13 | detect
-⠏ |          0 | examples                                       ✔ |      1   0 | examples
-⠏ |          0 | expression                                     ✔ |          1 | expression
-⠏ |          0 | hooks                                          ✔ |          5 | hooks
-⠏ |          0 | normalize_feature                              ✔ |          3 | normalize_feature
-⠏ |          0 | parameter                                      ✔ |          8 | parameter
-⠏ |          0 | parse_docstring                                ✔ |          1 | parse_docstring
-⠏ |          0 | parse_table                                    ⠙ | 2        0 | parse_table                                    ✖ | 4        0 | parse_table
-────────────────────────────────────────────────────────────────
-Error ('test-parse_table.R:10:5'): parse_table: should parse Data Table with 1 row
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(-1, +length(x))])`: i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:10:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...)
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...)
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:4:9
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:30:5'): parse_table: should parse Data Table with header only
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(-1, +length(x))])`: i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:30:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:52:5'): parse_table: should parse Data Table with many rows
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(-1, +length(x))])`: i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:52:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:73:5'): parse_table: should parse Data Table with escaped characters
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(-1, +length(x))])`: i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:73:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-────────────────────────────────────────────────────────────────
-⠏ |          0 | parse_token                                    ⠹ |          3 | parse_token                                    ⠇ |         19 | parse_token                                    x | 1       21 | parse_token
---------------------------------------------------------------------------------
-Error ('test-parse_token.R:386:27'): parse_token: should parse a Scenario Outline to a call list
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(.x, .f, ..., .progress = .progress)`: i In index: 1.
-Caused by error in `map()`:
-i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
---------------------------------------------------------------------------------
-⠏ |          0 | Feature: Multiple site support                 v |         18 | Feature: Multiple site support
-⠏ |          0 | Feature: Multiple site support                 ✖ | 1        0 | Feature: Multiple site support
-────────────────────────────────────────────────────────────────
-Error ('test-parse_token.R:598:27'): parse_token: should parse a Feature with Background and Scenario Outline
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(.x, .f, ..., .progress = .progress)`: i In index: 1.
-Caused by error in `map()`:
-i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-────────────────────────────────────────────────────────────────
-⠏ |          0 | run                                            ⠏ |          0 | Feature: The Maker                             v |          6 | Feature: The Maker
-⠏ |          0 | Feature: The Maker                             ✔ |         12 | Feature: The Maker
-⠏ |          0 | step                                           ✔ |          1 | step
-⠏ |          0 | tokenize                                       ⠋ |         11 | tokenize                                       ✔ |         14 | tokenize
-⠏ |          0 | validate                                       ✔ |      2   0 | validate
-
-══ Results ═════════════════════════════════════════════════════
-Duration: 1.4 s
-
-── Skipped tests (3) ───────────────────────────────────────────
-• On CRAN (3): 'test-examples.R:39:3', 'test-validate.R:3:5',
-  'test-validate.R:32:7'
-
-── Failed tests ────────────────────────────────────────────────
-Error ('test-parse_table.R:10:5'): parse_table: should parse Data Table with 1 row
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(-1, +length(x))])`: i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:10:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...)
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...)
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:4:9
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:30:5'): parse_table: should parse Data Table with header only
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(-1, +length(x))])`: i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:30:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:52:5'): parse_table: should parse Data Table with many rows
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(-1, +length(x))])`: i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:52:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_table.R:73:5'): parse_table: should parse Data Table with escaped characters
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(map(lines, function(x) str_split(x, "(?<!\\\\)\\|")[[1]]), 
-    function(x) x[c(-1, +length(x))])`: i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-Backtrace:
-     ▆
-  1. ├─cucumber:::parse_table(x) at test-parse_table.R:73:5
-  2. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  3. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  5. │ ├─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  6. │ │ └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  7. │ │   └─purrr:::vctrs_vec_compat(.x, .purrr_user_env)
-  8. │ └─purrr::map(...) at cucumber-master/R/parse_table.R:3:5
-  9. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
- 10. │     ├─purrr:::with_indexed_errors(...)
- 11. │     │ └─base::withCallingHandlers(...)
- 12. │     ├─purrr:::call_with_cleanup(...)
- 13. │     └─cucumber (local) .f(.x[[i]], ...)
- 14. └─base::.handleSimpleError(...) at cucumber-master/R/parse_table.R:3:5
- 15.   └─purrr (local) h(simpleError(msg, call))
- 16.     └─cli::cli_abort(...)
- 17.       └─rlang::abort(...)
-
-Error ('test-parse_token.R:386:27'): parse_token: should parse a Scenario Outline to a call list
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(.x, .f, ..., .progress = .progress)`: i In index: 1.
-Caused by error in `map()`:
-i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-
-Error ('test-parse_token.R:598:27'): parse_token: should parse a Feature with Background and Scenario Outline
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(.x, .f, ..., .progress = .progress)`: i In index: 1.
-Caused by error in `map()`:
-i In index: 1.
-Caused by error in `x[c(-1, +length(x))]`:
-! only 0's may be mixed with negative subscripts
-
-[ FAIL 6 | WARN 0 | SKIP 3 | PASS 103 ]
-✔ | F W  S  OK | Context
-⠏ |          0 | detect                                         ⠋ |          1 | detect                                         ⠋ |         11 | detect                                         ✔ |         13 | detect
-⠏ |          0 | examples                                       ✔ |      1   0 | examples
-⠏ |          0 | expression                                     ✔ |          1 | expression
-⠏ |          0 | hooks                                          ⠸ |          4 | hooks                                          ✔ |          5 | hooks
-⠏ |          0 | normalize_feature                              ✔ |          3 | normalize_feature
-⠏ |          0 | parameter                                      ✔ |          8 | parameter
-⠏ |          0 | parse_docstring                                ✔ |          1 | parse_docstring
-⠏ |          0 | parse_table                                    ⠋ | 1        0 | parse_table                                    ⠹ | 3        0 | parse_table                                    ⠸ | 4        0 | parse_table                                    ✖ | 4        0 | parse_table
-────────────────────────────────────────────────────────────────
-Failure ('test-parse_table.R:13:5'): parse_table: should parse Data Table with 1 row
-`result` (`actual`) not equal to tibble::tibble(start = c("12"), eat = c("5"), left = c("7")) (`expected`).
-
-  `attr(actual, 'row.names')`: 1 2 3
-`attr(expected, 'row.names')`: 1    
-
-actual vs expected
-                start eat left
-  actual[1, ]      12   5    7
-- actual[2, ]      12   5    7
-- actual[3, ]      12   5    7
-
-`actual$start`:   "12" "12" "12"
-`expected$start`: "12"          
-
-`actual$eat`:   "5" "5" "5"
-`expected$eat`: "5"        
-
-`actual$left`:   "7" "7" "7"
-`expected$left`: "7"        
-
-Error ('test-parse_table.R:30:5'): parse_table: should parse Data Table with header only
-Error in `matrix(unlist(rows[-1]), dimnames = list(seq_len(nrow), unlist(rows[1])), 
-    byrow = TRUE, nrow = nrow, ncol = ncols)`: 'data' must be of a vector type, was 'NULL'
-Backtrace:
-    ▆
- 1. └─cucumber:::parse_table(x) at test-parse_table.R:30:5
- 2.   ├─tibble::as_tibble(...) at cucumber-master/R/parse_table.R:13:5
- 3.   └─base::matrix(...) at cucumber-master/R/parse_table.R:13:5
-
-Failure ('test-parse_table.R:55:5'): parse_table: should parse Data Table with many rows
-`result` (`actual`) not equal to tibble::tibble(...) (`expected`).
-
-  `attr(actual, 'row.names')`: 1 2 3 4
-`attr(expected, 'row.names')`: 1 2    
-
-actual vs expected
-                start eat left
-  actual[1, ]      12   5    7
-  actual[2, ]      13   6    7
-- actual[3, ]      12   5    7
-- actual[4, ]      13   6    7
-
-`actual$start`:   "12" "13" "12" "13"
-`expected$start`: "12" "13"          
-
-`actual$eat`:   "5" "6" "5" "6"
-`expected$eat`: "5" "6"        
-
-`actual$left`:   "7" "7" "7" "7"
-`expected$left`: "7" "7"        
-
-Failure ('test-parse_table.R:76:5'): parse_table: should parse Data Table with escaped characters
-`result` (`actual`) not equal to tibble::tibble(start = c("'\\'"), eat = c("'\n'"), left = c("'|'")) (`expected`).
-
-  `attr(actual, 'row.names')`: 1 2 3
-`attr(expected, 'row.names')`: 1    
-
-actual vs expected
-                start  eat left
-  actual[1, ]    '\' '
-'  '|'
-- actual[2, ]    '\' '
-'  '|'
-- actual[3, ]    '\' '
-'  '|'
-
-`actual$start`:   "'\\'" "'\\'" "'\\'"
-`expected$start`: "'\\'"              
-
-`lines(actual$eat[[2]])` is a character vector ('\'', '\'')
-`lines(expected$eat[[2]])` is absent
-
-`lines(actual$eat[[3]])` is a character vector ('\'', '\'')
-`lines(expected$eat[[3]])` is absent
-
-`actual$left`:   "'|'" "'|'" "'|'"
-`expected$left`: "'|'"            
-────────────────────────────────────────────────────────────────
-⠏ |          0 | parse_token                                    ⠋ |          1 | parse_token                                    ⠙ |          2 | parse_token                                    ⠹ |          3 | parse_token                                    ⠦ |          7 | parse_token                                    ⠙ |         22 | parse_token                                    ⠴ | 3       33 | parse_token                                    x | 3       33 | parse_token
---------------------------------------------------------------------------------
-Failure ('test-parse_token.R:389:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:390:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:391:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
---------------------------------------------------------------------------------
-⠏ |          0 | Feature: Multiple site support                 v |         18 | Feature: Multiple site support
-⠏ |          0 | Feature: Multiple site support                 ⠸ | 2       12 | Feature: Multiple site support                 ✖ | 3       12 | Feature: Multiple site support
-────────────────────────────────────────────────────────────────
-Failure ('test-parse_token.R:601:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:602:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:603:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-────────────────────────────────────────────────────────────────
-Maximum number of failures exceeded; quitting at end of
-file.
-ℹ Increase this number with (e.g.)
-  `testthat::set_max_fails(Inf)` 
-
-══ Results ═════════════════════════════════════════════════════
-Duration: 2.4 s
-
-── Skipped tests (1) ───────────────────────────────────────────
-• On CRAN (1): 'test-examples.R:39:3'
-
-── Failed tests ────────────────────────────────────────────────
-Failure ('test-parse_table.R:13:5'): parse_table: should parse Data Table with 1 row
-`result` (`actual`) not equal to tibble::tibble(start = c("12"), eat = c("5"), left = c("7")) (`expected`).
-
-  `attr(actual, 'row.names')`: 1 2 3
-`attr(expected, 'row.names')`: 1    
-
-actual vs expected
-                start eat left
-  actual[1, ]      12   5    7
-- actual[2, ]      12   5    7
-- actual[3, ]      12   5    7
-
-`actual$start`:   "12" "12" "12"
-`expected$start`: "12"          
-
-`actual$eat`:   "5" "5" "5"
-`expected$eat`: "5"        
-
-`actual$left`:   "7" "7" "7"
-`expected$left`: "7"        
-
-Error ('test-parse_table.R:30:5'): parse_table: should parse Data Table with header only
-Error in `matrix(unlist(rows[-1]), dimnames = list(seq_len(nrow), unlist(rows[1])), 
-    byrow = TRUE, nrow = nrow, ncol = ncols)`: 'data' must be of a vector type, was 'NULL'
-Backtrace:
-    ▆
- 1. └─cucumber:::parse_table(x) at test-parse_table.R:30:5
- 2.   ├─tibble::as_tibble(...) at cucumber-master/R/parse_table.R:13:5
- 3.   └─base::matrix(...) at cucumber-master/R/parse_table.R:13:5
-
-Failure ('test-parse_table.R:55:5'): parse_table: should parse Data Table with many rows
-`result` (`actual`) not equal to tibble::tibble(...) (`expected`).
-
-  `attr(actual, 'row.names')`: 1 2 3 4
-`attr(expected, 'row.names')`: 1 2    
-
-actual vs expected
-                start eat left
-  actual[1, ]      12   5    7
-  actual[2, ]      13   6    7
-- actual[3, ]      12   5    7
-- actual[4, ]      13   6    7
-
-`actual$start`:   "12" "13" "12" "13"
-`expected$start`: "12" "13"          
-
-`actual$eat`:   "5" "6" "5" "6"
-`expected$eat`: "5" "6"        
-
-`actual$left`:   "7" "7" "7" "7"
-`expected$left`: "7" "7"        
-
-Failure ('test-parse_table.R:76:5'): parse_table: should parse Data Table with escaped characters
-`result` (`actual`) not equal to tibble::tibble(start = c("'\\'"), eat = c("'\n'"), left = c("'|'")) (`expected`).
-
-  `attr(actual, 'row.names')`: 1 2 3
-`attr(expected, 'row.names')`: 1    
-
-actual vs expected
-                start  eat left
-  actual[1, ]    '\' '
-'  '|'
-- actual[2, ]    '\' '
-'  '|'
-- actual[3, ]    '\' '
-'  '|'
-
-`actual$start`:   "'\\'" "'\\'" "'\\'"
-`expected$start`: "'\\'"              
-
-`lines(actual$eat[[2]])` is a character vector ('\'', '\'')
-`lines(expected$eat[[2]])` is absent
-
-`lines(actual$eat[[3]])` is a character vector ('\'', '\'')
-`lines(expected$eat[[3]])` is absent
-
-`actual$left`:   "'|'" "'|'" "'|'"
-`expected$left`: "'|'"            
-
-Failure ('test-parse_token.R:389:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:390:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:391:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:601:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:602:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:603:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-[ FAIL 10 | WARN 0 | SKIP 1 | PASS 94 ]
-══ Terminated early ════════════════════════════════════════════
-✔ | F W  S  OK | Context
-⠏ |          0 | detect                                         ⠙ |          2 | detect                                         ⠙ |         12 | detect                                         ✔ |         13 | detect
-⠏ |          0 | examples                                       ✔ |      1   0 | examples
-⠏ |          0 | expression                                     ✔ |          1 | expression
-⠏ |          0 | hooks                                          ✔ |          5 | hooks
-⠏ |          0 | normalize_feature                              ✔ |          3 | normalize_feature
-⠏ |          0 | parameter                                      ✔ |          8 | parameter
-⠏ |          0 | parse_docstring                                ✔ |          1 | parse_docstring
-⠏ |          0 | parse_table                                    ⠋ | 1        0 | parse_table                                    ⠹ | 2        1 | parse_table                                    ⠸ | 3        1 | parse_table                                    ✖ | 3        1 | parse_table
-────────────────────────────────────────────────────────────────
-Failure ('test-parse_table.R:13:5'): parse_table: should parse Data Table with 1 row
-`result` (`actual`) not equal to tibble::tibble(start = c("12"), eat = c("5"), left = c("7")) (`expected`).
-
-actual vs expected
-                start eat left
-- actual[1, ]   start eat left
-+ expected[1, ] 12    5   7   
-
-`actual$start`:   "start"
-`expected$start`: "12"   
-
-`actual$eat`:   "eat"
-`expected$eat`: "5"  
-
-`actual$left`:   "left"
-`expected$left`: "7"   
-
-Failure ('test-parse_table.R:55:5'): parse_table: should parse Data Table with many rows
-`result` (`actual`) not equal to tibble::tibble(...) (`expected`).
-
-actual vs expected
-                start eat left
-- actual[1, ]   start eat left
-+ expected[1, ] 12    5   7   
-- actual[2, ]   start eat left
-+ expected[2, ] 13    6   7   
-
-`actual$start`:   "start" "start"
-`expected$start`: "12"    "13"   
-
-`actual$eat`:   "eat" "eat"
-`expected$eat`: "5"   "6"  
-
-`actual$left`:   "left" "left"
-`expected$left`: "7"    "7"   
-
-Failure ('test-parse_table.R:76:5'): parse_table: should parse Data Table with escaped characters
-`result` (`actual`) not equal to tibble::tibble(start = c("'\\'"), eat = c("'\n'"), left = c("'|'")) (`expected`).
-
-actual vs expected
-                start  eat left
-- actual[1, ]   start eat  left
-+ expected[1, ] '\'  '
-' '|' 
-
-`actual$start`:   "start"
-`expected$start`: "'\\'" 
-
-`lines(actual$eat)`:   "eat"    
-`lines(expected$eat)`: "'"   "'"
-
-`actual$left`:   "left"
-`expected$left`: "'|'" 
-────────────────────────────────────────────────────────────────
-⠏ |          0 | parse_token                                    ⠙ |          2 | parse_token                                    ⠹ |          3 | parse_token                                    ⠧ |          8 | parse_token                                    ⠙ | 1       21 | parse_token                                    ⠼ | 4       21 | parse_token                                    x | 5       21 | parse_token
---------------------------------------------------------------------------------
-Error ('test-parse_token.R:386:27'): Scenario: eating (Example 1)
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(tokens, function(token) {
-    switch(token$type, Scenario = function() {
-        test_that(glue("Scenario: {token$value}"), {
-            .context <- new.env()
-            calls <- parse_token(token$children, steps, parameters)
-            after <- get_hook(hooks, "after")
-            before <- get_hook(hooks, "before")
-            on.exit(after(.context, token$value))
-            before(.context, token$value)
-            for (call in calls) {
-                step <- unclass(call)
-                description <- attr(step, "description")
-                args <- attr(step, "args")
-                attributes(step) <- NULL
-                exec(step, !!!args, context = .context)
-            }
-        })
-    }, `Scenario Outline` = function() {
-        scenarios <- expand_scenario_outline(token)
-        calls <- map(scenarios, function(scenario) {
-            parse_token(list(scenario), steps, parameters, hooks)[[1]]
-        })
-        for (call in calls) {
-            exec(call)
-        }
-    }, Feature = function(file_name = token$value) {
-        context_start_file(glue("Feature: {file_name}"))
-        if (token$children[[1]]$type == "Background") {
-            background <- token$children[[1]]
-            token$children <- map(token$children[2:length(token$children)], 
-                function(x) {
-                  x$children <- c(background$children, x$children)
-                  x
-                })
-        }
-        calls <- parse_token(token$children, steps, parameters, 
-            hooks)
-        for (call in calls) {
-            exec(call)
-        }
-    }, Step = parse_step(token, steps, parameters), abort(glue("Unknown token type: {token$type}")))
-})`: i In index: 1.
-Caused by error in `parse_step()`:
-! No step found for: "there are start cucumbers"
-
-Error ('test-parse_token.R:386:27'): Scenario: eating (Example 2)
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(tokens, function(token) {
-    switch(token$type, Scenario = function() {
-        test_that(glue("Scenario: {token$value}"), {
-            .context <- new.env()
-            calls <- parse_token(token$children, steps, parameters)
-            after <- get_hook(hooks, "after")
-            before <- get_hook(hooks, "before")
-            on.exit(after(.context, token$value))
-            before(.context, token$value)
-            for (call in calls) {
-                step <- unclass(call)
-                description <- attr(step, "description")
-                args <- attr(step, "args")
-                attributes(step) <- NULL
-                exec(step, !!!args, context = .context)
-            }
-        })
-    }, `Scenario Outline` = function() {
-        scenarios <- expand_scenario_outline(token)
-        calls <- map(scenarios, function(scenario) {
-            parse_token(list(scenario), steps, parameters, hooks)[[1]]
-        })
-        for (call in calls) {
-            exec(call)
-        }
-    }, Feature = function(file_name = token$value) {
-        context_start_file(glue("Feature: {file_name}"))
-        if (token$children[[1]]$type == "Background") {
-            background <- token$children[[1]]
-            token$children <- map(token$children[2:length(token$children)], 
-                function(x) {
-                  x$children <- c(background$children, x$children)
-                  x
-                })
-        }
-        calls <- parse_token(token$children, steps, parameters, 
-            hooks)
-        for (call in calls) {
-            exec(call)
-        }
-    }, Step = parse_step(token, steps, parameters), abort(glue("Unknown token type: {token$type}")))
-})`: i In index: 1.
-Caused by error in `parse_step()`:
-! No step found for: "there are start cucumbers"
-
-Failure ('test-parse_token.R:389:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:390:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:391:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
---------------------------------------------------------------------------------
-⠏ |          0 | Feature: Multiple site support                 v |         18 | Feature: Multiple site support
-⠏ |          0 | Feature: Multiple site support                 ⠙ | 2        0 | Feature: Multiple site support                 ✖ | 5        0 | Feature: Multiple site support
-────────────────────────────────────────────────────────────────
-Error ('test-parse_token.R:598:27'): Scenario: Dr. Bill posts to his own blog (Example 1)
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(tokens, function(token) {
-    switch(token$type, Scenario = function() {
-        test_that(glue("Scenario: {token$value}"), {
-            .context <- new.env()
-            calls <- parse_token(token$children, steps, parameters)
-            after <- get_hook(hooks, "after")
-            before <- get_hook(hooks, "before")
-            on.exit(after(.context, token$value))
-            before(.context, token$value)
-            for (call in calls) {
-                step <- unclass(call)
-                description <- attr(step, "description")
-                args <- attr(step, "args")
-                attributes(step) <- NULL
-                exec(step, !!!args, context = .context)
-            }
-        })
-    }, `Scenario Outline` = function() {
-        scenarios <- expand_scenario_outline(token)
-        calls <- map(scenarios, function(scenario) {
-            parse_token(list(scenario), steps, parameters, hooks)[[1]]
-        })
-        for (call in calls) {
-            exec(call)
-        }
-    }, Feature = function(file_name = token$value) {
-        context_start_file(glue("Feature: {file_name}"))
-        if (token$children[[1]]$type == "Background") {
-            background <- token$children[[1]]
-            token$children <- map(token$children[2:length(token$children)], 
-                function(x) {
-                  x$children <- c(background$children, x$children)
-                  x
-                })
-        }
-        calls <- parse_token(token$children, steps, parameters, 
-            hooks)
-        for (call in calls) {
-            exec(call)
-        }
-    }, Step = parse_step(token, steps, parameters), abort(glue("Unknown token type: {token$type}")))
-})`: i In index: 1.
-Caused by error in `parse_step()`:
-! No step found for: "a global administrator named admin"
-
-Error ('test-parse_token.R:598:27'): Scenario: Dr. Bill posts to his own blog (Example 2)
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(tokens, function(token) {
-    switch(token$type, Scenario = function() {
-        test_that(glue("Scenario: {token$value}"), {
-            .context <- new.env()
-            calls <- parse_token(token$children, steps, parameters)
-            after <- get_hook(hooks, "after")
-            before <- get_hook(hooks, "before")
-            on.exit(after(.context, token$value))
-            before(.context, token$value)
-            for (call in calls) {
-                step <- unclass(call)
-                description <- attr(step, "description")
-                args <- attr(step, "args")
-                attributes(step) <- NULL
-                exec(step, !!!args, context = .context)
-            }
-        })
-    }, `Scenario Outline` = function() {
-        scenarios <- expand_scenario_outline(token)
-        calls <- map(scenarios, function(scenario) {
-            parse_token(list(scenario), steps, parameters, hooks)[[1]]
-        })
-        for (call in calls) {
-            exec(call)
-        }
-    }, Feature = function(file_name = token$value) {
-        context_start_file(glue("Feature: {file_name}"))
-        if (token$children[[1]]$type == "Background") {
-            background <- token$children[[1]]
-            token$children <- map(token$children[2:length(token$children)], 
-                function(x) {
-                  x$children <- c(background$children, x$children)
-                  x
-                })
-        }
-        calls <- parse_token(token$children, steps, parameters, 
-            hooks)
-        for (call in calls) {
-            exec(call)
-        }
-    }, Step = parse_step(token, steps, parameters), abort(glue("Unknown token type: {token$type}")))
-})`: i In index: 1.
-Caused by error in `parse_step()`:
-! No step found for: "a global administrator named admin"
-
-Failure ('test-parse_token.R:601:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:602:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:603:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-────────────────────────────────────────────────────────────────
-Maximum number of failures exceeded; quitting at end of
-file.
-ℹ Increase this number with (e.g.)
-  `testthat::set_max_fails(Inf)` 
-
-══ Results ═════════════════════════════════════════════════════
-Duration: 2.4 s
-
-── Skipped tests (1) ───────────────────────────────────────────
-• On CRAN (1): 'test-examples.R:39:3'
-
-── Failed tests ────────────────────────────────────────────────
-Failure ('test-parse_table.R:13:5'): parse_table: should parse Data Table with 1 row
-`result` (`actual`) not equal to tibble::tibble(start = c("12"), eat = c("5"), left = c("7")) (`expected`).
-
-actual vs expected
-                start eat left
-- actual[1, ]   start eat left
-+ expected[1, ] 12    5   7   
-
-`actual$start`:   "start"
-`expected$start`: "12"   
-
-`actual$eat`:   "eat"
-`expected$eat`: "5"  
-
-`actual$left`:   "left"
-`expected$left`: "7"   
-
-Failure ('test-parse_table.R:55:5'): parse_table: should parse Data Table with many rows
-`result` (`actual`) not equal to tibble::tibble(...) (`expected`).
-
-actual vs expected
-                start eat left
-- actual[1, ]   start eat left
-+ expected[1, ] 12    5   7   
-- actual[2, ]   start eat left
-+ expected[2, ] 13    6   7   
-
-`actual$start`:   "start" "start"
-`expected$start`: "12"    "13"   
-
-`actual$eat`:   "eat" "eat"
-`expected$eat`: "5"   "6"  
-
-`actual$left`:   "left" "left"
-`expected$left`: "7"    "7"   
-
-Failure ('test-parse_table.R:76:5'): parse_table: should parse Data Table with escaped characters
-`result` (`actual`) not equal to tibble::tibble(start = c("'\\'"), eat = c("'\n'"), left = c("'|'")) (`expected`).
-
-actual vs expected
-                start  eat left
-- actual[1, ]   start eat  left
-+ expected[1, ] '\'  '
-' '|' 
-
-`actual$start`:   "start"
-`expected$start`: "'\\'" 
-
-`lines(actual$eat)`:   "eat"    
-`lines(expected$eat)`: "'"   "'"
-
-`actual$left`:   "left"
-`expected$left`: "'|'" 
-
-Error ('test-parse_token.R:386:27'): Scenario: eating (Example 1)
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(tokens, function(token) {
-    switch(token$type, Scenario = function() {
-        test_that(glue("Scenario: {token$value}"), {
-            .context <- new.env()
-            calls <- parse_token(token$children, steps, parameters)
-            after <- get_hook(hooks, "after")
-            before <- get_hook(hooks, "before")
-            on.exit(after(.context, token$value))
-            before(.context, token$value)
-            for (call in calls) {
-                step <- unclass(call)
-                description <- attr(step, "description")
-                args <- attr(step, "args")
-                attributes(step) <- NULL
-                exec(step, !!!args, context = .context)
-            }
-        })
-    }, `Scenario Outline` = function() {
-        scenarios <- expand_scenario_outline(token)
-        calls <- map(scenarios, function(scenario) {
-            parse_token(list(scenario), steps, parameters, hooks)[[1]]
-        })
-        for (call in calls) {
-            exec(call)
-        }
-    }, Feature = function(file_name = token$value) {
-        context_start_file(glue("Feature: {file_name}"))
-        if (token$children[[1]]$type == "Background") {
-            background <- token$children[[1]]
-            token$children <- map(token$children[2:length(token$children)], 
-                function(x) {
-                  x$children <- c(background$children, x$children)
-                  x
-                })
-        }
-        calls <- parse_token(token$children, steps, parameters, 
-            hooks)
-        for (call in calls) {
-            exec(call)
-        }
-    }, Step = parse_step(token, steps, parameters), abort(glue("Unknown token type: {token$type}")))
-})`: i In index: 1.
-Caused by error in `parse_step()`:
-! No step found for: "there are start cucumbers"
-
-Error ('test-parse_token.R:386:27'): Scenario: eating (Example 2)
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(tokens, function(token) {
-    switch(token$type, Scenario = function() {
-        test_that(glue("Scenario: {token$value}"), {
-            .context <- new.env()
-            calls <- parse_token(token$children, steps, parameters)
-            after <- get_hook(hooks, "after")
-            before <- get_hook(hooks, "before")
-            on.exit(after(.context, token$value))
-            before(.context, token$value)
-            for (call in calls) {
-                step <- unclass(call)
-                description <- attr(step, "description")
-                args <- attr(step, "args")
-                attributes(step) <- NULL
-                exec(step, !!!args, context = .context)
-            }
-        })
-    }, `Scenario Outline` = function() {
-        scenarios <- expand_scenario_outline(token)
-        calls <- map(scenarios, function(scenario) {
-            parse_token(list(scenario), steps, parameters, hooks)[[1]]
-        })
-        for (call in calls) {
-            exec(call)
-        }
-    }, Feature = function(file_name = token$value) {
-        context_start_file(glue("Feature: {file_name}"))
-        if (token$children[[1]]$type == "Background") {
-            background <- token$children[[1]]
-            token$children <- map(token$children[2:length(token$children)], 
-                function(x) {
-                  x$children <- c(background$children, x$children)
-                  x
-                })
-        }
-        calls <- parse_token(token$children, steps, parameters, 
-            hooks)
-        for (call in calls) {
-            exec(call)
-        }
-    }, Step = parse_step(token, steps, parameters), abort(glue("Unknown token type: {token$type}")))
-})`: i In index: 1.
-Caused by error in `parse_step()`:
-! No step found for: "there are start cucumbers"
-
-Failure ('test-parse_token.R:389:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:390:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:391:5'): parse_token: should parse a Scenario Outline to a call list
-mock object has not been called 2 times
-
-Error ('test-parse_token.R:598:27'): Scenario: Dr. Bill posts to his own blog (Example 1)
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(tokens, function(token) {
-    switch(token$type, Scenario = function() {
-        test_that(glue("Scenario: {token$value}"), {
-            .context <- new.env()
-            calls <- parse_token(token$children, steps, parameters)
-            after <- get_hook(hooks, "after")
-            before <- get_hook(hooks, "before")
-            on.exit(after(.context, token$value))
-            before(.context, token$value)
-            for (call in calls) {
-                step <- unclass(call)
-                description <- attr(step, "description")
-                args <- attr(step, "args")
-                attributes(step) <- NULL
-                exec(step, !!!args, context = .context)
-            }
-        })
-    }, `Scenario Outline` = function() {
-        scenarios <- expand_scenario_outline(token)
-        calls <- map(scenarios, function(scenario) {
-            parse_token(list(scenario), steps, parameters, hooks)[[1]]
-        })
-        for (call in calls) {
-            exec(call)
-        }
-    }, Feature = function(file_name = token$value) {
-        context_start_file(glue("Feature: {file_name}"))
-        if (token$children[[1]]$type == "Background") {
-            background <- token$children[[1]]
-            token$children <- map(token$children[2:length(token$children)], 
-                function(x) {
-                  x$children <- c(background$children, x$children)
-                  x
-                })
-        }
-        calls <- parse_token(token$children, steps, parameters, 
-            hooks)
-        for (call in calls) {
-            exec(call)
-        }
-    }, Step = parse_step(token, steps, parameters), abort(glue("Unknown token type: {token$type}")))
-})`: i In index: 1.
-Caused by error in `parse_step()`:
-! No step found for: "a global administrator named admin"
-
-Error ('test-parse_token.R:598:27'): Scenario: Dr. Bill posts to his own blog (Example 2)
-<purrr_error_indexed/rlang_error/error/condition>
-Error in `map(tokens, function(token) {
-    switch(token$type, Scenario = function() {
-        test_that(glue("Scenario: {token$value}"), {
-            .context <- new.env()
-            calls <- parse_token(token$children, steps, parameters)
-            after <- get_hook(hooks, "after")
-            before <- get_hook(hooks, "before")
-            on.exit(after(.context, token$value))
-            before(.context, token$value)
-            for (call in calls) {
-                step <- unclass(call)
-                description <- attr(step, "description")
-                args <- attr(step, "args")
-                attributes(step) <- NULL
-                exec(step, !!!args, context = .context)
-            }
-        })
-    }, `Scenario Outline` = function() {
-        scenarios <- expand_scenario_outline(token)
-        calls <- map(scenarios, function(scenario) {
-            parse_token(list(scenario), steps, parameters, hooks)[[1]]
-        })
-        for (call in calls) {
-            exec(call)
-        }
-    }, Feature = function(file_name = token$value) {
-        context_start_file(glue("Feature: {file_name}"))
-        if (token$children[[1]]$type == "Background") {
-            background <- token$children[[1]]
-            token$children <- map(token$children[2:length(token$children)], 
-                function(x) {
-                  x$children <- c(background$children, x$children)
-                  x
-                })
-        }
-        calls <- parse_token(token$children, steps, parameters, 
-            hooks)
-        for (call in calls) {
-            exec(call)
-        }
-    }, Step = parse_step(token, steps, parameters), abort(glue("Unknown token type: {token$type}")))
-})`: i In index: 1.
-Caused by error in `parse_step()`:
-! No step found for: "a global administrator named admin"
-
-Failure ('test-parse_token.R:601:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:602:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-Failure ('test-parse_token.R:603:5'): parse_token: should parse a Feature with Background and Scenario Outline
-mock object has not been called 2 times
-
-[ FAIL 13 | WARN 0 | SKIP 1 | PASS 71 ]
-══ Terminated early ════════════════════════════════════════════
-✔ | F W  S  OK | Context
-⠏ |          0 | detect                                         ✔ |         13 | detect
-⠏ |          0 | examples                                       ✔ |      1   0 | examples
-⠏ |          0 | expression                                     ✔ |          1 | expression
-⠏ |          0 | hooks                                          ✔ |          5 | hooks
-⠏ |          0 | normalize_feature                              ✔ |          3 | normalize_feature
-⠏ |          0 | parameter                                      ✔ |          8 | parameter
-⠏ |          0 | parse_docstring                                ✔ |          1 | parse_docstring
-⠏ |          0 | parse_table                                    ✔ |          4 | parse_table
-⠏ |          0 | parse_token                                    ⠹ |          3 | parse_token                                    ⠙ |   1     21 | parse_token                                    ⠼ |   6     29 | parse_token                                    v |   6     30 | parse_token
---------------------------------------------------------------------------------
-Warning ('test-parse_token.R:386:27'): Scenario: eating (Example 1)
-NAs introduced by coercion
-Backtrace:
-     x
-  1. \-cucumber:::parse_token(token$children, steps, parameters) at cucumber-master/R/parse_token.R:7:17
-  2.   \-purrr::map(...) at cucumber-master/R/parse_token.R:3:5
-  3.     \-purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4.       +-purrr:::with_indexed_errors(...)
-  5.       | \-base::withCallingHandlers(...)
-  6.       +-purrr:::call_with_cleanup(...)
-  7.       \-cucumber (local) .f(.x[[i]], ...)
-  8.         \-cucumber:::parse_step(token, steps, parameters) at cucumber-master/R/parse_token.R:4:9
-  9.           \-purrr::map2(...) at cucumber-master/R/parse_token.R:70:5
- 10.             \-purrr:::map2_("list", .x, .y, .f, ..., .progress = .progress)
- 11.               +-purrr:::with_indexed_errors(...)
- 12.               | \-base::withCallingHandlers(...)
- 13.               +-purrr:::call_with_cleanup(...)
- 14.               \-cucumber (local) .f(.x[[i]], .y[[i]], ...)
-
-Warning ('test-parse_token.R:386:27'): Scenario: eating (Example 1)
-NAs introduced by coercion
-Backtrace:
-     x
-  1. \-cucumber:::parse_token(token$children, steps, parameters) at cucumber-master/R/parse_token.R:7:17
-  2.   \-purrr::map(...) at cucumber-master/R/parse_token.R:3:5
-  3.     \-purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4.       +-purrr:::with_indexed_errors(...)
-  5.       | \-base::withCallingHandlers(...)
-  6.       +-purrr:::call_with_cleanup(...)
-  7.       \-cucumber (local) .f(.x[[i]], ...)
-  8.         \-cucumber:::parse_step(token, steps, parameters) at cucumber-master/R/parse_token.R:4:9
-  9.           \-purrr::map2(...) at cucumber-master/R/parse_token.R:70:5
- 10.             \-purrr:::map2_("list", .x, .y, .f, ..., .progress = .progress)
- 11.               +-purrr:::with_indexed_errors(...)
- 12.               | \-base::withCallingHandlers(...)
- 13.               +-purrr:::call_with_cleanup(...)
- 14.               \-cucumber (local) .f(.x[[i]], .y[[i]], ...)
-
-Warning ('test-parse_token.R:386:27'): Scenario: eating (Example 1)
-NAs introduced by coercion
-Backtrace:
-     x
-  1. \-cucumber:::parse_token(token$children, steps, parameters) at cucumber-master/R/parse_token.R:7:17
-  2.   \-purrr::map(...) at cucumber-master/R/parse_token.R:3:5
-  3.     \-purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4.       +-purrr:::with_indexed_errors(...)
-  5.       | \-base::withCallingHandlers(...)
-  6.       +-purrr:::call_with_cleanup(...)
-  7.       \-cucumber (local) .f(.x[[i]], ...)
-  8.         \-cucumber:::parse_step(token, steps, parameters) at cucumber-master/R/parse_token.R:4:9
-  9.           \-purrr::map2(...) at cucumber-master/R/parse_token.R:70:5
- 10.             \-purrr:::map2_("list", .x, .y, .f, ..., .progress = .progress)
- 11.               +-purrr:::with_indexed_errors(...)
- 12.               | \-base::withCallingHandlers(...)
- 13.               +-purrr:::call_with_cleanup(...)
- 14.               \-cucumber (local) .f(.x[[i]], .y[[i]], ...)
-
-Warning ('test-parse_token.R:386:27'): Scenario: eating (Example 2)
-NAs introduced by coercion
-Backtrace:
-     x
-  1. \-cucumber:::parse_token(token$children, steps, parameters) at cucumber-master/R/parse_token.R:7:17
-  2.   \-purrr::map(...) at cucumber-master/R/parse_token.R:3:5
-  3.     \-purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4.       +-purrr:::with_indexed_errors(...)
-  5.       | \-base::withCallingHandlers(...)
-  6.       +-purrr:::call_with_cleanup(...)
-  7.       \-cucumber (local) .f(.x[[i]], ...)
-  8.         \-cucumber:::parse_step(token, steps, parameters) at cucumber-master/R/parse_token.R:4:9
-  9.           \-purrr::map2(...) at cucumber-master/R/parse_token.R:70:5
- 10.             \-purrr:::map2_("list", .x, .y, .f, ..., .progress = .progress)
- 11.               +-purrr:::with_indexed_errors(...)
- 12.               | \-base::withCallingHandlers(...)
- 13.               +-purrr:::call_with_cleanup(...)
- 14.               \-cucumber (local) .f(.x[[i]], .y[[i]], ...)
-
-Warning ('test-parse_token.R:386:27'): Scenario: eating (Example 2)
-NAs introduced by coercion
-Backtrace:
-     x
-  1. \-cucumber:::parse_token(token$children, steps, parameters) at cucumber-master/R/parse_token.R:7:17
-  2.   \-purrr::map(...) at cucumber-master/R/parse_token.R:3:5
-  3.     \-purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4.       +-purrr:::with_indexed_errors(...)
-  5.       | \-base::withCallingHandlers(...)
-  6.       +-purrr:::call_with_cleanup(...)
-  7.       \-cucumber (local) .f(.x[[i]], ...)
-  8.         \-cucumber:::parse_step(token, steps, parameters) at cucumber-master/R/parse_token.R:4:9
-  9.           \-purrr::map2(...) at cucumber-master/R/parse_token.R:70:5
- 10.             \-purrr:::map2_("list", .x, .y, .f, ..., .progress = .progress)
- 11.               +-purrr:::with_indexed_errors(...)
- 12.               | \-base::withCallingHandlers(...)
- 13.               +-purrr:::call_with_cleanup(...)
- 14.               \-cucumber (local) .f(.x[[i]], .y[[i]], ...)
-
-Warning ('test-parse_token.R:386:27'): Scenario: eating (Example 2)
-NAs introduced by coercion
-Backtrace:
-     x
-  1. \-cucumber:::parse_token(token$children, steps, parameters) at cucumber-master/R/parse_token.R:7:17
-  2.   \-purrr::map(...) at cucumber-master/R/parse_token.R:3:5
-  3.     \-purrr:::map_("list", .x, .f, ..., .progress = .progress)
-  4.       +-purrr:::with_indexed_errors(...)
-  5.       | \-base::withCallingHandlers(...)
-  6.       +-purrr:::call_with_cleanup(...)
-  7.       \-cucumber (local) .f(.x[[i]], ...)
-  8.         \-cucumber:::parse_step(token, steps, parameters) at cucumber-master/R/parse_token.R:4:9
-  9.           \-purrr::map2(...) at cucumber-master/R/parse_token.R:70:5
- 10.             \-purrr:::map2_("list", .x, .y, .f, ..., .progress = .progress)
- 11.               +-purrr:::with_indexed_errors(...)
- 12.               | \-base::withCallingHandlers(...)
- 13.               +-purrr:::call_with_cleanup(...)
- 14.               \-cucumber (local) .f(.x[[i]], .y[[i]], ...)
---------------------------------------------------------------------------------
-⠏ |          0 | Feature: Multiple site support                 v |         18 | Feature: Multiple site support
-⠏ |          0 | Feature: Multiple site support                 ✔ |          9 | Feature: Multiple site support
-⠏ |          0 | run                                            ⠏ |          0 | Feature: The Maker                             v |          6 | Feature: The Maker
-⠏ |          0 | Feature: The Maker                             ✔ |         12 | Feature: The Maker
-⠏ |          0 | step                                           ✔ |          1 | step
-⠏ |          0 | tokenize                                       ⠏ |         10 | tokenize                                       ✔ |         14 | tokenize
-⠏ |          0 | validate                                       ✔ |      2   0 | validate
-
-══ Results ═════════════════════════════════════════════════════
-Duration: 1.2 s
-
-── Skipped tests (3) ───────────────────────────────────────────
-• On CRAN (3): 'test-examples.R:39:3', 'test-validate.R:3:5',
-  'test-validate.R:32:7'
-
-[ FAIL 0 | WARN 6 | SKIP 3 | PASS 125 ]
-
-🐝 Your tests are the bee's knees 🐝
-
-Test results: n_fail = , n_pass = 
-Mutant parameter.R_parameter.R_001.R: KILLED
+Mutant add-grob.R_add-grob.R_001.R: SURVIVED
 Mutation info: 
-From line/col: 86/1
-To line/col: 113/1
+From line/col: 45/1
+To line/col: 110/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant add-grob.R_add-grob.R_002.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_003.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_004.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
 '-' -> '+'
    Result: KILLED
 
-Mutant parse_docstring.R_parse_docstring.R_001.R: KILLED
+Mutant add-grob.R_add-grob.R_005.R: KILLED
 Mutation info: 
-From line/col: 2/1
-To line/col: 5/1
+From line/col: 45/1
+To line/col: 110/1
 '-' -> '+'
    Result: KILLED
 
-Mutant parse_table.R_parse_table.R_001.R: KILLED
+Mutant add-grob.R_add-grob.R_006.R: KILLED
 Mutation info: 
-From line/col: 6/1
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_007.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_008.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_009.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_010.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_011.R: KILLED
+Mutation info: deleted line 110
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_012.R: KILLED
+Mutation info: deleted line 67
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_013.R: SURVIVED
+Mutation info: deleted line 90
+   Result: SURVIVED
+
+Mutant add-grob.R_add-grob.R_014.R: KILLED
+Mutation info: deleted line 52
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_015.R: KILLED
+Mutation info: deleted line 50
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_001.R: KILLED
+Mutation info: 
+From line/col: 40/1
+To line/col: 55/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_002.R: KILLED
+Mutation info: 
+From line/col: 40/1
+To line/col: 55/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_003.R: KILLED
+Mutation info: 
+From line/col: 40/1
+To line/col: 55/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_004.R: KILLED
+Mutation info: 
+From line/col: 40/1
+To line/col: 55/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_005.R: KILLED
+Mutation info: 
+From line/col: 96/1
+To line/col: 110/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_006.R: KILLED
+Mutation info: 
+From line/col: 96/1
+To line/col: 110/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_007.R: KILLED
+Mutation info: 
+From line/col: 96/1
+To line/col: 110/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_008.R: KILLED
+Mutation info: 
+From line/col: 96/1
+To line/col: 110/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_009.R: KILLED
+Mutation info: deleted line 110
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_010.R: SURVIVED
+Mutation info: deleted line 72
+   Result: SURVIVED
+
+Mutant add-rows-cols.R_add-rows-cols.R_011.R: SURVIVED
+Mutation info: deleted line 5
+   Result: SURVIVED
+
+Mutant add-rows-cols.R_add-rows-cols.R_012.R: SURVIVED
+Mutation info: deleted line 90
+   Result: SURVIVED
+
+Mutant add-rows-cols.R_add-rows-cols.R_013.R: KILLED
+Mutation info: deleted line 107
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_001.R: KILLED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_002.R: KILLED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_003.R: KILLED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_004.R: KILLED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant add-space.R_add-space.R_006.R: KILLED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_007.R: KILLED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_008.R: KILLED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_009.R: KILLED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant add-space.R_add-space.R_011.R: SURVIVED
+Mutation info: deleted line 9
+   Result: SURVIVED
+
+Mutant add-space.R_add-space.R_012.R: KILLED
+Mutation info: deleted line 62
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_013.R: KILLED
+Mutation info: deleted line 65
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_014.R: SURVIVED
+Mutation info: deleted line 32
+   Result: SURVIVED
+
+Mutant add-space.R_add-space.R_015.R: SURVIVED
+Mutation info: deleted line 16
+   Result: SURVIVED
+
+Mutant align.R_align.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 43/1
+To line/col: 64/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant align.R_align.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant align.R_align.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant align.R_align.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant align.R_align.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant align.R_align.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant align.R_align.R_007.R: SURVIVED
+Mutation info: 
+From line/col: 122/1
+To line/col: 125/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant align.R_align.R_008.R: SURVIVED
+Mutation info: deleted line 55
+   Result: SURVIVED
+
+Mutant align.R_align.R_009.R: KILLED
+Mutation info: deleted line 85
+   Result: KILLED
+
+Mutant align.R_align.R_010.R: KILLED
+Mutation info: deleted line 87
+   Result: KILLED
+
+Mutant align.R_align.R_011.R: KILLED
+Mutation info: deleted line 109
+   Result: KILLED
+
+Mutant align.R_align.R_012.R: SURVIVED
+Mutation info: deleted line 36
+   Result: SURVIVED
+
+Mutant filter.R_filter.R_001.R: KILLED
+Mutation info: deleted line 37
+   Result: KILLED
+
+Mutant filter.R_filter.R_002.R: SURVIVED
+Mutation info: deleted line 15
+   Result: SURVIVED
+
+Mutant filter.R_filter.R_003.R: SURVIVED
+Mutation info: deleted line 44
+   Result: SURVIVED
+
+Mutant filter.R_filter.R_004.R: KILLED
+Mutation info: deleted line 45
+   Result: KILLED
+
+Mutant filter.R_filter.R_005.R: SURVIVED
+Mutation info: deleted line 2
+   Result: SURVIVED
+
+Mutant grid.R_grid.R_001.R: KILLED
+Mutation info: deleted line 30
+   Result: KILLED
+
+Mutant grid.R_grid.R_002.R: KILLED
+Mutation info: deleted line 64
+   Result: KILLED
+
+Mutant grid.R_grid.R_003.R: SURVIVED
+Mutation info: deleted line 56
+   Result: SURVIVED
+
+Mutant grid.R_grid.R_004.R: KILLED
+Mutation info: deleted line 64
+   Result: KILLED
+
+Mutant grid.R_grid.R_005.R: SURVIVED
+Mutation info: deleted line 4
+   Result: SURVIVED
+
+Mutant gtable-layouts.R_gtable-layouts.R_001.R: KILLED
+Mutation info: 
+From line/col: 27/1
+To line/col: 48/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_002.R: KILLED
+Mutation info: 
+From line/col: 27/1
+To line/col: 48/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_003.R: KILLED
+Mutation info: 
+From line/col: 76/1
+To line/col: 97/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_004.R: KILLED
+Mutation info: 
+From line/col: 76/1
+To line/col: 97/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_005.R: KILLED
+Mutation info: 
+From line/col: 134/1
+To line/col: 158/1
+'!=' -> '=='
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_006.R: KILLED
+Mutation info: 
+From line/col: 134/1
+To line/col: 158/1
+'!=' -> '=='
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_007.R: KILLED
+Mutation info: 
+From line/col: 134/1
+To line/col: 158/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_008.R: SURVIVED
+Mutation info: deleted line 122
+   Result: SURVIVED
+
+Mutant gtable-layouts.R_gtable-layouts.R_009.R: SURVIVED
+Mutation info: deleted line 79
+   Result: SURVIVED
+
+Mutant gtable-layouts.R_gtable-layouts.R_010.R: SURVIVED
+Mutation info: deleted line 113
+   Result: SURVIVED
+
+Mutant gtable-layouts.R_gtable-layouts.R_011.R: SURVIVED
+Mutation info: deleted line 163
+   Result: SURVIVED
+
+Mutant gtable-layouts.R_gtable-layouts.R_012.R: SURVIVED
+Mutation info: deleted line 15
+   Result: SURVIVED
+
+Mutant gtable-package.R_gtable-package.R_001.R: SURVIVED
+Mutation info: deleted line 8
+   Result: SURVIVED
+
+Mutant gtable-package.R_gtable-package.R_002.R: SURVIVED
+Mutation info: deleted line 10
+   Result: SURVIVED
+
+Mutant gtable-package.R_gtable-package.R_003.R: SURVIVED
+Mutation info: deleted line 9
+   Result: SURVIVED
+
+Mutant gtable-package.R_gtable-package.R_004.R: SURVIVED
+Mutation info: deleted line 6
+   Result: SURVIVED
+
+Mutant gtable-package.R_gtable-package.R_005.R: SURVIVED
+Mutation info: deleted line 3
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_002.R: KILLED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_005.R: KILLED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_007.R: KILLED
+Mutation info: 
+From line/col: 139/1
+To line/col: 159/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_008.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_009.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&&' -> '||'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_010.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_011.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'<' -> '>'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_012.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&&' -> '||'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_013.R: SURVIVED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_014.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'<' -> '>'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_015.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&' -> '|'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_016.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&' -> '|'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_017.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&' -> '|'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_018.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_019.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_020.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_021.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_022.R: SURVIVED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_023.R: SURVIVED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_024.R: SURVIVED
+Mutation info: 
+From line/col: 317/1
+To line/col: 331/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_025.R: SURVIVED
+Mutation info: 
+From line/col: 317/1
+To line/col: 331/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_026.R: SURVIVED
+Mutation info: deleted line 185
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_027.R: SURVIVED
+Mutation info: deleted line 29
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_028.R: SURVIVED
+Mutation info: deleted line 1
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_029.R: SURVIVED
+Mutation info: deleted line 210
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_030.R: SURVIVED
+Mutation info: deleted line 10
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_007.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_008.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_011.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_012.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_013.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_014.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_015.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'>=' -> '<='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_016.R: SURVIVED
+Mutation info: 
+From line/col: 328/1
+To line/col: 346/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_017.R: SURVIVED
+Mutation info: 
+From line/col: 328/1
+To line/col: 346/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_018.R: SURVIVED
+Mutation info: 
+From line/col: 328/1
+To line/col: 346/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_019.R: SURVIVED
+Mutation info: deleted line 322
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_020.R: SURVIVED
+Mutation info: deleted line 176
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_021.R: SURVIVED
+Mutation info: deleted line 35
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_022.R: SURVIVED
+Mutation info: deleted line 83
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_023.R: KILLED
+Mutation info: deleted line 218
+   Result: KILLED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 55/1
+To line/col: 74/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 106/1
+To line/col: 125/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 106/1
+To line/col: 125/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 106/1
+To line/col: 125/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 106/1
+To line/col: 125/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 159/1
+To line/col: 195/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_007.R: KILLED
+Mutation info: 
+From line/col: 197/1
+To line/col: 232/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_008.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_011.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_012.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_013.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_014.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_015.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_016.R: SURVIVED
+Mutation info: 
+From line/col: 274/1
+To line/col: 296/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_017.R: SURVIVED
+Mutation info: 
+From line/col: 298/1
+To line/col: 320/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_018.R: SURVIVED
+Mutation info: 
+From line/col: 322/1
+To line/col: 344/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_019.R: SURVIVED
+Mutation info: 
+From line/col: 346/1
+To line/col: 368/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_020.R: SURVIVED
+Mutation info: 
+From line/col: 370/1
+To line/col: 392/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_021.R: SURVIVED
+Mutation info: 
+From line/col: 394/1
+To line/col: 416/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_022.R: SURVIVED
+Mutation info: 
+From line/col: 418/1
+To line/col: 440/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_023.R: SURVIVED
+Mutation info: 
+From line/col: 445/1
+To line/col: 467/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_024.R: SURVIVED
+Mutation info: 
+From line/col: 469/1
+To line/col: 491/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_025.R: SURVIVED
+Mutation info: deleted line 267
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_026.R: KILLED
+Mutation info: deleted line 82
+   Result: KILLED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_027.R: SURVIVED
+Mutation info: deleted line 317
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_028.R: KILLED
+Mutation info: deleted line 209
+   Result: KILLED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_029.R: SURVIVED
+Mutation info: deleted line 235
+   Result: SURVIVED
+
+Mutant new-data-frame.R_new-data-frame.R_001.R: KILLED
+Mutation info: 
+From line/col: 3/1
+To line/col: 12/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant new-data-frame.R_new-data-frame.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 14/1
+To line/col: 21/1
+'!=' -> '=='
+   Result: SURVIVED
+
+Mutant new-data-frame.R_new-data-frame.R_003.R: KILLED
+Mutation info: deleted line 8
+   Result: KILLED
+
+Mutant new-data-frame.R_new-data-frame.R_004.R: SURVIVED
+Mutation info: deleted line 19
+   Result: SURVIVED
+
+Mutant new-data-frame.R_new-data-frame.R_005.R: KILLED
+Mutation info: deleted line 6
+   Result: KILLED
+
+Mutant new-data-frame.R_new-data-frame.R_006.R: SURVIVED
+Mutation info: deleted line 2
+   Result: SURVIVED
+
+Mutant new-data-frame.R_new-data-frame.R_007.R: KILLED
+Mutation info: deleted line 12
+   Result: KILLED
+
+Mutant padding.R_padding.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 29/1
 To line/col: 37/1
 '-' -> '+'
-   Result: KILLED
+   Result: SURVIVED
 
-Mutant parse_table.R_parse_table.R_002.R: KILLED
+Mutant padding.R_padding.R_002.R: SURVIVED
 Mutation info: 
-From line/col: 6/1
+From line/col: 29/1
 To line/col: 37/1
 '-' -> '+'
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_003.R: SURVIVED
+Mutation info: deleted line 18
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_004.R: SURVIVED
+Mutation info: deleted line 33
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_005.R: SURVIVED
+Mutation info: deleted line 30
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_006.R: SURVIVED
+Mutation info: deleted line 30
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_007.R: SURVIVED
+Mutation info: deleted line 7
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_001.R: KILLED
+Mutation info: 
+From line/col: 64/1
+To line/col: 100/1
+'!=' -> '=='
    Result: KILLED
 
-Mutant parse_table.R_parse_table.R_003.R: KILLED
+Mutant rbind-cbind.R_rbind-cbind.R_002.R: KILLED
 Mutation info: 
-From line/col: 6/1
-To line/col: 37/1
+From line/col: 64/1
+To line/col: 100/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_003.R: KILLED
+Mutation info: 
+From line/col: 64/1
+To line/col: 100/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 64/1
+To line/col: 100/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 64/1
+To line/col: 100/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_006.R: KILLED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'!=' -> '=='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_007.R: KILLED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_008.R: KILLED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_011.R: KILLED
+Mutation info: deleted line 93
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_012.R: SURVIVED
+Mutation info: deleted line 119
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_013.R: SURVIVED
+Mutation info: deleted line 35
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_014.R: SURVIVED
+Mutation info: deleted line 34
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_015.R: SURVIVED
+Mutation info: deleted line 36
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_001.R: KILLED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant trim.R_trim.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_007.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_008.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_010.R: SURVIVED
+Mutation info: deleted line 32
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_011.R: KILLED
+Mutation info: deleted line 40
+   Result: KILLED
+
+Mutant trim.R_trim.R_012.R: SURVIVED
+Mutation info: deleted line 9
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_013.R: SURVIVED
+Mutation info: deleted line 27
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_014.R: SURVIVED
+Mutation info: deleted line 8
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 1/1
+To line/col: 23/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 25/1
+To line/col: 47/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_003.R: KILLED
+Mutation info: 
+From line/col: 49/1
+To line/col: 51/1
+'>=' -> '<='
+   Result: KILLED
+
+Mutant utils.R_utils.R_004.R: KILLED
+Mutation info: 
+From line/col: 49/1
+To line/col: 51/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant utils.R_utils.R_005.R: KILLED
+Mutation info: 
+From line/col: 49/1
+To line/col: 51/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant utils.R_utils.R_006.R: KILLED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_007.R: KILLED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_008.R: SURVIVED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'>=' -> '<='
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_011.R: KILLED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_012.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_013.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_014.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'<=' -> '>='
+   Result: KILLED
+
+Mutant utils.R_utils.R_015.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'>=' -> '<='
+   Result: KILLED
+
+Mutant utils.R_utils.R_016.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant utils.R_utils.R_017.R: KILLED
+Mutation info: 
+From line/col: 123/1
+To line/col: 125/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant utils.R_utils.R_018.R: KILLED
+Mutation info: 
+From line/col: 123/1
+To line/col: 125/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_019.R: KILLED
+Mutation info: 
+From line/col: 123/1
+To line/col: 125/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_020.R: SURVIVED
+Mutation info: deleted line 84
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_021.R: SURVIVED
+Mutation info: deleted line 101
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_022.R: KILLED
+Mutation info: deleted line 33
+   Result: KILLED
+
+Mutant utils.R_utils.R_023.R: SURVIVED
+Mutation info: deleted line 106
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_024.R: SURVIVED
+Mutation info: deleted line 106
+   Result: SURVIVED
+
+Mutant z.R_z.R_001.R: KILLED
+Mutation info: 
+From line/col: 14/1
+To line/col: 19/1
 '-' -> '+'
    Result: KILLED
 
-Mutant parse_table.R_parse_table.R_004.R: KILLED
+Mutant z.R_z.R_002.R: KILLED
 Mutation info: 
-From line/col: 6/1
-To line/col: 37/1
-'-' -> '+'
+From line/col: 14/1
+To line/col: 19/1
+'+' -> '-'
    Result: KILLED
 
-Mutant parse_token.R_parse_token.R_001.R: KILLED
+Mutant z.R_z.R_003.R: KILLED
 Mutation info: 
-From line/col: 69/1
-To line/col: 119/1
-'-' -> '+'
+From line/col: 34/1
+To line/col: 51/1
+'!=' -> '=='
+   Result: KILLED
+
+Mutant z.R_z.R_004.R: KILLED
+Mutation info: 
+From line/col: 34/1
+To line/col: 51/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant z.R_z.R_005.R: KILLED
+Mutation info: 
+From line/col: 34/1
+To line/col: 51/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant z.R_z.R_006.R: KILLED
+Mutation info: deleted line 18
+   Result: KILLED
+
+Mutant z.R_z.R_007.R: SURVIVED
+Mutation info: deleted line 22
+   Result: SURVIVED
+
+Mutant z.R_z.R_008.R: SURVIVED
+Mutation info: deleted line 24
+   Result: SURVIVED
+
+Mutant z.R_z.R_009.R: KILLED
+Mutation info: deleted line 48
+   Result: KILLED
+
+Mutant z.R_z.R_010.R: KILLED
+Mutation info: deleted line 48
+   Result: KILLED
+
+Mutant zzz.R_zzz.R_001.R: KILLED
+Mutation info: deleted line 1
+   Result: KILLED
+
+Mutant zzz.R_zzz.R_002.R: KILLED
+Mutation info: deleted line 5
+   Result: KILLED
+
+Mutant zzz.R_zzz.R_003.R: KILLED
+Mutation info: deleted line 4
+   Result: KILLED
+
+Mutant zzz.R_zzz.R_004.R: SURVIVED
+Mutation info: deleted line 3
+   Result: SURVIVED
+
+Mutant zzz.R_zzz.R_005.R: KILLED
+Mutation info: deleted line 2
    Result: KILLED
 
 
 Mutation Testing Summary:
-  Total mutants:    7
-  Killed:           7
-  Survived:         0
-  Mutation Score:   100.00%
-$package_mutants
-$package_mutants$parameter.R_parameter.R_001.R
-$package_mutants$parameter.R_parameter.R_001.R$path
-[1] "/tmp/RtmpU7AD88/pkg_mutation_5f31d69abf0c0/cucumber-master"
-
-$package_mutants$parameter.R_parameter.R_001.R$mutation_info
-[1] "\nFrom line/col: 86/1\nTo line/col: 113/1\n'-' -> '+'"
-
-$package_mutants$parameter.R_parameter.R_001.R$result
-[1] FALSE
-
-
-$package_mutants$parse_docstring.R_parse_docstring.R_001.R
-$package_mutants$parse_docstring.R_parse_docstring.R_001.R$path
-[1] "/tmp/RtmpU7AD88/pkg_mutation_5f31d612ed475/cucumber-master"
-
-$package_mutants$parse_docstring.R_parse_docstring.R_001.R$mutation_info
-[1] "\nFrom line/col: 2/1\nTo line/col: 5/1\n'-' -> '+'"
-
-$package_mutants$parse_docstring.R_parse_docstring.R_001.R$result
-[1] FALSE
-
-
-$package_mutants$parse_table.R_parse_table.R_001.R
-$package_mutants$parse_table.R_parse_table.R_001.R$path
-[1] "/tmp/RtmpU7AD88/pkg_mutation_5f31d446893be/cucumber-master"
-
-$package_mutants$parse_table.R_parse_table.R_001.R$mutation_info
-[1] "\nFrom line/col: 6/1\nTo line/col: 37/1\n'-' -> '+'"
-
-$package_mutants$parse_table.R_parse_table.R_001.R$result
-[1] FALSE
-
-
-$package_mutants$parse_table.R_parse_table.R_002.R
-$package_mutants$parse_table.R_parse_table.R_002.R$path
-[1] "/tmp/RtmpU7AD88/pkg_mutation_5f31d614b7363/cucumber-master"
-
-$package_mutants$parse_table.R_parse_table.R_002.R$mutation_info
-[1] "\nFrom line/col: 6/1\nTo line/col: 37/1\n'-' -> '+'"
-
-$package_mutants$parse_table.R_parse_table.R_002.R$result
-[1] FALSE
-
-
-$package_mutants$parse_table.R_parse_table.R_003.R
-$package_mutants$parse_table.R_parse_table.R_003.R$path
-[1] "/tmp/RtmpU7AD88/pkg_mutation_5f31d24da32db/cucumber-master"
-
-$package_mutants$parse_table.R_parse_table.R_003.R$mutation_info
-[1] "\nFrom line/col: 6/1\nTo line/col: 37/1\n'-' -> '+'"
-
-$package_mutants$parse_table.R_parse_table.R_003.R$result
-[1] FALSE
-
-
-$package_mutants$parse_table.R_parse_table.R_004.R
-$package_mutants$parse_table.R_parse_table.R_004.R$path
-[1] "/tmp/RtmpU7AD88/pkg_mutation_5f31d76740fde/cucumber-master"
-
-$package_mutants$parse_table.R_parse_table.R_004.R$mutation_info
-[1] "\nFrom line/col: 6/1\nTo line/col: 37/1\n'-' -> '+'"
-
-$package_mutants$parse_table.R_parse_table.R_004.R$result
-[1] FALSE
-
-
-$package_mutants$parse_token.R_parse_token.R_001.R
-$package_mutants$parse_token.R_parse_token.R_001.R$path
-[1] "/tmp/RtmpU7AD88/pkg_mutation_5f31d12307865/cucumber-master"
-
-$package_mutants$parse_token.R_parse_token.R_001.R$mutation_info
-[1] "\nFrom line/col: 69/1\nTo line/col: 119/1\n'-' -> '+'"
-
-$package_mutants$parse_token.R_parse_token.R_001.R$result
-[1] FALSE
-
-
-
-$test_results
-$test_results$parameter.R_parameter.R_001.R
-[1] FALSE
-
-$test_results$parse_docstring.R_parse_docstring.R_001.R
-[1] FALSE
-
-$test_results$parse_table.R_parse_table.R_001.R
-[1] FALSE
-
-$test_results$parse_table.R_parse_table.R_002.R
-[1] FALSE
-
-$test_results$parse_table.R_parse_table.R_003.R
-[1] FALSE
-
-$test_results$parse_table.R_parse_table.R_004.R
-[1] FALSE
-
-$test_results$parse_token.R_parse_token.R_001.R
-[1] FALSE
-
-
+  Total mutants:    246
+  Killed:           108
+  Survived:         138
+  Mutation Score:   43.90%

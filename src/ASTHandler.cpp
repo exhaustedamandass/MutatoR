@@ -21,6 +21,7 @@
 #include "DeleteOperator.hpp"
         
 bool ASTHandler::isDeletable(SEXP expr) {
+    return false;
     if (!_is_inside_block) return false;
     
     // We can't delete the block itself, only elements inside the block
@@ -34,10 +35,6 @@ bool ASTHandler::isDeletable(SEXP expr) {
         }
     }
     
-    return true;
-}
-
-bool isBlock(SEXP expr){
     return true;
 }
 
@@ -60,19 +57,19 @@ void ASTHandler::gatherOperatorsRecursive(SEXP expr, std::vector<int> path, std:
 
         std::map<SEXP, std::function<std::unique_ptr<Operator>()>> operator_map = {
             {Rf_install("+"), []() { return std::make_unique<PlusOperator>(); }},
-            {Rf_install("-"), []() { return std::make_unique<MinusOperator>(); }}
-            // {Rf_install("*"), []() { return std::make_unique<MultiplyOperator>(); }},
-            // {Rf_install("/"), []() { return std::make_unique<DivideOperator>(); }},
-            // {Rf_install("=="), []() { return std::make_unique<EqualOperator>(); }},
-            // {Rf_install("!="), []() { return std::make_unique<NotEqualOperator>(); }},
-            // {Rf_install("<"), []() { return std::make_unique<LessThanOperator>(); }},
-            // {Rf_install(">"), []() { return std::make_unique<MoreThanOperator>(); }},
-            // {Rf_install("<="), []() { return std::make_unique<LessThanOrEqualOperator>(); }},
-            // {Rf_install(">="), []() { return std::make_unique<MoreThanOrEqualOperator>(); }},
-            // {Rf_install("&"), []() { return std::make_unique<AndOperator>(); }},
-            // {Rf_install("|"), []() { return std::make_unique<OrOperator>(); }},
-            // {Rf_install("&&"), []() { return std::make_unique<LogicalAndOperator>(); }},
-            // {Rf_install("||"), []() { return std::make_unique<LogicalOrOperator>(); }}
+            {Rf_install("-"), []() { return std::make_unique<MinusOperator>(); }},
+            {Rf_install("*"), []() { return std::make_unique<MultiplyOperator>(); }},
+            {Rf_install("/"), []() { return std::make_unique<DivideOperator>(); }},
+            {Rf_install("=="), []() { return std::make_unique<EqualOperator>(); }},
+            {Rf_install("!="), []() { return std::make_unique<NotEqualOperator>(); }},
+            {Rf_install("<"), []() { return std::make_unique<LessThanOperator>(); }},
+            {Rf_install(">"), []() { return std::make_unique<MoreThanOperator>(); }},
+            {Rf_install("<="), []() { return std::make_unique<LessThanOrEqualOperator>(); }},
+            {Rf_install(">="), []() { return std::make_unique<MoreThanOrEqualOperator>(); }},
+            {Rf_install("&"), []() { return std::make_unique<AndOperator>(); }},
+            {Rf_install("|"), []() { return std::make_unique<OrOperator>(); }},
+            {Rf_install("&&"), []() { return std::make_unique<LogicalAndOperator>(); }},
+            {Rf_install("||"), []() { return std::make_unique<LogicalOrOperator>(); }}
         };
 
         auto it = operator_map.find(fun);
