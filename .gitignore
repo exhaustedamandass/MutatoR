@@ -12,3 +12,6 @@ mutations/*
 mutations_reduced/*
 main.cpp
 R/sample/*
+cpp_tests/*.txt
+.openai_config.R
+log.txt

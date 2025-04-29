@@ -21,8 +21,9 @@
 #include "DeleteOperator.hpp"
         
 bool ASTHandler::isDeletable(SEXP expr) {
-    return false;
-    if (!_is_inside_block) return false;
+    if (!_is_inside_block) {
+        return false;
+    }
     
     // We can't delete the block itself, only elements inside the block
     if (TYPEOF(expr) == LANGSXP) {
