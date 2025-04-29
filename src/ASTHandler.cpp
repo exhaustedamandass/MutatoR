@@ -20,105 +20,93 @@
 #include "LogicalAndOperator.hpp"
 #include "DeleteOperator.hpp"
         
-bool ASTHandler::isDeletable(SEXP expr) {
-    if (!_is_inside_block) {
+static struct CachedSyms {
+    SEXP s_lbrace  = Rf_install("{");
+    SEXP s_rbrace  = Rf_install("}");
+    SEXP s_plus    = Rf_install("+");   SEXP s_minus  = Rf_install("-");
+    SEXP s_mul     = Rf_install("*");   SEXP s_div    = Rf_install("/");
+    SEXP s_eq      = Rf_install("==");  SEXP s_neq    = Rf_install("!=");
+    SEXP s_lt      = Rf_install("<");   SEXP s_gt     = Rf_install(">");
+    SEXP s_le      = Rf_install("<=");  SEXP s_ge     = Rf_install(">=");
+    SEXP s_and     = Rf_install("&");   SEXP s_or     = Rf_install("|");
+    SEXP s_land    = Rf_install("&&");  SEXP s_lor    = Rf_install("||");
+    SEXP s_srcref  = Rf_install("srcref");
+    SEXP s_mutinfo = Rf_install("mutation_info");
+} SYM;
+
+bool ASTHandler::isDeletable(SEXP expr)
+{
+    if (!_is_inside_block) return false;
+    if (TYPEOF(expr) != LANGSXP) return true;
+
+    SEXP head = CAR(expr);
+    if (TYPEOF(head) == SYMSXP && (head == SYM.s_lbrace || head == SYM.s_rbrace))
         return false;
-    }
-    
-    // We can't delete the block itself, only elements inside the block
-    if (TYPEOF(expr) == LANGSXP) {
-        SEXP head = CAR(expr);
-        if (TYPEOF(head) == SYMSXP) {
-            std::string op_name = CHAR(PRINTNAME(head));
-            if (op_name == "{" || op_name == "}") {
-                return false;
-            }
-        }
-    }
-    
     return true;
 }
 
-std::vector<OperatorPos> ASTHandler::gatherOperators(SEXP expr, SEXP src_ref, bool is_inside_block) {
+std::vector<OperatorPos> ASTHandler::gatherOperators(SEXP expr, SEXP src_ref,
+                                                    bool is_inside_block)
+{
+    if (TYPEOF(src_ref) != INTSXP || LENGTH(src_ref) < 4)
+        Rf_error("src_ref must be an integer vector of length 4");
+
+    const int *p = INTEGER(src_ref);
+    _start_line = p[0];  _start_col = p[1];
+    _end_line   = p[2];  _end_col  = p[3];
+    _is_inside_block = is_inside_block;
+
     std::vector<OperatorPos> ops;
     std::vector<int> path;
-    int* ref_ptr = INTEGER(src_ref);
-    _start_line = ref_ptr[0];
-    _start_col  = ref_ptr[1];
-    _end_line   = ref_ptr[2];
-    _end_col    = ref_ptr[3];
-    _is_inside_block = is_inside_block;
     gatherOperatorsRecursive(expr, path, ops);
     return ops;
 }
 
-void ASTHandler::gatherOperatorsRecursive(SEXP expr, std::vector<int> path, std::vector<OperatorPos>& ops) {
-    if (TYPEOF(expr) == LANGSXP) {
-        SEXP fun = CAR(expr);
+void ASTHandler::gatherOperatorsRecursive(SEXP expr, std::vector<int> path,
+                                          std::vector<OperatorPos>& ops)
+{
+    if (TYPEOF(expr) != LANGSXP)
+        return;
 
-        std::map<SEXP, std::function<std::unique_ptr<Operator>()>> operator_map = {
-            {Rf_install("+"), []() { return std::make_unique<PlusOperator>(); }},
-            {Rf_install("-"), []() { return std::make_unique<MinusOperator>(); }},
-            {Rf_install("*"), []() { return std::make_unique<MultiplyOperator>(); }},
-            {Rf_install("/"), []() { return std::make_unique<DivideOperator>(); }},
-            {Rf_install("=="), []() { return std::make_unique<EqualOperator>(); }},
-            {Rf_install("!="), []() { return std::make_unique<NotEqualOperator>(); }},
-            {Rf_install("<"), []() { return std::make_unique<LessThanOperator>(); }},
-            {Rf_install(">"), []() { return std::make_unique<MoreThanOperator>(); }},
-            {Rf_install("<="), []() { return std::make_unique<LessThanOrEqualOperator>(); }},
-            {Rf_install(">="), []() { return std::make_unique<MoreThanOrEqualOperator>(); }},
-            {Rf_install("&"), []() { return std::make_unique<AndOperator>(); }},
-            {Rf_install("|"), []() { return std::make_unique<OrOperator>(); }},
-            {Rf_install("&&"), []() { return std::make_unique<LogicalAndOperator>(); }},
-            {Rf_install("||"), []() { return std::make_unique<LogicalOrOperator>(); }}
-        };
+    SEXP fun = CAR(expr);
 
-        auto it = operator_map.find(fun);
-        if (it != operator_map.end()) {
-            auto op = it->second();
-            OperatorPos pos{path, std::move(op), _start_line, 
-            _start_col, _end_line, _end_col, fun};
-            ops.push_back(std::move(pos));
-        }
+    /* operator map – keys are the cached symbols */
+    static const std::map<SEXP, std::function<std::unique_ptr<Operator>()>> op_map = {
+        {SYM.s_plus, []{return std::make_unique<PlusOperator>();}},
+        {SYM.s_minus, []{return std::make_unique<MinusOperator>();}},
+        {SYM.s_mul, []{return std::make_unique<MultiplyOperator>();}},
+        {SYM.s_div, []{return std::make_unique<DivideOperator>();}},
+        {SYM.s_eq, []{return std::make_unique<EqualOperator>();}},
+        {SYM.s_neq, []{return std::make_unique<NotEqualOperator>();}},
+        {SYM.s_lt, []{return std::make_unique<LessThanOperator>();}},
+        {SYM.s_gt, []{return std::make_unique<MoreThanOperator>();}},
+        {SYM.s_le, []{return std::make_unique<LessThanOrEqualOperator>();}},
+        {SYM.s_ge, []{return std::make_unique<MoreThanOrEqualOperator>();}},
+        {SYM.s_and, []{return std::make_unique<AndOperator>();}},
+        {SYM.s_or, []{return std::make_unique<OrOperator>();}},
+        {SYM.s_land, []{return std::make_unique<LogicalAndOperator>();}},
+        {SYM.s_lor, []{return std::make_unique<LogicalOrOperator>();}}
+    };
 
-        bool is_block = false;
-        if (TYPEOF(fun) == SYMSXP) {
-            std::string op_name = CHAR(PRINTNAME(fun));
-            if (op_name == "{") {
-                is_block = true;
-            }
-        }
+    if (auto it = op_map.find(fun); it != op_map.end()) {
+        auto op = it->second();
+        ops.push_back({path, std::move(op), _start_line, _start_col,
+                       _end_line, _end_col, fun});
+    }
 
-        // If we're in a deletable context, add delete operator
-        if (isDeletable(expr)) {
-            auto deleteOp = std::make_unique<DeleteOperator>(expr);
-            OperatorPos delPos{path, std::move(deleteOp), _start_line, 
-            _start_col, _end_line, _end_col, expr};
-            ops.push_back(std::move(delPos));
-        }
+    const bool is_block = (fun == SYM.s_lbrace);
 
-        // If this is a block, we need to recursively handle its contents
-        if (is_block) {
-            bool old_is_inside_block = _is_inside_block;
-            _is_inside_block = true;  // Set that we're inside a block for recursive calls
-            
-            // Traverse block contents
-            int i = 0;
-            for (SEXP next = CDR(expr); next != R_NilValue; next = CDR(next), i++) {
-                std::vector<int> child_path = path;
-                child_path.push_back(i);
-                gatherOperatorsRecursive(CAR(next), child_path, ops);
-            }
-            
-            _is_inside_block = old_is_inside_block;  // Restore previous block state
-        } else {
-            // Traverse the child expressions for non-block expressions
-            int i = 0;
-            for (SEXP next = CDR(expr); next != R_NilValue; next = CDR(next), i++) {
-                std::vector<int> child_path = path;
-                child_path.push_back(i);
-                gatherOperatorsRecursive(CAR(next), child_path, ops);
-            }
-        }
+    // add delete operator if allowed
+    if (isDeletable(expr)) {
+        auto del = std::make_unique<DeleteOperator>(expr);
+        ops.push_back({path, std::move(del), _start_line, _start_col,
+                       _end_line, _end_col, expr});
+    }
+
+    // recurse into children (block or not)
+    int idx = 0;
+    for (SEXP next = CDR(expr); next != R_NilValue; next = CDR(next), ++idx) {
+        auto child_path = path; child_path.push_back(idx);
+        gatherOperatorsRecursive(CAR(next), child_path, ops);
     }
 }

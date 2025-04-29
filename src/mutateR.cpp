@@ -23,53 +23,51 @@
 #include "Mutator.hpp"
 #include <vector>
 
-extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp, bool is_inside_block) {
-
+extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp, bool is_inside_block)
+{
     if (TYPEOF(expr_sexp) == EXPRSXP) {
-        if (Rf_length(expr_sexp) < 1) {
+        if (Rf_length(expr_sexp) == 0)
             Rf_error("EXPRSXP input has no expressions.");
-        }
         expr_sexp = VECTOR_ELT(expr_sexp, 0);
     }
 
     ASTHandler astHandler;
-    std::vector<OperatorPos> operators = astHandler.gatherOperators(expr_sexp, src_ref_sexp, is_inside_block);
+    std::vector<OperatorPos> operators =
+        astHandler.gatherOperators(expr_sexp, src_ref_sexp, is_inside_block);
 
-    int n = static_cast<int>(operators.size());
+    const int n = static_cast<int>(operators.size());
     if (n == 0) {
-        // Rf_warning("No operators found to mutate.");
-        SEXP emptyList = PROTECT(Rf_allocVector(VECSXP, 0));
-        UNPROTECT(1);
-        return emptyList;
+        return Rf_allocVector(VECSXP, 0);     // no PROTECT needed – no alloc yet
     }
 
     Mutator mutator;
 
-    std::vector<SEXP> mutatedExpressions;
-    mutatedExpressions.reserve(n);
+    // protect every mutant until we have copied it into the result list
+    std::vector<SEXP> mutants;  mutants.reserve(n);
+    int n_protected = 0;
 
-    for (int i = 0; i < n; i++) {
-        std::pair<SEXP, bool> result = mutator.applyMutation(expr_sexp, operators, i);
-        if(result.second)
-            mutatedExpressions.push_back(result.first);
+    for (int i = 0; i < n; ++i) {
+        auto [mut, ok] = mutator.applyMutation(expr_sexp, operators, i);
+        if (ok) {
+            PROTECT(mut); ++n_protected;
+            mutants.push_back(mut);
+        }
     }
 
-    SEXP resultList = PROTECT(Rf_allocVector(VECSXP, mutatedExpressions.size()));
-    for (size_t i = 0; i < mutatedExpressions.size(); i++) {
-        SET_VECTOR_ELT(resultList, i, mutatedExpressions[i]);
-    }
+    const R_xlen_t m = static_cast<R_xlen_t>(mutants.size());
+    SEXP res = PROTECT(Rf_allocVector(VECSXP, m)); ++n_protected;
+    for (R_xlen_t i = 0; i < m; ++i)
+        SET_VECTOR_ELT(res, i, mutants[i]);
 
-    UNPROTECT(1);
-    return resultList;
+    UNPROTECT(n_protected);   // res is now reachable from R, others are inside res
+    return res;
 }
 
-bool isValidMutant(SEXP mutant) {
-    SEXP compiled_result = R_NilValue;
-    PROTECT(compiled_result = Rf_eval(mutant, R_GlobalEnv)); // Evaluate in the global environment
-
-    bool is_valid = (compiled_result != R_NilValue); // Check if the evaluation was successful
-    UNPROTECT(1); // Unprotect the compiled_result
-    return is_valid;
+static bool isValidMutant(SEXP mutant)
+{
+    int error = 0;
+    R_tryEval(mutant, R_GlobalEnv, &error);
+    return error == 0;
 }
 
 std::vector<bool> detect_block_expressions(SEXP exprs, int n_expr) {
@@ -115,78 +113,62 @@ std::vector<bool> detect_block_expressions(SEXP exprs, int n_expr) {
     return block_flags;
 }
 
-extern "C" SEXP C_mutate_file(SEXP exprs) {
-    // Ensure the input is a list of expressions (EXPRSXP)
-    if (TYPEOF(exprs) != EXPRSXP) {
+extern "C" SEXP C_mutate_file(SEXP exprs)
+{
+    if (TYPEOF(exprs) != EXPRSXP)
         Rf_error("Input must be an expression list (EXPRSXP).");
-    }
-    
+
     SEXP src_ref = Rf_getAttrib(exprs, Rf_install("srcref"));
-    
-    int n_expr = Rf_length(exprs);
+    if (TYPEOF(src_ref) != VECSXP || Rf_length(src_ref) != Rf_length(exprs))
+        Rf_error("'srcref' attribute missing or malformed.");
 
-    std::vector<bool> is_inside_block = detect_block_expressions(exprs, n_expr);
+    const int n_expr = Rf_length(exprs);
+    std::vector<bool> inside_block = detect_block_expressions(exprs, n_expr);
 
-    std::vector<SEXP> all_mutants;
-    
-    // Loop over each expression in the file
-    for (int i = 0; i < n_expr; i++) {
-        SEXP cur_expr = VECTOR_ELT(exprs, i);
-        SEXP cur_src_ref = VECTOR_ELT(src_ref, i);
+    // we will collect *protected* mutants and unprotect them after transferring
+    std::vector<SEXP> valid_mutants;
+    int n_protected = 0;
 
-        // Get all mutants for the current expression
-        SEXP cur_mutants = C_mutate_single(cur_expr, cur_src_ref, is_inside_block[i]);
-        
-        // Verify that the return is a list of mutants
-        if (TYPEOF(cur_mutants) != VECSXP) {
+    for (int i = 0; i < n_expr; ++i) {
+        SEXP cur_expr     = VECTOR_ELT(exprs, i);
+        SEXP cur_src_ref  = VECTOR_ELT(src_ref, i);
+
+        SEXP cur_mutants  = C_mutate_single(cur_expr, cur_src_ref, inside_block[i]);
+        if (TYPEOF(cur_mutants) != VECSXP)
             Rf_error("C_mutate_single did not return a list for expression %d.", i);
-        }
 
-        int n_mutants = Rf_length(cur_mutants);
-        // For each mutant of the current expression, create a complete file mutant.
-        for (int j = 0; j < n_mutants; j++) {
-            // Allocate a new EXPRSXP (list of expressions) for the mutated file.
-            SEXP new_mutant_file = PROTECT(Rf_allocVector(EXPRSXP, n_expr));
-            SEXP mutation_info = R_NilValue;
-            for (int k = 0; k < n_expr; k++) {
-                // If this is the expression we mutated, use the mutant.
+        const int n_mut   = Rf_length(cur_mutants);
+        for (int j = 0; j < n_mut; ++j) {
+            SEXP file_mut = PROTECT(Rf_allocVector(EXPRSXP, n_expr)); ++n_protected;
+            SEXP mut_info = R_NilValue;
+
+            for (int k = 0; k < n_expr; ++k) {
                 if (k == i) {
-                    SEXP mutant = VECTOR_ELT(cur_mutants, j);
-                    SET_VECTOR_ELT(new_mutant_file, k, mutant);
-
-                    // Reassign the mutation_info attribute
-                    mutation_info = Rf_getAttrib(mutant, Rf_install("mutation_info"));
+                    SEXP mut = VECTOR_ELT(cur_mutants, j);
+                    SET_VECTOR_ELT(file_mut, k, mut);
+                    mut_info = Rf_getAttrib(mut, Rf_install("mutation_info"));
                 } else {
-                    // Otherwise, copy the original expression.
-                    SET_VECTOR_ELT(new_mutant_file, k, VECTOR_ELT(exprs, k));
+                    SET_VECTOR_ELT(file_mut, k, VECTOR_ELT(exprs, k));
                 }
             }
-            Rf_setAttrib(new_mutant_file, Rf_install("mutation_info"), mutation_info);
-            all_mutants.push_back(new_mutant_file);
-            UNPROTECT(1);
-        }
-    }
-    
-    // Create an R list to hold all mutated file variants.
-    SEXP resultList = PROTECT(Rf_allocVector(VECSXP, all_mutants.size()));
-    size_t valid_count = 0; // To keep track of valid mutants
+            Rf_setAttrib(file_mut, Rf_install("mutation_info"), mut_info);
 
-    for (size_t k = 0; k < all_mutants.size(); k++) {
-        // Use the validation function to check if the mutant is valid
-        if (isValidMutant(all_mutants[k])) {
-            SET_VECTOR_ELT(resultList, valid_count, all_mutants[k]);
-            valid_count++; // Increment valid count
+            if (isValidMutant(file_mut))
+                valid_mutants.push_back(file_mut); // still protected
+            else {
+                UNPROTECT(1); --n_protected;       // discard invalid mutant
+            }
         }
     }
 
-    // Resize the resultList to the number of valid mutants
-    SEXP final_resultList = PROTECT(Rf_allocVector(VECSXP, valid_count));
-    for (size_t i = 0; i < valid_count; i++) {
-        SET_VECTOR_ELT(final_resultList, i, VECTOR_ELT(resultList, i));
-    }
-    UNPROTECT(1); // Unprotect the original resultList
+    // Build the final R list
+    const R_xlen_t n_valid = static_cast<R_xlen_t>(valid_mutants.size());
+    SEXP res = PROTECT(Rf_allocVector(VECSXP, n_valid)); ++n_protected;
 
-    UNPROTECT(1); // Unprotect the final_resultList
-    return final_resultList;
+    for (R_xlen_t i = 0; i < n_valid; ++i)
+        SET_VECTOR_ELT(res, i, valid_mutants[i]);
+
+    UNPROTECT(n_protected);   // drops all temporaries but keeps res reachable
+    return res;
 }
 
