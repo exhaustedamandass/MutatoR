@@ -86,10 +86,7 @@ identify_equivalent_mutants <- function(src_file, survived_mutants, api_config =
     
     # Process response
     if (!is.null(response)) {
-      parsed <- jsonlite::fromJSON(response)
-      cat("Parsed response:\n")
-      print(parsed)
-      cat("\n")
+      parsed <- response
       if (!is.null(parsed$choices) && length(parsed$choices) > 0) {
         # Extract equivalent mutants information from response
         equivalent_analysis <- parsed$choices[[1]]$message$content
@@ -185,7 +182,7 @@ call_openai_api <- function(prompt, config) {
     )
     
     if (httr::status_code(response) == 200) {
-      return(httr::content(response, "text", encoding = "UTF-8"))
+      return(httr::content(response, as = "parsed", type = "application/json"))
     } else {
       warning(
         "OpenAI API error: ", 
