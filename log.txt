@@ -1,0 +1,4891 @@
+Mutant add-grob.R_add-grob.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant add-grob.R_add-grob.R_002.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_003.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_004.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_005.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_006.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_007.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_008.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_009.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_010.R: KILLED
+Mutation info: 
+From line/col: 45/1
+To line/col: 110/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_011.R: SURVIVED
+Mutation info: deleted line 13
+   Result: SURVIVED
+
+Mutant add-grob.R_add-grob.R_012.R: SURVIVED
+Mutation info: deleted line 40
+   Result: SURVIVED
+
+Mutant add-grob.R_add-grob.R_013.R: KILLED
+Mutation info: deleted line 94
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_014.R: KILLED
+Mutation info: deleted line 80
+   Result: KILLED
+
+Mutant add-grob.R_add-grob.R_015.R: KILLED
+Mutation info: deleted line 85
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_001.R: KILLED
+Mutation info: 
+From line/col: 40/1
+To line/col: 55/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_002.R: KILLED
+Mutation info: 
+From line/col: 40/1
+To line/col: 55/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_003.R: KILLED
+Mutation info: 
+From line/col: 40/1
+To line/col: 55/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_004.R: KILLED
+Mutation info: 
+From line/col: 40/1
+To line/col: 55/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_005.R: KILLED
+Mutation info: 
+From line/col: 96/1
+To line/col: 110/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_006.R: KILLED
+Mutation info: 
+From line/col: 96/1
+To line/col: 110/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_007.R: KILLED
+Mutation info: 
+From line/col: 96/1
+To line/col: 110/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_008.R: KILLED
+Mutation info: 
+From line/col: 96/1
+To line/col: 110/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_009.R: KILLED
+Mutation info: deleted line 106
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_010.R: KILLED
+Mutation info: deleted line 101
+   Result: KILLED
+
+Mutant add-rows-cols.R_add-rows-cols.R_011.R: SURVIVED
+Mutation info: deleted line 82
+   Result: SURVIVED
+
+Mutant add-rows-cols.R_add-rows-cols.R_012.R: SURVIVED
+Mutation info: deleted line 8
+   Result: SURVIVED
+
+Mutant add-rows-cols.R_add-rows-cols.R_013.R: SURVIVED
+Mutation info: deleted line 70
+   Result: SURVIVED
+
+Mutant add-space.R_add-space.R_001.R: KILLED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_002.R: KILLED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_003.R: KILLED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_004.R: KILLED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 37/1
+To line/col: 52/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant add-space.R_add-space.R_006.R: KILLED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_007.R: KILLED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_008.R: KILLED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_009.R: KILLED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 57/1
+To line/col: 72/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant add-space.R_add-space.R_011.R: SURVIVED
+Mutation info: deleted line 26
+   Result: SURVIVED
+
+Mutant add-space.R_add-space.R_012.R: KILLED
+Mutation info: deleted line 59
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_013.R: KILLED
+Mutation info: deleted line 48
+   Result: KILLED
+
+Mutant add-space.R_add-space.R_014.R: SURVIVED
+Mutation info: deleted line 14
+   Result: SURVIVED
+
+Mutant add-space.R_add-space.R_015.R: SURVIVED
+Mutation info: deleted line 54
+   Result: SURVIVED
+
+Mutant align.R_align.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 43/1
+To line/col: 64/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant align.R_align.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant align.R_align.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant align.R_align.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant align.R_align.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant align.R_align.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 75/1
+To line/col: 118/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant align.R_align.R_007.R: SURVIVED
+Mutation info: 
+From line/col: 122/1
+To line/col: 125/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant align.R_align.R_008.R: KILLED
+Mutation info: deleted line 79
+   Result: KILLED
+
+Mutant align.R_align.R_009.R: KILLED
+Mutation info: deleted line 27
+   Result: KILLED
+
+Mutant align.R_align.R_010.R: SURVIVED
+Mutation info: deleted line 69
+   Result: SURVIVED
+
+Mutant align.R_align.R_011.R: SURVIVED
+Mutation info: deleted line 18
+   Result: SURVIVED
+
+Mutant align.R_align.R_012.R: SURVIVED
+Mutation info: deleted line 32
+   Result: SURVIVED
+
+Mutant filter.R_filter.R_001.R: SURVIVED
+Mutation info: deleted line 26
+   Result: SURVIVED
+
+Mutant filter.R_filter.R_002.R: SURVIVED
+Mutation info: deleted line 20
+   Result: SURVIVED
+
+Mutant filter.R_filter.R_003.R: SURVIVED
+Mutation info: deleted line 11
+   Result: SURVIVED
+
+Mutant filter.R_filter.R_004.R: SURVIVED
+Mutation info: deleted line 18
+   Result: SURVIVED
+
+Mutant filter.R_filter.R_005.R: SURVIVED
+Mutation info: deleted line 19
+   Result: SURVIVED
+
+Mutant grid.R_grid.R_001.R: SURVIVED
+Mutation info: deleted line 9
+   Result: SURVIVED
+
+Mutant grid.R_grid.R_002.R: SURVIVED
+Mutation info: deleted line 35
+   Result: SURVIVED
+
+Mutant grid.R_grid.R_003.R: KILLED
+Mutation info: deleted line 27
+   Result: KILLED
+
+Mutant grid.R_grid.R_004.R: SURVIVED
+Mutation info: deleted line 10
+   Result: SURVIVED
+
+Mutant grid.R_grid.R_005.R: KILLED
+Mutation info: deleted line 28
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_001.R: KILLED
+Mutation info: 
+From line/col: 27/1
+To line/col: 48/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_002.R: KILLED
+Mutation info: 
+From line/col: 27/1
+To line/col: 48/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_003.R: KILLED
+Mutation info: 
+From line/col: 76/1
+To line/col: 97/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_004.R: KILLED
+Mutation info: 
+From line/col: 76/1
+To line/col: 97/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_005.R: KILLED
+Mutation info: 
+From line/col: 134/1
+To line/col: 158/1
+'!=' -> '=='
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_006.R: KILLED
+Mutation info: 
+From line/col: 134/1
+To line/col: 158/1
+'!=' -> '=='
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_007.R: KILLED
+Mutation info: 
+From line/col: 134/1
+To line/col: 158/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_008.R: SURVIVED
+Mutation info: deleted line 123
+   Result: SURVIVED
+
+Mutant gtable-layouts.R_gtable-layouts.R_009.R: KILLED
+Mutation info: deleted line 42
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_010.R: SURVIVED
+Mutation info: deleted line 16
+   Result: SURVIVED
+
+Mutant gtable-layouts.R_gtable-layouts.R_011.R: KILLED
+Mutation info: deleted line 28
+   Result: KILLED
+
+Mutant gtable-layouts.R_gtable-layouts.R_012.R: KILLED
+Mutation info: deleted line 44
+   Result: KILLED
+
+Mutant gtable-package.R_gtable-package.R_001.R: SURVIVED
+Mutation info: deleted line 6
+   Result: SURVIVED
+
+Mutant gtable-package.R_gtable-package.R_002.R: SURVIVED
+Mutation info: deleted line 10
+   Result: SURVIVED
+
+Mutant gtable-package.R_gtable-package.R_003.R: SURVIVED
+Mutation info: deleted line 2
+   Result: SURVIVED
+
+Mutant gtable-package.R_gtable-package.R_004.R: SURVIVED
+Mutation info: deleted line 2
+   Result: SURVIVED
+
+Mutant gtable-package.R_gtable-package.R_005.R: SURVIVED
+Mutation info: deleted line 2
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_002.R: KILLED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_005.R: KILLED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 94/1
+To line/col: 130/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_007.R: KILLED
+Mutation info: 
+From line/col: 139/1
+To line/col: 159/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_008.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_009.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&&' -> '||'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_010.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_011.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'<' -> '>'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_012.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&&' -> '||'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_013.R: SURVIVED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_014.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'<' -> '>'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_015.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&' -> '|'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_016.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&' -> '|'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_017.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'&' -> '|'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_018.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_019.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_020.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_021.R: KILLED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant gtable.R_gtable.R_022.R: SURVIVED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_023.R: SURVIVED
+Mutation info: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_024.R: SURVIVED
+Mutation info: 
+From line/col: 317/1
+To line/col: 331/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_025.R: SURVIVED
+Mutation info: 
+From line/col: 317/1
+To line/col: 331/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_026.R: SURVIVED
+Mutation info: deleted line 73
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_027.R: SURVIVED
+Mutation info: deleted line 58
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_028.R: SURVIVED
+Mutation info: deleted line 88
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_029.R: SURVIVED
+Mutation info: deleted line 65
+   Result: SURVIVED
+
+Mutant gtable.R_gtable.R_030.R: SURVIVED
+Mutation info: deleted line 313
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_007.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_008.R: SURVIVED
+Mutation info: 
+From line/col: 58/1
+To line/col: 163/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_011.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_012.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_013.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_014.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_015.R: SURVIVED
+Mutation info: 
+From line/col: 165/1
+To line/col: 218/1
+'>=' -> '<='
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_016.R: SURVIVED
+Mutation info: 
+From line/col: 328/1
+To line/col: 346/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_017.R: SURVIVED
+Mutation info: 
+From line/col: 328/1
+To line/col: 346/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_018.R: SURVIVED
+Mutation info: 
+From line/col: 328/1
+To line/col: 346/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_019.R: SURVIVED
+Mutation info: deleted line 87
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_020.R: SURVIVED
+Mutation info: deleted line 52
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_021.R: KILLED
+Mutation info: deleted line 316
+   Result: KILLED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_022.R: SURVIVED
+Mutation info: deleted line 27
+   Result: SURVIVED
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_023.R: SURVIVED
+Mutation info: deleted line 205
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 55/1
+To line/col: 74/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 106/1
+To line/col: 125/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 106/1
+To line/col: 125/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 106/1
+To line/col: 125/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 106/1
+To line/col: 125/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 159/1
+To line/col: 195/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_007.R: KILLED
+Mutation info: 
+From line/col: 197/1
+To line/col: 232/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_008.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'==' -> '!='
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_011.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_012.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_013.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_014.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'<' -> '>'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_015.R: SURVIVED
+Mutation info: 
+From line/col: 234/1
+To line/col: 272/1
+'>' -> '<'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_016.R: SURVIVED
+Mutation info: 
+From line/col: 274/1
+To line/col: 296/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_017.R: SURVIVED
+Mutation info: 
+From line/col: 298/1
+To line/col: 320/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_018.R: SURVIVED
+Mutation info: 
+From line/col: 322/1
+To line/col: 344/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_019.R: SURVIVED
+Mutation info: 
+From line/col: 346/1
+To line/col: 368/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_020.R: SURVIVED
+Mutation info: 
+From line/col: 370/1
+To line/col: 392/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_021.R: SURVIVED
+Mutation info: 
+From line/col: 394/1
+To line/col: 416/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_022.R: SURVIVED
+Mutation info: 
+From line/col: 418/1
+To line/col: 440/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_023.R: SURVIVED
+Mutation info: 
+From line/col: 445/1
+To line/col: 467/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_024.R: SURVIVED
+Mutation info: 
+From line/col: 469/1
+To line/col: 491/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_025.R: KILLED
+Mutation info: deleted line 454
+   Result: KILLED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_026.R: KILLED
+Mutation info: deleted line 450
+   Result: KILLED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_027.R: SURVIVED
+Mutation info: deleted line 146
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_028.R: SURVIVED
+Mutation info: deleted line 372
+   Result: SURVIVED
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_029.R: SURVIVED
+Mutation info: deleted line 186
+   Result: SURVIVED
+
+Mutant new-data-frame.R_new-data-frame.R_001.R: KILLED
+Mutation info: 
+From line/col: 3/1
+To line/col: 12/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant new-data-frame.R_new-data-frame.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 14/1
+To line/col: 21/1
+'!=' -> '=='
+   Result: SURVIVED
+
+Mutant new-data-frame.R_new-data-frame.R_003.R: KILLED
+Mutation info: deleted line 12
+   Result: KILLED
+
+Mutant new-data-frame.R_new-data-frame.R_004.R: KILLED
+Mutation info: deleted line 15
+   Result: KILLED
+
+Mutant new-data-frame.R_new-data-frame.R_005.R: SURVIVED
+Mutation info: deleted line 16
+   Result: SURVIVED
+
+Mutant new-data-frame.R_new-data-frame.R_006.R: KILLED
+Mutation info: deleted line 11
+   Result: KILLED
+
+Mutant new-data-frame.R_new-data-frame.R_007.R: KILLED
+Mutation info: deleted line 17
+   Result: KILLED
+
+Mutant padding.R_padding.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 29/1
+To line/col: 37/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 29/1
+To line/col: 37/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_003.R: SURVIVED
+Mutation info: deleted line 33
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_004.R: SURVIVED
+Mutation info: deleted line 11
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_005.R: SURVIVED
+Mutation info: deleted line 4
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_006.R: SURVIVED
+Mutation info: deleted line 32
+   Result: SURVIVED
+
+Mutant padding.R_padding.R_007.R: SURVIVED
+Mutation info: deleted line 8
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_001.R: KILLED
+Mutation info: 
+From line/col: 64/1
+To line/col: 100/1
+'!=' -> '=='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_002.R: KILLED
+Mutation info: 
+From line/col: 64/1
+To line/col: 100/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_003.R: KILLED
+Mutation info: 
+From line/col: 64/1
+To line/col: 100/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 64/1
+To line/col: 100/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 64/1
+To line/col: 100/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_006.R: KILLED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'!=' -> '=='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_007.R: KILLED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_008.R: KILLED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 113/1
+To line/col: 149/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_011.R: KILLED
+Mutation info: deleted line 107
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_012.R: SURVIVED
+Mutation info: deleted line 87
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_013.R: SURVIVED
+Mutation info: deleted line 41
+   Result: SURVIVED
+
+Mutant rbind-cbind.R_rbind-cbind.R_014.R: KILLED
+Mutation info: deleted line 118
+   Result: KILLED
+
+Mutant rbind-cbind.R_rbind-cbind.R_015.R: KILLED
+Mutation info: deleted line 132
+   Result: KILLED
+
+Mutant trim.R_trim.R_001.R: KILLED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant trim.R_trim.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_003.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_004.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_005.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_006.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_007.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_008.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_010.R: KILLED
+Mutation info: deleted line 35
+   Result: KILLED
+
+Mutant trim.R_trim.R_011.R: SURVIVED
+Mutation info: deleted line 29
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_012.R: SURVIVED
+Mutation info: deleted line 24
+   Result: SURVIVED
+
+Mutant trim.R_trim.R_013.R: KILLED
+Mutation info: deleted line 53
+   Result: KILLED
+
+Mutant trim.R_trim.R_014.R: SURVIVED
+Mutation info: deleted line 15
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_001.R: SURVIVED
+Mutation info: 
+From line/col: 1/1
+To line/col: 23/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_002.R: SURVIVED
+Mutation info: 
+From line/col: 25/1
+To line/col: 47/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_003.R: KILLED
+Mutation info: 
+From line/col: 49/1
+To line/col: 51/1
+'>=' -> '<='
+   Result: KILLED
+
+Mutant utils.R_utils.R_004.R: KILLED
+Mutation info: 
+From line/col: 49/1
+To line/col: 51/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant utils.R_utils.R_005.R: KILLED
+Mutation info: 
+From line/col: 49/1
+To line/col: 51/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant utils.R_utils.R_006.R: KILLED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_007.R: KILLED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_008.R: SURVIVED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'&&' -> '||'
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_009.R: SURVIVED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'>=' -> '<='
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_010.R: SURVIVED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'||' -> '&&'
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_011.R: KILLED
+Mutation info: 
+From line/col: 53/1
+To line/col: 78/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_012.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_013.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_014.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'<=' -> '>='
+   Result: KILLED
+
+Mutant utils.R_utils.R_015.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'>=' -> '<='
+   Result: KILLED
+
+Mutant utils.R_utils.R_016.R: KILLED
+Mutation info: 
+From line/col: 81/1
+To line/col: 93/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant utils.R_utils.R_017.R: KILLED
+Mutation info: 
+From line/col: 123/1
+To line/col: 125/1
+'||' -> '&&'
+   Result: KILLED
+
+Mutant utils.R_utils.R_018.R: KILLED
+Mutation info: 
+From line/col: 123/1
+To line/col: 125/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_019.R: KILLED
+Mutation info: 
+From line/col: 123/1
+To line/col: 125/1
+'==' -> '!='
+   Result: KILLED
+
+Mutant utils.R_utils.R_020.R: KILLED
+Mutation info: deleted line 8
+   Result: KILLED
+
+Mutant utils.R_utils.R_021.R: KILLED
+Mutation info: deleted line 51
+   Result: KILLED
+
+Mutant utils.R_utils.R_022.R: SURVIVED
+Mutation info: deleted line 18
+   Result: SURVIVED
+
+Mutant utils.R_utils.R_023.R: KILLED
+Mutation info: deleted line 10
+   Result: KILLED
+
+Mutant utils.R_utils.R_024.R: SURVIVED
+Mutation info: deleted line 116
+   Result: SURVIVED
+
+Mutant z.R_z.R_001.R: KILLED
+Mutation info: 
+From line/col: 14/1
+To line/col: 19/1
+'-' -> '+'
+   Result: KILLED
+
+Mutant z.R_z.R_002.R: KILLED
+Mutation info: 
+From line/col: 14/1
+To line/col: 19/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant z.R_z.R_003.R: KILLED
+Mutation info: 
+From line/col: 34/1
+To line/col: 51/1
+'!=' -> '=='
+   Result: KILLED
+
+Mutant z.R_z.R_004.R: KILLED
+Mutation info: 
+From line/col: 34/1
+To line/col: 51/1
+'>' -> '<'
+   Result: KILLED
+
+Mutant z.R_z.R_005.R: KILLED
+Mutation info: 
+From line/col: 34/1
+To line/col: 51/1
+'+' -> '-'
+   Result: KILLED
+
+Mutant z.R_z.R_006.R: SURVIVED
+Mutation info: deleted line 33
+   Result: SURVIVED
+
+Mutant z.R_z.R_007.R: SURVIVED
+Mutation info: deleted line 30
+   Result: SURVIVED
+
+Mutant z.R_z.R_008.R: SURVIVED
+Mutation info: deleted line 4
+   Result: SURVIVED
+
+Mutant z.R_z.R_009.R: SURVIVED
+Mutation info: deleted line 29
+   Result: SURVIVED
+
+Mutant z.R_z.R_010.R: KILLED
+Mutation info: deleted line 44
+   Result: KILLED
+
+Mutant zzz.R_zzz.R_001.R: KILLED
+Mutation info: deleted line 4
+   Result: KILLED
+
+Mutant zzz.R_zzz.R_002.R: KILLED
+Mutation info: deleted line 2
+   Result: KILLED
+
+Mutant zzz.R_zzz.R_003.R: KILLED
+Mutation info: deleted line 2
+   Result: KILLED
+
+Mutant zzz.R_zzz.R_004.R: SURVIVED
+Mutation info: deleted line 3
+   Result: SURVIVED
+
+Mutant zzz.R_zzz.R_005.R: KILLED
+Mutation info: deleted line 5
+   Result: KILLED
+
+
+Analyzing equivalent mutants among survived mutants...
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Add a single grob, possibly spanning multiple rows or columns.
+#'
+#' This only adds grobs into the table - it doesn't affect the table layout in
+#' any way.  In the gtable model, grobs always fill up the complete table
+#' cell.  If you want custom justification you might need to define the grob
+#' dimension in absolute units, or put it into another gtable that can then be
+#' added to the gtable instead of the grob.
+#'
+#' @param x a [gtable()] object
+#' @param grobs a single grob or a list of grobs
+#' @param t a numeric vector giving the top extent of the grobs
+#' @param l a numeric vector giving the left extent of the grobs
+#' @param b a numeric vector giving the bottom extent of the grobs
+#' @param r a numeric vector giving the right extent of the grobs
+#' @param z a numeric vector giving the order in which the grobs should be
+#'   plotted.  Use `Inf` (the default) to plot above or `-Inf`
+#'   below all existing grobs. By default positions are on the integers,
+#'  giving plenty of room to insert new grobs between existing grobs.
+#' @param clip should drawing be clipped to the specified cells
+#'   (`"on"`), the entire table (`"inherit"`), or not at all
+#'   (`"off"`)
+#' @param name name of the grob - used to modify the grob name before it's
+#'   plotted.
+#'
+#' @return A gtable object with the new grob(s) added
+#'
+#' @family gtable manipulation
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#'
+#' gt <- gtable(widths = unit(c(1, 1), 'null'), heights = unit(c(1, 1), 'null'))
+#' pts <- pointsGrob(x = runif(5), y = runif(5))
+#'
+#' # Add a grob to a single cell (top-right cell)
+#' gt <- gtable_add_grob(gt, pts, t = 1, l = 2)
+#'
+#' # Add a grob spanning multiple cells
+#' gt <- gtable_add_grob(gt, pts, t = 1, l = 1, b = 2)
+#'
+#' plot(gt)
+#'
+gtable_add_grob <- function(x, grobs, t, l, b = t, r = l, z = Inf, clip = "on", name = x$name) {
+  check_gtable(x)
+  if (is.grob(grobs)) {
+    grobs <- list(grobs)
+  }
+  if (!is_list(grobs) || any(!vapply(grobs, is.grob, logical(1)))) {
+    stop_input_type(grobs, "a single grob or a list of grobs")
+  }
+  n_grobs <- length(grobs)
+
+  if (is.logical(clip)) {
+    clip <- ifelse(clip, "on", "off")
+  }
+
+  layout <- unclass(x$layout)
+
+  # Check that inputs have the right length
+  if (!all(vapply(
+    list(t, r, b, l, z, clip, name), len_same_or_1,
+    logical(1), n_grobs
+  ))) {
+    cli::cli_abort("Not all inputs have either length 1 or same length same as {.arg grobs}")
+  }
+
+  # If z is just one value, replicate to same length as grobs
+  z <- rep(z, length.out = n_grobs)
+
+  # Get the existing z values from x$layout, and new non-Inf z-values
+  zval <- c(layout$z, z[!is.infinite(z)])
+  if (length(zval) == 0) {
+    # If there are no existing finite z values, set these so that
+    # -Inf values get assigned ..., -2, -1, 0 and
+    # +Inf values get assigned 1, 2, 3, ...
+    zmin <- 1
+    zmax <- 0
+  } else {
+    zmin <- min(zval)
+    zmax <- max(zval)
+  }
+  z[z == -Inf] <- zmin - rev(seq_len(sum(z == -Inf)))
+  z[z == Inf] <- zmax + seq_len(sum(z == Inf))
+
+  x_row <- length(x$heights)
+  x_col <- length(x$widths)
+
+  t <- rep(neg_to_pos(t, x_row), length.out = n_grobs)
+  b <- rep(neg_to_pos(b, x_row), length.out = n_grobs)
+  l <- rep(neg_to_pos(l, x_col), length.out = n_grobs)
+  r <- rep(neg_to_pos(r, x_col), length.out = n_grobs)
+  clip <- rep(clip, length.out = n_grobs)
+  name <- rep(name, length.out = n_grobs)
+
+  x$grobs <- c(x$grobs, grobs)
+
+  x$layout <- new_data_frame(list(
+    t = c(layout$t, t),
+    l = c(layout$l, l),
+    b = c(layout$b, b),
+    r = c(layout$r, r),
+    z = c(layout$z, z),
+    clip = c(layout$clip, clip),
+    name = c(layout$name, name)
+  ))
+
+  x
+}
+```
+
+Survived mutants:
+Mutant ID: add-grob.R_add-grob.R_001.R
+Mutation: 
+From line/col: 45/1
+To line/col: 110/1
+'||' -> '&&'
+
+Mutant ID: add-grob.R_add-grob.R_011.R
+Mutation: deleted line 13
+
+Mutant ID: add-grob.R_add-grob.R_012.R
+Mutation: deleted line 40
+
+----------------------------------------
+
+Mutant add-grob.R_add-grob.R_001.R identified as EQUIVALENT
+Mutant add-grob.R_add-grob.R_011.R identified as EQUIVALENT
+Mutant add-grob.R_add-grob.R_012.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Add new rows in specified position.
+#'
+#' Insert new rows in a gtable and adjust the grob placement accordingly. If
+#' rows are added in the middle of a grob spanning multiple rows, the grob will
+#' continue to span them all. If a row is added above or below a grob, the grob
+#' will not span the new row(s).
+#'
+#' @param x a [gtable()] object
+#' @param heights a unit vector giving the heights of the new rows
+#' @param pos new row will be added below this position. Defaults to
+#'   adding row on bottom. `0` adds on the top.
+#'
+#' @return A gtable with the new rows added.
+#'
+#' @family gtable manipulation
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#' rect <- rectGrob(gp = gpar(fill = "#00000080"))
+#' tab <- gtable(unit(rep(1, 3), "null"), unit(rep(1, 3), "null"))
+#' tab <- gtable_add_grob(tab, rect, t = 1, l = 1, r = 3)
+#' tab <- gtable_add_grob(tab, rect, t = 1, b = 3, l = 1)
+#' tab <- gtable_add_grob(tab, rect, t = 1, b = 3, l = 3)
+#' dim(tab)
+#' plot(tab)
+#'
+#' # Grobs will continue to span over new rows if added in the middle
+#' tab2 <- gtable_add_rows(tab, unit(1, "null"), 1)
+#' dim(tab2)
+#' plot(tab2)
+#'
+#' # But not when added to top (0) or bottom (-1, the default)
+#' tab3 <- gtable_add_rows(tab, unit(1, "null"))
+#' tab3 <- gtable_add_rows(tab3, unit(1, "null"), 0)
+#' dim(tab3)
+#' plot(tab3)
+#'
+gtable_add_rows <- function(x, heights, pos = -1) {
+  check_gtable(x)
+  check_number_whole(pos)
+  n <- length(heights)
+
+  pos <- neg_to_pos(pos, length(x$heights))
+
+  # Shift existing rows down
+  x$heights <- insert.unit(x$heights, heights, pos)
+  layout <- unclass(x$layout)
+  layout$t <- ifelse(layout$t > pos, layout$t + n, layout$t)
+  layout$b <- ifelse(layout$b > pos, layout$b + n, layout$b)
+  x$layout <- new_data_frame(layout)
+
+  x
+}
+
+#' Add new columns in specified position.
+#'
+#' Insert new columns in a gtable and adjust the grob placement accordingly. If
+#' columns are added in the middle of a grob spanning multiple columns, the grob
+#' will continue to span them all. If a column is added to the left or right of
+#' a grob, the grob will not span the new column(s).
+#'
+#' @param x a [gtable()] object
+#' @param widths a unit vector giving the widths of the new columns
+#' @param pos new columns will be added to the right of this position. Defaults
+#'   to adding col on right. `0` adds on the left.
+#'
+#' @return A gtable with the new columns added.
+#'
+#' @family gtable manipulation
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#' rect <- rectGrob(gp = gpar(fill = "#00000080"))
+#' tab <- gtable(unit(rep(1, 3), "null"), unit(rep(1, 3), "null"))
+#' tab <- gtable_add_grob(tab, rect, t = 1, l = 1, r = 3)
+#' tab <- gtable_add_grob(tab, rect, t = 1, b = 3, l = 1)
+#' tab <- gtable_add_grob(tab, rect, t = 1, b = 3, l = 3)
+#' dim(tab)
+#' plot(tab)
+#'
+#' # Grobs will continue to span over new rows if added in the middle
+#' tab2 <- gtable_add_cols(tab, unit(1, "null"), 1)
+#' dim(tab2)
+#' plot(tab2)
+#'
+#' # But not when added to left (0) or right (-1, the default)
+#' tab3 <- gtable_add_cols(tab, unit(1, "null"))
+#' tab3 <- gtable_add_cols(tab3, unit(1, "null"), 0)
+#' dim(tab3)
+#' plot(tab3)
+#'
+gtable_add_cols <- function(x, widths, pos = -1) {
+  check_gtable(x)
+  check_number_whole(pos)
+  n <- length(widths)
+
+  pos <- neg_to_pos(pos, length(x$widths))
+
+  # Shift existing columns right
+  x$widths <- insert.unit(x$widths, widths, pos)
+  layout <- unclass(x$layout)
+  layout$l <- ifelse(layout$l > pos, layout$l + n, layout$l)
+  layout$r <- ifelse(layout$r > pos, layout$r + n, layout$r)
+  x$layout <- new_data_frame(layout)
+  x
+}
+```
+
+Survived mutants:
+Mutant ID: add-rows-cols.R_add-rows-cols.R_011.R
+Mutation: deleted line 82
+
+Mutant ID: add-rows-cols.R_add-rows-cols.R_012.R
+Mutation: deleted line 8
+
+Mutant ID: add-rows-cols.R_add-rows-cols.R_013.R
+Mutation: deleted line 70
+
+----------------------------------------
+
+Mutant add-rows-cols.R_add-rows-cols.R_011.R identified as EQUIVALENT
+Mutant add-rows-cols.R_add-rows-cols.R_012.R identified as EQUIVALENT
+Mutant add-rows-cols.R_add-rows-cols.R_013.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Add row/column spacing.
+#'
+#' Adds `width` space between the columns or `height` space between
+#' the rows, effictvely pushing the existing cells apart.
+#'
+#' @name gtable_add_space
+#' @param x a gtable object
+#'
+#' @return A gtable with the additional rows or columns added
+#'
+#' @family gtable manipulation
+#'
+#' @examples
+#' library(grid)
+#'
+#' rect <- rectGrob()
+#' rect_mat <- matrix(rep(list(rect), 9), nrow = 3)
+#'
+#' gt <- gtable_matrix("rects", rect_mat, widths = unit(rep(1, 3), "null"),
+#'                     heights = unit(rep(1, 3), "null"))
+#'
+#' plot(gt)
+#'
+#' # Add spacing between the grobs
+#' # same height between all rows
+#' gt <- gtable_add_row_space(gt, unit(0.5, "cm"))
+#'
+#' # Different width between the columns
+#' gt <- gtable_add_col_space(gt, unit(c(0.5, 1), "cm"))
+#'
+#' plot(gt)
+NULL
+
+#' @param width a vector of units of length 1 or ncol - 1
+#' @export
+#' @rdname gtable_add_space
+gtable_add_col_space <- function(x, width) {
+  check_gtable(x)
+  n <- length(x$widths) - 1
+  if (n == 0) return(x)
+
+  if (!(length(width) == 1 || length(width) == n)) {
+    cli::cli_abort("{.arg width} must be of length 1 or ncol - 1")
+  }
+  width <- rep(width, length.out = n)
+
+  for (i in rev(seq_len(n))) {
+    x <- gtable_add_cols(x, width[i], pos = i)
+  }
+
+  x
+}
+
+#' @param height a vector of units of length 1 or nrow - 1
+#' @export
+#' @rdname gtable_add_space
+gtable_add_row_space <- function(x, height) {
+  check_gtable(x)
+  n <- length(x$heights) - 1
+  if (n == 0) return(x)
+
+  if (!(length(height) == 1 || length(height) == n)) {
+    cli::cli_abort("{.arg height} must be of length 1 or nrow - 1")
+  }
+  height <- rep(height, length.out = n)
+
+  for (i in rev(seq_len(n))) {
+    x <- gtable_add_rows(x, height[i], pos = i)
+  }
+
+  x
+}
+```
+
+Survived mutants:
+Mutant ID: add-space.R_add-space.R_005.R
+Mutation: 
+From line/col: 37/1
+To line/col: 52/1
+'==' -> '!='
+
+Mutant ID: add-space.R_add-space.R_010.R
+Mutation: 
+From line/col: 57/1
+To line/col: 72/1
+'==' -> '!='
+
+Mutant ID: add-space.R_add-space.R_011.R
+Mutation: deleted line 26
+
+Mutant ID: add-space.R_add-space.R_014.R
+Mutation: deleted line 14
+
+Mutant ID: add-space.R_add-space.R_015.R
+Mutation: deleted line 54
+
+----------------------------------------
+
+Mutant add-space.R_add-space.R_005.R identified as EQUIVALENT
+Mutant add-space.R_add-space.R_010.R identified as EQUIVALENT
+Mutant add-space.R_add-space.R_011.R identified as EQUIVALENT
+Mutant add-space.R_add-space.R_014.R identified as EQUIVALENT
+Mutant add-space.R_add-space.R_015.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+# Code does not currently work - need to thinking about how indexing a gtable
+# should work in more detail.  How do the grobs move around?
+
+#  Join two gtables together based on row/column names.
+#
+#  @inheritParams gtable_align
+#  @param along dimension to align along, \code{1} = rows, \code{2} = cols.
+#    Join will occur perpendicular to this direction.
+#  @examples
+#  rect <- rectGrob(gp = gpar(fill = "black"))
+#  circ <- circleGrob(gp = gpar(fill = "red"))
+#  a <- gtable_col("a", list(rect, circ), width = unit(5, "cm"))
+#  rownames(a) <- c("top", "mid")
+#  b <- gtable_col("b", list(circ, rect), width = unit(5, "cm"))
+#  rownames(b) <- c("mid", "bot")
+#
+#  # Commented out example below because it causes R CMD check to fail
+#  # when this function is not exported. Uncomment when this function
+#  # is fixed and exported again.
+#  # gtable_join(a, b)
+gtable_join <- function(x, y, along = 1L, join = "left") {
+  aligned <- gtable_align(x, y, along = along, join = join)
+  switch(along,
+    cbind(aligned$x, aligned$y),
+    rbind(aligned$x, aligned$y),
+    cli::cli_abort("{.arg along} > 2 no implemented")
+  )
+}
+
+#  Align two gtables based on their row/col names.
+#
+#  @param x \code{\link{gtable}}
+#  @param y \code{\link{gtable}}
+#  @param along dimension to align along, \code{1} = rows, \code{2} = cols.
+#  @param join when x and y have different names, how should the difference
+#    be resolved? \code{inner} keep names that appear in both, \code{outer}
+#    keep names that appear in either, \code{left} keep names from \code{x},
+#    and \code{right} keep names from \code{y}.
+#  @seealso \code{\link{gtable_join}} to return the two gtables combined
+#    in to a single gtable.
+#  @return a list with elements \code{x} and \code{y} corresponding to the
+#    input gtables with extra rows/columns so that they now align.
+gtable_align <- function(x, y, along = 1L, join = "left") {
+  join <- arg_match0(join, c("left", "right", "inner", "outer"))
+
+  names_x <- dimnames(x)[[along]]
+  names_y <- dimnames(y)[[along]]
+
+  if (is.null(names_x) || is.null(names_y)) {
+    cli::cli_abort("Both gtables must have names along dimension to be aligned")
+  }
+
+  idx <- switch(join,
+    left = names_x,
+    right = names_y,
+    inner = intersect(names_x, names_y),
+    outer = union(names_x, names_y)
+  )
+
+  list(
+    x = gtable_reindex(x, idx, along),
+    y = gtable_reindex(y, idx, along)
+  )
+}
+
+#  Reindex a gtable.
+#
+#  @keywords internal
+#  @examples
+#  gt <- gtable(heights = unit(rep(1, 3), "cm"), rownames = c("a", "b", "c"))
+#  rownames(gtable:::gtable_reindex(gt, c("a", "b", "c")))
+#  rownames(gtable:::gtable_reindex(gt, c("a", "b")))
+#  rownames(gtable:::gtable_reindex(gt, c("a")))
+#  rownames(gtable:::gtable_reindex(gt, c("a", "d", "e")))
+gtable_reindex <- function(x, index, along = 1) {
+  check_character(index)
+  if (length(dim(x)) > 2L || along > 2L) {
+    cli::cli_abort("only 2d objects can be reindexed")
+  }
+  old_index <- switch(along, rownames(x), colnames(x))
+  if (is.null(old_index)) {
+    cli::cli_abort("{.arg index} is NULL in the given dimension")
+  }
+
+  if (identical(index, old_index)) {
+    return(x)
+  }
+
+  if (!(old_index %contains% index)) {
+    missing <- setdiff(index, old_index)
+    # Create and add dummy space rows
+
+    if (along == 1L) {
+      spacer <- gtable(
+        widths = unit(rep(0, length(x$widths)), "cm"),
+        heights = rep_along(unit(0, "cm"), missing),
+        rownames = missing
+      )
+      x <- rbind(x, spacer, size = "first")
+    } else if (along == 2L) {
+      spacer <- gtable(
+        heights = unit(rep(0, length(x$heights)), "cm"),
+        widths = rep_along(unit(0, "cm"), missing),
+        colnames = missing
+      )
+
+      x <- cbind(x, spacer, size = "first")
+    }
+  }
+
+
+  # Reorder & subset
+
+  switch(along,
+    x[index, ],
+    x[, index]
+  )
+}
+
+"%contains%" <- function(x, y) all(y %in% x)
+
+rep_along <- function(x, y) {
+  if (length(y) == 0) return(NULL)
+  rep(x, length(y))
+}
+```
+
+Survived mutants:
+Mutant ID: align.R_align.R_001.R
+Mutation: 
+From line/col: 43/1
+To line/col: 64/1
+'||' -> '&&'
+
+Mutant ID: align.R_align.R_002.R
+Mutation: 
+From line/col: 75/1
+To line/col: 118/1
+'||' -> '&&'
+
+Mutant ID: align.R_align.R_003.R
+Mutation: 
+From line/col: 75/1
+To line/col: 118/1
+'>' -> '<'
+
+Mutant ID: align.R_align.R_004.R
+Mutation: 
+From line/col: 75/1
+To line/col: 118/1
+'>' -> '<'
+
+Mutant ID: align.R_align.R_005.R
+Mutation: 
+From line/col: 75/1
+To line/col: 118/1
+'==' -> '!='
+
+Mutant ID: align.R_align.R_006.R
+Mutation: 
+From line/col: 75/1
+To line/col: 118/1
+'==' -> '!='
+
+Mutant ID: align.R_align.R_007.R
+Mutation: 
+From line/col: 122/1
+To line/col: 125/1
+'==' -> '!='
+
+Mutant ID: align.R_align.R_010.R
+Mutation: deleted line 69
+
+Mutant ID: align.R_align.R_011.R
+Mutation: deleted line 18
+
+Mutant ID: align.R_align.R_012.R
+Mutation: deleted line 32
+
+----------------------------------------
+
+Mutant align.R_align.R_001.R identified as EQUIVALENT
+Mutant align.R_align.R_002.R identified as EQUIVALENT
+Mutant align.R_align.R_003.R identified as EQUIVALENT
+Mutant align.R_align.R_004.R identified as EQUIVALENT
+Mutant align.R_align.R_005.R identified as EQUIVALENT
+Mutant align.R_align.R_006.R identified as EQUIVALENT
+Mutant align.R_align.R_007.R identified as EQUIVALENT
+Mutant align.R_align.R_010.R identified as EQUIVALENT
+Mutant align.R_align.R_011.R identified as EQUIVALENT
+Mutant align.R_align.R_012.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Filter cells by name
+#'
+#' Normally a gtable is considered a matrix when indexing so that indexing is
+#' working on the cell layout and not on the grobs it contains. `gtable_filter`
+#' allows you to subset the grobs by name and optionally remove rows or columns
+#' if left empty after the subsetting
+#'
+#' @param x a gtable object
+#' @inheritParams base::grepl
+#' @param trim if `TRUE`, [gtable_trim()] will be used to trim
+#'   off any empty cells.
+#' @param invert Should the filtering be inverted so that cells matching
+#'   `pattern` is removed instead of kept.
+#'
+#' @return A gtable only containing the matching grobs, potentially stripped of
+#' empty columns and rows
+#'
+#' @family gtable manipulation
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#' gt <- gtable(unit(rep(5, 3), c("cm")), unit(5, "cm"))
+#' rect <- rectGrob(gp = gpar(fill = "black"))
+#' circ <- circleGrob(gp = gpar(fill = "red"))
+#'
+#' gt <- gtable_add_grob(gt, rect, 1, 1, name = "rect")
+#' gt <- gtable_add_grob(gt, circ, 1, 3, name = "circ")
+#'
+#' plot(gtable_filter(gt, "rect"))
+#' plot(gtable_filter(gt, "rect", trim = FALSE))
+#' plot(gtable_filter(gt, "circ"))
+#' plot(gtable_filter(gt, "circ", trim = FALSE))
+#'
+gtable_filter <- function(x, pattern, fixed = FALSE, trim = TRUE, invert = FALSE) {
+  matches <- grepl(pattern, .subset2(x$layout, "name"), fixed = fixed)
+  if (invert) matches <- !matches
+  x$layout <- x$layout[matches, , drop = FALSE]
+  x$grobs <- x$grobs[matches]
+
+  if (trim) x <- gtable_trim(x)
+
+  x
+}
+```
+
+Survived mutants:
+Mutant ID: filter.R_filter.R_001.R
+Mutation: deleted line 26
+
+Mutant ID: filter.R_filter.R_002.R
+Mutation: deleted line 20
+
+Mutant ID: filter.R_filter.R_003.R
+Mutation: deleted line 11
+
+Mutant ID: filter.R_filter.R_004.R
+Mutation: deleted line 18
+
+Mutant ID: filter.R_filter.R_005.R
+Mutation: deleted line 19
+
+----------------------------------------
+
+Mutant filter.R_filter.R_001.R identified as EQUIVALENT
+Mutant filter.R_filter.R_002.R identified as EQUIVALENT
+Mutant filter.R_filter.R_003.R identified as EQUIVALENT
+Mutant filter.R_filter.R_004.R identified as EQUIVALENT
+Mutant filter.R_filter.R_005.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Visualise the layout of a gtable.
+#'
+#' This function is a simple wrapper around [grid::grid.show.layout()] that
+#' allows you to inspect the layout of the gtable.
+#'
+#' @param x a gtable object
+#' @inheritDotParams grid::grid.show.layout
+#'
+#' @export
+#'
+#' @examples
+#' gt <- gtable(widths = grid::unit(c(1, 0.5, 2), c("null", "cm", "null")),
+#'              heights = grid::unit(c(0.2, 1, 3), c("inch", "null", "cm")))
+#' gtable_show_layout(gt)
+#'
+gtable_show_layout <- function(x, ...) {
+  grid.show.layout(gtable_layout(x), ...)
+}
+
+gtable_layout <- function(x) {
+  check_gtable(x)
+
+  grid.layout(
+    nrow = length(x$heights), heights = x$heights,
+    ncol = length(x$widths), widths = x$widths,
+    respect = x$respect
+  )
+}
+
+vpname <- function(row) {
+  row <- unclass(row)
+  paste0(row$name, ".", row$t, "-", row$r, "-", row$b, "-", row$l)
+}
+
+#' @export
+widthDetails.gtable <- function(x) absolute.size(gtable_width(x))
+
+#' @export
+heightDetails.gtable <- function(x) absolute.size(gtable_height(x))
+
+#' @export
+makeContext.gtable <- function(x) {
+  layoutvp <- viewport(layout = gtable_layout(x), name = x$name)
+  if (is.null(x$vp)) {
+    x$vp <- layoutvp
+  } else {
+    x$vp <- vpStack(x$vp, layoutvp)
+  }
+  x
+}
+
+#' @export
+makeContent.gtable <- function(x) {
+  child_name <- vpname(x$layout)
+  children_vps <- mapply(child_vp,
+    vp_name = child_name,
+    t = .subset2(x$layout, "t"), r = .subset2(x$layout, "r"),
+    b = .subset2(x$layout, "b"), l = .subset2(x$layout, "l"),
+    clip = .subset2(x$layout, "clip"),
+    SIMPLIFY = FALSE
+  )
+  x$grobs <- mapply(grobTree, x$grobs, name = child_name, vp = children_vps,
+    SIMPLIFY = FALSE
+  )
+  setChildren(x, inject(gList(!!!x$grobs[order(.subset2(x$layout, "z"))])))
+}
+
+# Return the viewport for a child grob in a gtable
+child_vp <- function(vp_name, t, r, b, l, clip) {
+  viewport(
+    name = vp_name, layout.pos.row = t:b,
+    layout.pos.col = l:r, clip = clip
+  )
+}
+```
+
+Survived mutants:
+Mutant ID: grid.R_grid.R_001.R
+Mutation: deleted line 9
+
+Mutant ID: grid.R_grid.R_002.R
+Mutation: deleted line 35
+
+Mutant ID: grid.R_grid.R_004.R
+Mutation: deleted line 10
+
+----------------------------------------
+
+Mutant grid.R_grid.R_001.R identified as EQUIVALENT
+Mutant grid.R_grid.R_002.R identified as EQUIVALENT
+Mutant grid.R_grid.R_004.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Create a single column gtable
+#'
+#' This function stacks a list of grobs into a single column gtable of the given
+#' width and heights.
+#'
+#' @inheritParams gtable
+#' @inheritParams gtable_add_grob
+#' @param width a unit vector giving the width of this column
+#' @param vp a grid viewport object (or NULL).
+#'
+#' @return A gtable with one column and as many rows as elements in the grobs
+#' list.
+#'
+#' @family gtable construction
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#' a <- rectGrob(gp = gpar(fill = "red"))
+#' b <- circleGrob()
+#' c <- linesGrob()
+#' gt <- gtable_col("demo", list(a, b, c))
+#' gt
+#' plot(gt)
+#' gtable_show_layout(gt)
+gtable_col <- function(name, grobs, width = NULL, heights = NULL,
+                       z = NULL, vp = NULL, clip = "inherit") {
+  width <- width %||% unit(max(unlist(lapply(grobs, width_cm))), "cm")
+  heights <- heights %||% rep(unit(1, "null"), length(grobs))
+
+  # z is either NULL, or a vector of the same length as grobs
+  if (!(is.null(z) || length(z) == length(grobs))) {
+    cli::cli_abort("{.arg z} must be either NULL or the same length as {.arg grobs}")
+  }
+  if (is.null(z)) {
+    z <- Inf
+  }
+
+  table <- gtable(widths = width, heights = heights, name = name, vp = vp,
+                  rownames = names(grobs))
+  table <- gtable_add_grob(table, grobs,
+    t = seq_along(grobs), l = 1,
+    z = z, clip = clip
+  )
+
+  table
+}
+
+#' Create a single row gtable.
+#'
+#' This function puts grobs in a list side-by-side in a single-row gtable from
+#' left to right witrh the given widths and height.
+#'
+#' @inheritParams gtable
+#' @inheritParams gtable_add_grob
+#' @param height a unit vector giving the height of this row
+#' @param vp a grid viewport object (or NULL).
+#'
+#' @return A gtable with a single row and the same number of columns as
+#' elements in the grobs list
+#'
+#' @family gtable construction
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#' a <- rectGrob(gp = gpar(fill = "red"))
+#' b <- circleGrob()
+#' c <- linesGrob()
+#' gt <- gtable_row("demo", list(a, b, c))
+#' gt
+#' plot(gt)
+#' gtable_show_layout(gt)
+gtable_row <- function(name, grobs, height = NULL, widths = NULL,
+                       z = NULL, vp = NULL, clip = "inherit") {
+  height <- height %||% unit(max(unlist(lapply(grobs, height_cm))), "cm")
+  widths <- widths %||% rep(unit(1, "null"), length(grobs))
+
+  # z is either NULL, or a vector of the same length as grobs
+  if (!(is.null(z) || length(z) == length(grobs))) {
+    cli::cli_abort("{.arg z} must be either NULL or the same length as {.arg grobs}")
+  }
+  if (is.null(z)) {
+    z <- Inf
+  }
+
+  table <- gtable(widths = widths, heights = height, name = name, vp = vp,
+                  colnames = names(grobs))
+  table <- gtable_add_grob(table, grobs,
+    l = seq_along(grobs), t = 1,
+    z = z, clip = clip
+  )
+
+  table
+}
+
+#' Create a gtable from a matrix of grobs.
+#'
+#' This function takes a matrix of grobs and create a gtable matching with the
+#' grobs in the same position as they were in the matrix, with the given heights
+#' and widths.
+#'
+#' @inheritParams gtable
+#' @inheritParams gtable_add_grob
+#' @param z a numeric matrix of the same dimensions as `grobs`,
+#'   specifying the order that the grobs are drawn.
+#' @param vp a grid viewport object (or NULL).
+#'
+#' @return A gtable of the same dimensions as the grobs matrix.
+#'
+#' @family gtable construction
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#' a <- rectGrob(gp = gpar(fill = "red"))
+#' b <- circleGrob()
+#' c <- linesGrob()
+#'
+#' row <- matrix(list(a, b, c), nrow = 1)
+#' col <- matrix(list(a, b, c), ncol = 1)
+#' mat <- matrix(list(a, b, c, nullGrob()), nrow = 2)
+#'
+#' gtable_matrix("demo", row, unit(c(1, 1, 1), "null"), unit(1, "null"))
+#' gtable_matrix("demo", col, unit(1, "null"), unit(c(1, 1, 1), "null"))
+#' gtable_matrix("demo", mat, unit(c(1, 1), "null"), unit(c(1, 1), "null"))
+#'
+#' # Can specify z ordering
+#' z <- matrix(c(3, 1, 2, 4), nrow = 2)
+#' gtable_matrix("demo", mat, unit(c(1, 1), "null"), unit(c(1, 1), "null"), z = z)
+gtable_matrix <- function(name, grobs, widths = NULL, heights = NULL,
+                          z = NULL, respect = FALSE, clip = "on", vp = NULL) {
+  if (length(widths) != ncol(grobs)) {
+    cli::cli_abort("{.arg widths} must be the same as the number of columns in {.arg grobs}")
+  }
+  if (length(heights) != nrow(grobs)) {
+    cli::cli_abort("{.arg heights} must be the same as the number of rows in {.arg grobs}")
+  }
+  # z is either NULL or a matrix of the same dimensions as grobs
+  if (!(is.null(z) || identical(dim(grobs), dim(z)))) {
+    cli::cli_abort("{.arg z} must be either NULL or have the same dimensions as {.arg grobs}")
+  }
+  if (is.null(z)) {
+    z <- Inf
+  }
+  table <- gtable(widths = widths, heights = heights, name = name,
+                  respect = respect, vp = vp,
+                  rownames = rownames(grobs), colnames = colnames(grobs))
+  table <- gtable_add_grob(table, grobs,
+    t = c(row(grobs)), l = c(col(grobs)),
+    z = as.vector(z), clip = clip
+  )
+
+  table
+}
+
+#' Create a row/col spacer gtable.
+#'
+#' Create a zero-column or zero-row gtable with the given heights or widths
+#' respectively.
+#'
+#' @name gtable_spacer
+#'
+#' @return A gtable object
+#'
+#' @family gtable construction
+NULL
+
+#' @param widths unit vector of widths
+#' @rdname gtable_spacer
+#' @export
+gtable_row_spacer <- function(widths) {
+  gtable_add_cols(gtable(), widths)
+}
+
+#' @param heights unit vector of heights
+#' @rdname gtable_spacer
+#' @export
+gtable_col_spacer <- function(heights) {
+  gtable_add_rows(gtable(), heights)
+}
+```
+
+Survived mutants:
+Mutant ID: gtable-layouts.R_gtable-layouts.R_008.R
+Mutation: deleted line 123
+
+Mutant ID: gtable-layouts.R_gtable-layouts.R_010.R
+Mutation: deleted line 16
+
+----------------------------------------
+
+Mutant gtable-layouts.R_gtable-layouts.R_008.R identified as EQUIVALENT
+Mutant gtable-layouts.R_gtable-layouts.R_010.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' @keywords internal
+#' @aliases gtable-package
+"_PACKAGE"
+
+## usethis namespace: start
+#' @import grid
+#' @import rlang
+#' @importFrom glue glue
+#' @importFrom lifecycle deprecated
+## usethis namespace: end
+NULL
+```
+
+Survived mutants:
+Mutant ID: gtable-package.R_gtable-package.R_001.R
+Mutation: deleted line 6
+
+Mutant ID: gtable-package.R_gtable-package.R_002.R
+Mutation: deleted line 10
+
+Mutant ID: gtable-package.R_gtable-package.R_003.R
+Mutation: deleted line 2
+
+Mutant ID: gtable-package.R_gtable-package.R_004.R
+Mutation: deleted line 2
+
+Mutant ID: gtable-package.R_gtable-package.R_005.R
+Mutation: deleted line 2
+
+----------------------------------------
+
+Mutant gtable-package.R_gtable-package.R_001.R identified as EQUIVALENT
+Mutant gtable-package.R_gtable-package.R_002.R identified as EQUIVALENT
+Mutant gtable-package.R_gtable-package.R_003.R identified as EQUIVALENT
+Mutant gtable-package.R_gtable-package.R_004.R identified as EQUIVALENT
+Mutant gtable-package.R_gtable-package.R_005.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Create a new grob table.
+#'
+#' A grob table captures all the information needed to layout grobs in a table
+#' structure. It supports row and column spanning, offers some tools to
+#' automatically figure out the correct dimensions, and makes it easy to
+#' align and combine multiple tables.
+#'
+#' Each grob is put in its own viewport - grobs in the same location are
+#' not combined into one cell. Each grob takes up the entire cell viewport
+#' so justification control is not available.
+#'
+#' It constructs both the viewports and the gTree needed to display the table.
+#'
+#' @section Components:
+#'
+#' There are three basics components to a grob table: the specification of
+#' table (cell heights and widths), the layout (for each grob, its position,
+#' name and other settings), and global parameters.
+#'
+#' It's easier to understand how `gtable` works if in your head you keep
+#' the table separate from it's contents.  Each cell can have 0, 1, or many
+#' grobs inside. Each grob must belong to at least one cell, but can span
+#' across many cells.
+#'
+#' @section Layout:
+#'
+#' The layout details are stored in a data frame with one row for each grob,
+#' and columns:
+#'
+#' \itemize{
+#'   \item `t` top extent of grob
+#'   \item `r` right extent of grob
+#'   \item `b` bottom extent of
+#'   \item `l` left extent of grob
+#'   \item `z` the z-order of the grob - used to reorder the grobs
+#'     before they are rendered
+#'   \item `clip` a string, specifying how the grob should be clipped:
+#'     either `"on"`, `"off"` or `"inherit"`
+#'   \item `name`, a character vector used to name each grob and its
+#'     viewport
+#' }
+#'
+#' You should not need to modify this data frame directly - instead use
+#' functions like `gtable_add_grob`.
+#'
+#' @param widths a unit vector giving the width of each column
+#' @param heights a unit vector giving the height of each row
+#' @param respect a logical vector of length 1: should the aspect ratio of
+#'   height and width specified in null units be respected.  See
+#'   [grid.layout()] for more details
+#' @param name a string giving the name of the table. This is used to name
+#'   the layout viewport
+#' @param rownames,colnames character vectors of row and column names, used
+#'   for characteric subsetting.
+#' @param vp a grid viewport object (or NULL).
+#'
+#' @return A gtable object
+#'
+#' @family gtable construction
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#' a <- gtable(unit(1:3, c("cm")), unit(5, "cm"))
+#' a
+#' gtable_show_layout(a)
+#'
+#' # Add a grob:
+#' rect <- rectGrob(gp = gpar(fill = "black"))
+#' a <- gtable_add_grob(a, rect, 1, 1)
+#' a
+#' plot(a)
+#'
+#' # gtables behave like matrices:
+#' dim(a)
+#' t(a)
+#' plot(t(a))
+#'
+#' # when subsetting, grobs are retained if their extents lie in the
+#' # rows/columns that retained.
+#'
+#' b <- gtable(unit(c(2, 2, 2), "cm"), unit(c(2, 2, 2), "cm"))
+#' b <- gtable_add_grob(b, rect, 2, 2)
+#' b[1, ]
+#' b[, 1]
+#' b[2, 2]
+#'
+#' # gtable have row and column names
+#' rownames(b) <- 1:3
+#' rownames(b)[2] <- 200
+#' colnames(b) <- letters[1:3]
+#' dimnames(b)
+gtable <- function(widths = list(), heights = list(), respect = FALSE,
+                   name = "layout", rownames = NULL, colnames = NULL, vp = NULL) {
+  if (length(widths) > 0) {
+    check_unit(widths)
+    if (!(is.null(colnames) || length(colnames == length(widths)))) {
+      cli::cli_abort("{.arg colnames} must either be NULL or have the same length as {.arg widths}")
+    }
+  }
+  if (length(heights) > 0) {
+    check_unit(heights)
+    if (!(is.null(rownames) || length(rownames == length(heights)))) {
+      cli::cli_abort("{.arg rownames} must either be NULL or have the same length as {.arg heights}")
+    }
+  }
+
+  layout <- new_data_frame(list(
+    t = numeric(), l = numeric(), b = numeric(), r = numeric(), z = numeric(),
+    clip = character(), name = character()
+  ), n = 0)
+
+  if (!is.null(vp)) {
+    vp <- viewport(
+      name = name,
+      x = vp$x, y = vp$y,
+      width = vp$width, height = vp$height,
+      just = vp$justification, gp = vp$gp, xscale = vp$xscale,
+      yscale = vp$yscale, angle = vp$angle, clip = vp$clip
+    )
+  }
+
+  gTree(
+    grobs = list(), layout = layout, widths = widths,
+    heights = heights, respect = respect, name = name,
+    rownames = rownames, colnames = colnames, vp = vp,
+    cl = "gtable"
+  )
+}
+
+#' Print a gtable object
+#'
+#' @param x A gtable object.
+#' @param zsort Sort by z values? Default `FALSE`.
+#' @param ... Other arguments (not used by this method).
+#' @export
+#' @method print gtable
+print.gtable <- function(x, zsort = FALSE, ...) {
+  cat("TableGrob (", length(x$heights), " x ", length(x$widths), ") \"", x$name, "\": ",
+      length(x$grobs), " grobs\n", sep = "")
+
+  if (nrow(x$layout) == 0) return()
+
+  pos <- as.data.frame(format(as.matrix(x$layout[c("t", "r", "b", "l")])),
+    stringsAsFactors = FALSE
+  )
+  grobNames <- vapply(x$grobs, as.character, character(1))
+
+  info <- data.frame(
+    z = x$layout$z,
+    cells = paste("(", pos$t, "-", pos$b, ",", pos$l, "-", pos$r, ")", sep = ""),
+    name = x$layout$name,
+    grob = grobNames
+  )
+  if (zsort) info <- info[order(x$layout$z), ]
+
+  print(info)
+}
+
+
+#' @export
+dim.gtable <- function(x) c(length(x$heights), length(x$widths))
+
+#' @export
+dimnames.gtable <- function(x, ...) list(x$rownames, x$colnames)
+
+#' @export
+"dimnames<-.gtable" <- function(x, value) {
+  x$rownames <- value[[1]]
+  x$colnames <- value[[2]]
+
+  if (anyDuplicated(x$rownames)) {
+    cli::cli_abort("rownames must be distinct")
+  }
+  if (anyDuplicated(x$colnames)) {
+    cli::cli_abort("colnames must be distinct")
+  }
+
+  x
+}
+
+#' @export
+plot.gtable <- function(x, bg = NULL, grill = NULL, ...) {
+  grid.newpage()
+  if (!is.null(bg)) {
+    grid.rect(gp = gpar(fill = bg))
+  }
+  if (!is.null(grill)) {
+    grid <- seq(0, 1, length.out = 20)
+    grid.grill(h = grid, v = grid, gp = gpar(col = grill))
+  }
+  grid.draw(x)
+}
+
+#' Is this a gtable?
+#'
+#' @param x object to test
+#' @export
+is.gtable <- function(x) {
+  inherits(x, "gtable")
+}
+
+#' @export
+t.gtable <- function(x) {
+  new <- x
+  layout <- unclass(x$layout)
+  old_lay <- layout
+
+  layout$t <- old_lay$l
+  layout$r <- old_lay$b
+  layout$b <- old_lay$r
+  layout$l <- old_lay$t
+
+  new$layout <- new_data_frame(layout)
+  new$widths <- x$heights
+  new$heights <- x$widths
+
+  new
+}
+
+#' @export
+"[.gtable" <- function(x, i, j) {
+  # Convert indicies to (named) numeric
+  rows <- stats::setNames(seq_along(x$heights), rownames(x))[i]
+  cols <- stats::setNames(seq_along(x$widths), colnames(x))[j]
+
+  rows_cur <- stats::na.omit(rows)
+  cols_cur <- stats::na.omit(cols)
+
+  if ((length(rows) > 1 && any(diff(rows_cur) < 1)) ||
+      (length(cols) > 1 && any(diff(cols_cur) < 1))) {
+    cli::cli_abort("{.arg i} and {.arg j} must be increasing sequences of numbers")
+  }
+
+  i <- seq_along(x$heights) %in% seq_along(x$heights)[rows_cur]
+  j <- seq_along(x$widths) %in% seq_along(x$widths)[cols_cur]
+
+  x$heights <- x$heights[rows_cur]
+  x$rownames <- x$rownames[rows_cur]
+  x$widths <- x$widths[cols_cur]
+  x$colnames <- x$colnames[cols_cur]
+
+  layout <- unclass(x$layout)
+
+  keep <- layout$t %in% rows_cur & layout$b %in% rows_cur &
+          layout$l %in% cols_cur & layout$r %in% cols_cur
+  x$grobs <- x$grobs[keep]
+
+  adj_rows <- cumsum(!stats::na.omit(i))
+  adj_cols <- cumsum(!stats::na.omit(j))
+
+  layout$r <- layout$r - adj_cols[layout$r]
+  layout$l <- layout$l - adj_cols[layout$l]
+  layout$t <- layout$t - adj_rows[layout$t]
+  layout$b <- layout$b - adj_rows[layout$b]
+
+  # Drop the unused rows from layout
+  x$layout <- new_data_frame(layout)[keep, ]
+
+  if (anyNA(rows)) {
+    for (i in which(is.na(rows))) {
+      x <- gtable_add_rows(x, unit(0, "mm"), i - 1)
+    }
+  }
+  if (anyNA(cols)) {
+    for (i in which(is.na(cols))) {
+      x <- gtable_add_cols(x, unit(0, "mm"), i - 1)
+    }
+  }
+  x
+}
+
+#' @export
+length.gtable <- function(x) length(x$grobs)
+
+#' Returns the height of a gtable, in the gtable's units
+#'
+#' Note that unlike heightDetails.gtable, this can return relative units.
+#'
+#' @param x A gtable object
+#' @export
+gtable_height <- function(x) sum(x$heights)
+
+#' Returns the width of a gtable, in the gtable's units
+#'
+#' Note that unlike widthDetails.gtable, this can return relative units.
+#'
+#' @param x A gtable object
+#' @export
+gtable_width <- function(x) sum(x$widths)
+
+#' Convert to a gtable
+#'
+#' @param x An object to convert.
+#' @param ... Arguments forwarded to methods.
+#'
+#' @return A gtable object
+#' @export
+as.gtable <- function(x, ...) {
+  check_dots_used()
+  UseMethod("as.gtable")
+}
+
+#' @export
+as.gtable.default <- function(x, ...) {
+  cli::cli_abort("Can't convert {.obj_type_friendly {x}} to a {.cls gtable}.")
+}
+
+#' @export
+as.gtable.gtable <- function(x, ...) x
+
+#' @export
+#' @describeIn as.gtable Creates a 1-cell gtable containing the grob.
+#' @param widths,heights Scalar unit setting the size of the table. Defaults
+#'   to [grid::grobWidth()] and [grid::grobHeight()] of `x` respectively.
+as.gtable.grob <- function(x, widths = NULL, heights = NULL, ...) {
+  if (length(widths) > 1) {
+    widths <- widths[1]
+    cli::cli_warn("{.arg widths} truncated to length 1.")
+  }
+  if (length(heights) > 1) {
+    heights <- heights[1]
+    cli::cli_warn("{.arg heights} truncated to length 1.")
+  }
+  table <- gtable(
+    widths  = widths  %||% grobWidth(x),
+    heights = heights %||% grobHeight(x)
+  )
+  gtable_add_grob(table, x, t = 1L, l = 1L, b = 1L, r = 1L, ...)
+}
+```
+
+Survived mutants:
+Mutant ID: gtable.R_gtable.R_001.R
+Mutation: 
+From line/col: 94/1
+To line/col: 130/1
+'>' -> '<'
+
+Mutant ID: gtable.R_gtable.R_003.R
+Mutation: 
+From line/col: 94/1
+To line/col: 130/1
+'==' -> '!='
+
+Mutant ID: gtable.R_gtable.R_004.R
+Mutation: 
+From line/col: 94/1
+To line/col: 130/1
+'>' -> '<'
+
+Mutant ID: gtable.R_gtable.R_006.R
+Mutation: 
+From line/col: 94/1
+To line/col: 130/1
+'==' -> '!='
+
+Mutant ID: gtable.R_gtable.R_013.R
+Mutation: 
+From line/col: 223/1
+To line/col: 272/1
+'>' -> '<'
+
+Mutant ID: gtable.R_gtable.R_022.R
+Mutation: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+
+Mutant ID: gtable.R_gtable.R_023.R
+Mutation: 
+From line/col: 223/1
+To line/col: 272/1
+'-' -> '+'
+
+Mutant ID: gtable.R_gtable.R_024.R
+Mutation: 
+From line/col: 317/1
+To line/col: 331/1
+'>' -> '<'
+
+Mutant ID: gtable.R_gtable.R_025.R
+Mutation: 
+From line/col: 317/1
+To line/col: 331/1
+'>' -> '<'
+
+Mutant ID: gtable.R_gtable.R_026.R
+Mutation: deleted line 73
+
+Mutant ID: gtable.R_gtable.R_027.R
+Mutation: deleted line 58
+
+Mutant ID: gtable.R_gtable.R_028.R
+Mutation: deleted line 88
+
+Mutant ID: gtable.R_gtable.R_029.R
+Mutation: deleted line 65
+
+Mutant ID: gtable.R_gtable.R_030.R
+Mutation: deleted line 313
+
+----------------------------------------
+
+Mutant gtable.R_gtable.R_001.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_003.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_004.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_006.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_013.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_022.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_023.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_024.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_025.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_026.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_027.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_028.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_029.R identified as EQUIVALENT
+Mutant gtable.R_gtable.R_030.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+# Standalone file: do not edit by hand
+# Source: <https://github.com/r-lib/rlang/blob/main/R/standalone-obj-type.R>
+# ----------------------------------------------------------------------
+#
+# ---
+# repo: r-lib/rlang
+# file: standalone-obj-type.R
+# last-updated: 2022-10-04
+# license: https://unlicense.org
+# ---
+#
+# ## Changelog
+#
+# 2022-10-04:
+# - `obj_type_friendly(value = TRUE)` now shows numeric scalars
+#   literally.
+# - `stop_friendly_type()` now takes `show_value`, passed to
+#   `obj_type_friendly()` as the `value` argument.
+#
+# 2022-10-03:
+# - Added `allow_na` and `allow_null` arguments.
+# - `NULL` is now backticked.
+# - Better friendly type for infinities and `NaN`.
+#
+# 2022-09-16:
+# - Unprefixed usage of rlang functions with `rlang::` to
+#   avoid onLoad issues when called from rlang (#1482).
+#
+# 2022-08-11:
+# - Prefixed usage of rlang functions with `rlang::`.
+#
+# 2022-06-22:
+# - `friendly_type_of()` is now `obj_type_friendly()`.
+# - Added `obj_type_oo()`.
+#
+# 2021-12-20:
+# - Added support for scalar values and empty vectors.
+# - Added `stop_input_type()`
+#
+# 2021-06-30:
+# - Added support for missing arguments.
+#
+# 2021-04-19:
+# - Added support for matrices and arrays (#141).
+# - Added documentation.
+# - Added changelog.
+#
+# nocov start
+
+#' Return English-friendly type
+#' @param x Any R object.
+#' @param value Whether to describe the value of `x`. Special values
+#'   like `NA` or `""` are always described.
+#' @param length Whether to mention the length of vectors and lists.
+#' @return A string describing the type. Starts with an indefinite
+#'   article, e.g. "an integer vector".
+#' @noRd
+obj_type_friendly <- function(x, value = TRUE) {
+  if (is_missing(x)) {
+    return("absent")
+  }
+
+  if (is.object(x)) {
+    if (inherits(x, "quosure")) {
+      type <- "quosure"
+    } else {
+      type <- paste(class(x), collapse = "/")
+    }
+    return(sprintf("a <%s> object", type))
+  }
+
+  if (!is_vector(x)) {
+    return(.rlang_as_friendly_type(typeof(x)))
+  }
+
+  n_dim <- length(dim(x))
+
+  if (!n_dim) {
+    if (!is_list(x) && length(x) == 1) {
+      if (is_na(x)) {
+        return(switch(
+          typeof(x),
+          logical = "`NA`",
+          integer = "an integer `NA`",
+          double =
+            if (is.nan(x)) {
+              "`NaN`"
+            } else {
+              "a numeric `NA`"
+            },
+          complex = "a complex `NA`",
+          character = "a character `NA`",
+          .rlang_stop_unexpected_typeof(x)
+        ))
+      }
+
+      show_infinites <- function(x) {
+        if (x > 0) {
+          "`Inf`"
+        } else {
+          "`-Inf`"
+        }
+      }
+      str_encode <- function(x, width = 30, ...) {
+        if (nchar(x) > width) {
+          x <- substr(x, 1, width - 3)
+          x <- paste0(x, "...")
+        }
+        encodeString(x, ...)
+      }
+
+      if (value) {
+        if (is.numeric(x) && is.infinite(x)) {
+          return(show_infinites(x))
+        }
+
+        if (is.numeric(x) || is.complex(x)) {
+          number <- as.character(round(x, 2))
+          what <- if (is.complex(x)) "the complex number" else "the number"
+          return(paste(what, number))
+        }
+
+        return(switch(
+          typeof(x),
+          logical = if (x) "`TRUE`" else "`FALSE`",
+          character = {
+            what <- if (nzchar(x)) "the string" else "the empty string"
+            paste(what, str_encode(x, quote = "\""))
+          },
+          raw = paste("the raw value", as.character(x)),
+          .rlang_stop_unexpected_typeof(x)
+        ))
+      }
+
+      return(switch(
+        typeof(x),
+        logical = "a logical value",
+        integer = "an integer",
+        double = if (is.infinite(x)) show_infinites(x) else "a number",
+        complex = "a complex number",
+        character = if (nzchar(x)) "a string" else "\"\"",
+        raw = "a raw value",
+        .rlang_stop_unexpected_typeof(x)
+      ))
+    }
+
+    if (length(x) == 0) {
+      return(switch(
+        typeof(x),
+        logical = "an empty logical vector",
+        integer = "an empty integer vector",
+        double = "an empty numeric vector",
+        complex = "an empty complex vector",
+        character = "an empty character vector",
+        raw = "an empty raw vector",
+        list = "an empty list",
+        .rlang_stop_unexpected_typeof(x)
+      ))
+    }
+  }
+
+  vec_type_friendly(x)
+}
+
+vec_type_friendly <- function(x, length = FALSE) {
+  if (!is_vector(x)) {
+    abort("`x` must be a vector.")
+  }
+  type <- typeof(x)
+  n_dim <- length(dim(x))
+
+  add_length <- function(type) {
+    if (length && !n_dim) {
+      paste0(type, sprintf(" of length %s", length(x)))
+    } else {
+      type
+    }
+  }
+
+  if (type == "list") {
+    if (n_dim < 2) {
+      return(add_length("a list"))
+    } else if (is.data.frame(x)) {
+      return("a data frame")
+    } else if (n_dim == 2) {
+      return("a list matrix")
+    } else {
+      return("a list array")
+    }
+  }
+
+  type <- switch(
+    type,
+    logical = "a logical %s",
+    integer = "an integer %s",
+    numeric = ,
+    double = "a double %s",
+    complex = "a complex %s",
+    character = "a character %s",
+    raw = "a raw %s",
+    type = paste0("a ", type, " %s")
+  )
+
+  if (n_dim < 2) {
+    kind <- "vector"
+  } else if (n_dim == 2) {
+    kind <- "matrix"
+  } else {
+    kind <- "array"
+  }
+  out <- sprintf(type, kind)
+
+  if (n_dim >= 2) {
+    out
+  } else {
+    add_length(out)
+  }
+}
+
+.rlang_as_friendly_type <- function(type) {
+  switch(
+    type,
+
+    list = "a list",
+
+    NULL = "`NULL`",
+    environment = "an environment",
+    externalptr = "a pointer",
+    weakref = "a weak reference",
+    S4 = "an S4 object",
+
+    name = ,
+    symbol = "a symbol",
+    language = "a call",
+    pairlist = "a pairlist node",
+    expression = "an expression vector",
+
+    char = "an internal string",
+    promise = "an internal promise",
+    ... = "an internal dots object",
+    any = "an internal `any` object",
+    bytecode = "an internal bytecode object",
+
+    primitive = ,
+    builtin = ,
+    special = "a primitive function",
+    closure = "a function",
+
+    type
+  )
+}
+
+.rlang_stop_unexpected_typeof <- function(x, call = caller_env()) {
+  abort(
+    sprintf("Unexpected type <%s>.", typeof(x)),
+    call = call
+  )
+}
+
+#' Return OO type
+#' @param x Any R object.
+#' @return One of `"bare"` (for non-OO objects), `"S3"`, `"S4"`,
+#'   `"R6"`, or `"R7"`.
+#' @noRd
+obj_type_oo <- function(x) {
+  if (!is.object(x)) {
+    return("bare")
+  }
+
+  class <- inherits(x, c("R6", "R7_object"), which = TRUE)
+
+  if (class[[1]]) {
+    "R6"
+  } else if (class[[2]]) {
+    "R7"
+  } else if (isS4(x)) {
+    "S4"
+  } else {
+    "S3"
+  }
+}
+
+#' @param x The object type which does not conform to `what`. Its
+#'   `obj_type_friendly()` is taken and mentioned in the error message.
+#' @param what The friendly expected type as a string. Can be a
+#'   character vector of expected types, in which case the error
+#'   message mentions all of them in an "or" enumeration.
+#' @param show_value Passed to `value` argument of `obj_type_friendly()`.
+#' @param ... Arguments passed to [abort()].
+#' @inheritParams args_error_context
+#' @noRd
+stop_input_type <- function(x,
+                            what,
+                            ...,
+                            allow_na = FALSE,
+                            allow_null = FALSE,
+                            show_value = TRUE,
+                            arg = caller_arg(x),
+                            call = caller_env()) {
+  # From standalone-cli.R
+  cli <- env_get_list(
+    nms = c("format_arg", "format_code"),
+    last = topenv(),
+    default = function(x) sprintf("`%s`", x),
+    inherit = TRUE
+  )
+
+  if (allow_na) {
+    what <- c(what, cli$format_code("NA"))
+  }
+  if (allow_null) {
+    what <- c(what, cli$format_code("NULL"))
+  }
+  if (length(what)) {
+    what <- oxford_comma(what)
+  }
+
+  message <- sprintf(
+    "%s must be %s, not %s.",
+    cli$format_arg(arg),
+    what,
+    obj_type_friendly(x, value = show_value)
+  )
+
+  abort(message, ..., call = call, arg = arg)
+}
+
+oxford_comma <- function(chr, sep = ", ", final = "or") {
+  n <- length(chr)
+
+  if (n < 2) {
+    return(chr)
+  }
+
+  head <- chr[seq_len(n - 1)]
+  last <- chr[n]
+
+  head <- paste(head, collapse = sep)
+
+  # Write a or b. But a, b, or c.
+  if (n > 2) {
+    paste0(head, sep, final, " ", last)
+  } else {
+    paste0(head, " ", final, " ", last)
+  }
+}
+
+# nocov end
+```
+
+Survived mutants:
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_001.R
+Mutation: 
+From line/col: 58/1
+To line/col: 163/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_002.R
+Mutation: 
+From line/col: 58/1
+To line/col: 163/1
+'==' -> '!='
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_003.R
+Mutation: 
+From line/col: 58/1
+To line/col: 163/1
+'>' -> '<'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_004.R
+Mutation: 
+From line/col: 58/1
+To line/col: 163/1
+'>' -> '<'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_005.R
+Mutation: 
+From line/col: 58/1
+To line/col: 163/1
+'-' -> '+'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_006.R
+Mutation: 
+From line/col: 58/1
+To line/col: 163/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_007.R
+Mutation: 
+From line/col: 58/1
+To line/col: 163/1
+'||' -> '&&'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_008.R
+Mutation: 
+From line/col: 58/1
+To line/col: 163/1
+'==' -> '!='
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_009.R
+Mutation: 
+From line/col: 165/1
+To line/col: 218/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_010.R
+Mutation: 
+From line/col: 165/1
+To line/col: 218/1
+'==' -> '!='
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_011.R
+Mutation: 
+From line/col: 165/1
+To line/col: 218/1
+'<' -> '>'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_012.R
+Mutation: 
+From line/col: 165/1
+To line/col: 218/1
+'==' -> '!='
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_013.R
+Mutation: 
+From line/col: 165/1
+To line/col: 218/1
+'<' -> '>'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_014.R
+Mutation: 
+From line/col: 165/1
+To line/col: 218/1
+'==' -> '!='
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_015.R
+Mutation: 
+From line/col: 165/1
+To line/col: 218/1
+'>=' -> '<='
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_016.R
+Mutation: 
+From line/col: 328/1
+To line/col: 346/1
+'<' -> '>'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_017.R
+Mutation: 
+From line/col: 328/1
+To line/col: 346/1
+'-' -> '+'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_018.R
+Mutation: 
+From line/col: 328/1
+To line/col: 346/1
+'>' -> '<'
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_019.R
+Mutation: deleted line 87
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_020.R
+Mutation: deleted line 52
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_022.R
+Mutation: deleted line 27
+
+Mutant ID: import-standalone-obj-type.R_import-standalone-obj-type.R_023.R
+Mutation: deleted line 205
+
+----------------------------------------
+
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_001.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_002.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_003.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_004.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_005.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_006.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_007.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_008.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_009.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_010.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_011.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_012.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_013.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_014.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_015.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_016.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_017.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_018.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_019.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_020.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_022.R identified as EQUIVALENT
+Mutant import-standalone-obj-type.R_import-standalone-obj-type.R_023.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+# Standalone file: do not edit by hand
+# Source: <https://github.com/r-lib/rlang/blob/main/R/standalone-types-check.R>
+# ----------------------------------------------------------------------
+#
+# ---
+# repo: r-lib/rlang
+# file: standalone-types-check.R
+# last-updated: 2023-02-15
+# license: https://unlicense.org
+# dependencies: standalone-obj-type.R
+# ---
+#
+# ## Changelog
+#
+# 2023-02-15:
+# - Added `check_logical()`.
+#
+# - `check_bool()`, `check_number_whole()`, and
+#   `check_number_decimal()` are now implemented in C.
+#
+# - For efficiency, `check_number_whole()` and
+#   `check_number_decimal()` now take a `NULL` default for `min` and
+#   `max`. This makes it possible to bypass unnecessary type-checking
+#   and comparisons in the default case of no bounds checks.
+#
+# 2022-10-07:
+# - `check_number_whole()` and `_decimal()` no longer treat
+#   non-numeric types such as factors or dates as numbers.  Numeric
+#   types are detected with `is.numeric()`.
+#
+# 2022-10-04:
+# - Added `check_name()` that forbids the empty string.
+#   `check_string()` allows the empty string by default.
+#
+# 2022-09-28:
+# - Removed `what` arguments.
+# - Added `allow_na` and `allow_null` arguments.
+# - Added `allow_decimal` and `allow_infinite` arguments.
+# - Improved errors with absent arguments.
+#
+#
+# 2022-09-16:
+# - Unprefixed usage of rlang functions with `rlang::` to
+#   avoid onLoad issues when called from rlang (#1482).
+#
+# 2022-08-11:
+# - Added changelog.
+#
+# nocov start
+
+# Scalars -----------------------------------------------------------------
+
+.standalone_types_check_dot_call <- .Call
+
+check_bool <- function(x,
+                       ...,
+                       allow_na = FALSE,
+                       allow_null = FALSE,
+                       arg = caller_arg(x),
+                       call = caller_env()) {
+  if (!missing(x) && .standalone_types_check_dot_call(ffi_standalone_is_bool_1.0.7, x, allow_na, allow_null)) {
+    return(invisible(NULL))
+  }
+
+  stop_input_type(
+    x,
+    c("`TRUE`", "`FALSE`"),
+    ...,
+    allow_na = allow_na,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_string <- function(x,
+                         ...,
+                         allow_empty = TRUE,
+                         allow_na = FALSE,
+                         allow_null = FALSE,
+                         arg = caller_arg(x),
+                         call = caller_env()) {
+  if (!missing(x)) {
+    is_string <- .rlang_check_is_string(
+      x,
+      allow_empty = allow_empty,
+      allow_na = allow_na,
+      allow_null = allow_null
+    )
+    if (is_string) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a single string",
+    ...,
+    allow_na = allow_na,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+.rlang_check_is_string <- function(x,
+                                   allow_empty,
+                                   allow_na,
+                                   allow_null) {
+  if (is_string(x)) {
+    if (allow_empty || !is_string(x, "")) {
+      return(TRUE)
+    }
+  }
+
+  if (allow_null && is_null(x)) {
+    return(TRUE)
+  }
+
+  if (allow_na && (identical(x, NA) || identical(x, na_chr))) {
+    return(TRUE)
+  }
+
+  FALSE
+}
+
+check_name <- function(x,
+                       ...,
+                       allow_null = FALSE,
+                       arg = caller_arg(x),
+                       call = caller_env()) {
+  if (!missing(x)) {
+    is_string <- .rlang_check_is_string(
+      x,
+      allow_empty = FALSE,
+      allow_na = FALSE,
+      allow_null = allow_null
+    )
+    if (is_string) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a valid name",
+    ...,
+    allow_na = FALSE,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+IS_NUMBER_true <- 0
+IS_NUMBER_false <- 1
+IS_NUMBER_oob <- 2
+
+check_number_decimal <- function(x,
+                                 ...,
+                                 min = NULL,
+                                 max = NULL,
+                                 allow_infinite = TRUE,
+                                 allow_na = FALSE,
+                                 allow_null = FALSE,
+                                 arg = caller_arg(x),
+                                 call = caller_env()) {
+  if (missing(x)) {
+    exit_code <- IS_NUMBER_false
+  } else if (0 == (exit_code <- .standalone_types_check_dot_call(
+    ffi_standalone_check_number_1.0.7,
+    x,
+    allow_decimal = TRUE,
+    min,
+    max,
+    allow_infinite,
+    allow_na,
+    allow_null
+  ))) {
+    return(invisible(NULL))
+  }
+
+  .stop_not_number(
+    x,
+    ...,
+    exit_code = exit_code,
+    allow_decimal = TRUE,
+    min = min,
+    max = max,
+    allow_na = allow_na,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_number_whole <- function(x,
+                               ...,
+                               min = NULL,
+                               max = NULL,
+                               allow_na = FALSE,
+                               allow_null = FALSE,
+                               arg = caller_arg(x),
+                               call = caller_env()) {
+  if (missing(x)) {
+    exit_code <- IS_NUMBER_false
+  } else if (0 == (exit_code <- .standalone_types_check_dot_call(
+    ffi_standalone_check_number_1.0.7,
+    x,
+    allow_decimal = FALSE,
+    min,
+    max,
+    allow_infinite = FALSE,
+    allow_na,
+    allow_null
+  ))) {
+    return(invisible(NULL))
+  }
+
+  .stop_not_number(
+    x,
+    ...,
+    exit_code = exit_code,
+    allow_decimal = FALSE,
+    min = min,
+    max = max,
+    allow_na = allow_na,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+.stop_not_number <- function(x,
+                             ...,
+                             exit_code,
+                             allow_decimal,
+                             min,
+                             max,
+                             allow_na,
+                             allow_null,
+                             arg,
+                             call) {
+  if (exit_code == IS_NUMBER_oob) {
+    min <- min %||% -Inf
+    max <- max %||% Inf
+
+    if (min > -Inf && max < Inf) {
+      what <- sprintf("a number between %s and %s", min, max)
+    } else if (x < min) {
+      what <- sprintf("a number larger than %s", min)
+    } else if (x > max) {
+      what <- sprintf("a number smaller than %s", max)
+    } else {
+      abort("Unexpected state in OOB check", .internal = TRUE)
+    }
+  } else if (allow_decimal) {
+    what <- "a number"
+  } else {
+    what <- "a whole number"
+  }
+
+  stop_input_type(
+    x,
+    what,
+    ...,
+    allow_na = allow_na,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_symbol <- function(x,
+                         ...,
+                         allow_null = FALSE,
+                         arg = caller_arg(x),
+                         call = caller_env()) {
+  if (!missing(x)) {
+    if (is_symbol(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a symbol",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_arg <- function(x,
+                      ...,
+                      allow_null = FALSE,
+                      arg = caller_arg(x),
+                      call = caller_env()) {
+  if (!missing(x)) {
+    if (is_symbol(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "an argument name",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_call <- function(x,
+                       ...,
+                       allow_null = FALSE,
+                       arg = caller_arg(x),
+                       call = caller_env()) {
+  if (!missing(x)) {
+    if (is_call(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a defused call",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_environment <- function(x,
+                              ...,
+                              allow_null = FALSE,
+                              arg = caller_arg(x),
+                              call = caller_env()) {
+  if (!missing(x)) {
+    if (is_environment(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "an environment",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_function <- function(x,
+                           ...,
+                           allow_null = FALSE,
+                           arg = caller_arg(x),
+                           call = caller_env()) {
+  if (!missing(x)) {
+    if (is_function(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a function",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_closure <- function(x,
+                          ...,
+                          allow_null = FALSE,
+                          arg = caller_arg(x),
+                          call = caller_env()) {
+  if (!missing(x)) {
+    if (is_closure(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "an R function",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_formula <- function(x,
+                          ...,
+                          allow_null = FALSE,
+                          arg = caller_arg(x),
+                          call = caller_env()) {
+  if (!missing(x)) {
+    if (is_formula(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a formula",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+
+# Vectors -----------------------------------------------------------------
+
+check_character <- function(x,
+                            ...,
+                            allow_null = FALSE,
+                            arg = caller_arg(x),
+                            call = caller_env()) {
+  if (!missing(x)) {
+    if (is_character(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a character vector",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_logical <- function(x,
+                          ...,
+                          allow_null = FALSE,
+                          arg = caller_arg(x),
+                          call = caller_env()) {
+  if (!missing(x)) {
+    if (is_logical(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a logical vector",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+# nocov end
+```
+
+Survived mutants:
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_001.R
+Mutation: 
+From line/col: 55/1
+To line/col: 74/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_002.R
+Mutation: 
+From line/col: 106/1
+To line/col: 125/1
+'||' -> '&&'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_003.R
+Mutation: 
+From line/col: 106/1
+To line/col: 125/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_004.R
+Mutation: 
+From line/col: 106/1
+To line/col: 125/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_005.R
+Mutation: 
+From line/col: 106/1
+To line/col: 125/1
+'||' -> '&&'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_006.R
+Mutation: 
+From line/col: 159/1
+To line/col: 195/1
+'==' -> '!='
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_008.R
+Mutation: 
+From line/col: 234/1
+To line/col: 272/1
+'==' -> '!='
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_009.R
+Mutation: 
+From line/col: 234/1
+To line/col: 272/1
+'-' -> '+'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_010.R
+Mutation: 
+From line/col: 234/1
+To line/col: 272/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_011.R
+Mutation: 
+From line/col: 234/1
+To line/col: 272/1
+'>' -> '<'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_012.R
+Mutation: 
+From line/col: 234/1
+To line/col: 272/1
+'-' -> '+'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_013.R
+Mutation: 
+From line/col: 234/1
+To line/col: 272/1
+'<' -> '>'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_014.R
+Mutation: 
+From line/col: 234/1
+To line/col: 272/1
+'<' -> '>'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_015.R
+Mutation: 
+From line/col: 234/1
+To line/col: 272/1
+'>' -> '<'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_016.R
+Mutation: 
+From line/col: 274/1
+To line/col: 296/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_017.R
+Mutation: 
+From line/col: 298/1
+To line/col: 320/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_018.R
+Mutation: 
+From line/col: 322/1
+To line/col: 344/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_019.R
+Mutation: 
+From line/col: 346/1
+To line/col: 368/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_020.R
+Mutation: 
+From line/col: 370/1
+To line/col: 392/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_021.R
+Mutation: 
+From line/col: 394/1
+To line/col: 416/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_022.R
+Mutation: 
+From line/col: 418/1
+To line/col: 440/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_023.R
+Mutation: 
+From line/col: 445/1
+To line/col: 467/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_024.R
+Mutation: 
+From line/col: 469/1
+To line/col: 491/1
+'&&' -> '||'
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_027.R
+Mutation: deleted line 146
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_028.R
+Mutation: deleted line 372
+
+Mutant ID: import-standalone-types-check.R_import-standalone-types-check.R_029.R
+Mutation: deleted line 186
+
+----------------------------------------
+
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_001.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_002.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_003.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_004.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_005.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_006.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_008.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_009.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_010.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_011.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_012.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_013.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_014.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_015.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_016.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_017.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_018.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_019.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_020.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_021.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_022.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_023.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_024.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_027.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_028.R identified as EQUIVALENT
+Mutant import-standalone-types-check.R_import-standalone-types-check.R_029.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+# Fast data.frame constructor
+# No checking, recycling etc. unless asked for
+new_data_frame <- function(x, n = NULL) {
+  if (is.null(n)) {
+    n <- if (length(x) == 0) 0 else length(x[[1]])
+  }
+
+  class(x) <- "data.frame"
+
+  attr(x, "row.names") <- .set_row_names(n)
+  x
+}
+
+validate_data_frame <- function(x) {
+  if (length(unique(lengths(x))) != 1) {
+    cli::cli_abort('All elements in a data.frame must be of equal length')
+  }
+  if (is.null(names(x))) {
+    cli::cli_abort('columns must be named')
+  }
+}
+```
+
+Survived mutants:
+Mutant ID: new-data-frame.R_new-data-frame.R_002.R
+Mutation: 
+From line/col: 14/1
+To line/col: 21/1
+'!=' -> '=='
+
+Mutant ID: new-data-frame.R_new-data-frame.R_005.R
+Mutation: deleted line 16
+
+----------------------------------------
+
+Mutant new-data-frame.R_new-data-frame.R_002.R identified as EQUIVALENT
+Mutant new-data-frame.R_new-data-frame.R_005.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Add padding around edges of table.
+#'
+#' This is a convenience function for adding an extra row and an extra column at
+#' each edge of the table.
+#'
+#' @param x a [gtable()] object
+#' @param padding vector of length 4: top, right, bottom, left.  Normal
+#'  recycling rules apply.
+#'
+#' @return A gtable object
+#'
+#' @family gtable manipulation
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#' gt <- gtable(unit(1, "null"), unit(1, "null"))
+#' gt <- gtable_add_grob(gt, rectGrob(gp = gpar(fill = "black")), 1, 1)
+#'
+#' plot(gt)
+#' plot(cbind(gt, gt))
+#' plot(rbind(gt, gt))
+#'
+#' pad <- gtable_add_padding(gt, unit(1, "cm"))
+#' plot(pad)
+#' plot(cbind(pad, pad))
+#' plot(rbind(pad, pad))
+gtable_add_padding <- function(x, padding) {
+  padding <- rep(padding, length.out = 4)
+
+  x <- gtable_add_rows(x, pos = 0, heights = padding[1])
+  x <- gtable_add_cols(x, pos = -1, widths = padding[2])
+  x <- gtable_add_rows(x, pos = -1, heights = padding[3])
+  x <- gtable_add_cols(x, pos = 0, widths = padding[4])
+  x
+}
+```
+
+Survived mutants:
+Mutant ID: padding.R_padding.R_001.R
+Mutation: 
+From line/col: 29/1
+To line/col: 37/1
+'-' -> '+'
+
+Mutant ID: padding.R_padding.R_002.R
+Mutation: 
+From line/col: 29/1
+To line/col: 37/1
+'-' -> '+'
+
+Mutant ID: padding.R_padding.R_003.R
+Mutation: deleted line 33
+
+Mutant ID: padding.R_padding.R_004.R
+Mutation: deleted line 11
+
+Mutant ID: padding.R_padding.R_005.R
+Mutation: deleted line 4
+
+Mutant ID: padding.R_padding.R_006.R
+Mutation: deleted line 32
+
+Mutant ID: padding.R_padding.R_007.R
+Mutation: deleted line 8
+
+----------------------------------------
+
+Mutant padding.R_padding.R_001.R identified as EQUIVALENT
+Mutant padding.R_padding.R_002.R identified as EQUIVALENT
+Mutant padding.R_padding.R_003.R identified as EQUIVALENT
+Mutant padding.R_padding.R_004.R identified as EQUIVALENT
+Mutant padding.R_padding.R_005.R identified as EQUIVALENT
+Mutant padding.R_padding.R_006.R identified as EQUIVALENT
+Mutant padding.R_padding.R_007.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Row and column binding for gtables.
+#'
+#' These functions are the parallels of the `matrix`/`data.frame` row and
+#' column bindings. As such they work in the same way, except they have to take
+#' care of additional attributes within the gtables. Most importantly it needs
+#' to take care of the sizing of the final gtable, as the different gtables
+#' going in may have different widths or heights. By default it tries to
+#' calculate the maximum width/height among the supplied gtables, but other
+#' options exists. Further, the relative layering of the grobs in each gtable
+#' can be modified or left as-is.
+#'
+#' @param ... gtables to combine (`x` and `y`)
+#' @param size How should the widths (for rbind) and the heights (for cbind)
+#'   be combined across the gtables: take values from `first`,
+#'   or `last` gtable, or compute the `min` or `max` values.
+#'   Defaults to `max`.
+#' @param z A numeric vector indicating the relative z values of each gtable.
+#'   The z values of each object in the resulting gtable will be modified
+#'   to fit this order. If `NULL`, then the z values of obects within
+#'   each gtable will not be modified.
+#'
+#' @return A gtable object
+#'
+#' @name bind
+#'
+#' @examples
+#' library(grid)
+#' a <- rectGrob(gp = gpar(fill = "red"))
+#' b <- circleGrob()
+#' c <- linesGrob()
+#'
+#' row <- matrix(list(a, b), nrow = 1)
+#' col <- matrix(list(a, b), ncol = 1)
+#' mat <- matrix(list(a, b, c, nullGrob()), nrow = 2)
+#'
+#' row_gt <- gtable_matrix("demo", row, unit(c(1, 1), "null"), unit(1, "null"))
+#' col_gt <- gtable_matrix("demo", col, unit(1, "null"), unit(c(1, 1), "null"))
+#' mat_gt <- gtable_matrix("demo", mat, unit(c(1, 1), "null"), unit(c(1, 1), "null"))
+#'
+#' # cbind
+#' c_binded <- cbind(mat_gt, col_gt, size = "first")
+#' plot(c_binded)
+#'
+#' # rbind
+#' r_binded <- rbind(mat_gt, row_gt, size = "last")
+#' plot(r_binded)
+#'
+#' # Dimensions must match along bind direction
+#' try(cbind(mat_gt, row_gt))
+#'
+NULL
+
+#' @rdname bind
+#' @method rbind gtable
+#' @export
+rbind.gtable <- function(..., size = "max", z = NULL) {
+  gtables <- list(...)
+  if (!is.null(z)) {
+    gtables <- z_arrange_gtables(gtables, z)
+  }
+  Reduce(function(x, y) rbind_gtable(x, y, size = size), gtables)
+}
+
+rbind_gtable <- function(x, y, size = "max") {
+  if (length(x$widths) != length(y$widths)) {
+    cli::cli_abort("{.arg x} and {.arg y} must have the same number of columns")
+  }
+  x_row <- length(x$heights)
+  y_row <- length(y$heights)
+  if (x_row == 0) return(y)
+  if (y_row == 0) return(x)
+
+  lay_x <- unclass(x$layout)
+  lay_y <- unclass(y$layout)
+
+  x$layout <- new_data_frame(list(
+    t = c(lay_x$t, lay_y$t + x_row),
+    l = c(lay_x$l, lay_y$l),
+    b = c(lay_x$b, lay_y$b + x_row),
+    r = c(lay_x$r, lay_y$r),
+    z = c(lay_x$z, lay_y$z),
+    clip = c(lay_x$clip, lay_y$clip),
+    name = c(lay_x$name, lay_y$name)
+  ))
+
+  x$heights <- insert.unit(x$heights, y$heights)
+  x$rownames <- c(x$rownames, y$rownames)
+
+  size <- match.arg(size, c("first", "last", "max", "min"))
+  x$widths <- switch(size,
+    first = x$widths,
+    last = y$widths,
+    min = compare_unit(x$widths, y$widths, pmin),
+    max = compare_unit(x$widths, y$widths, pmax)
+  )
+
+  x$grobs <- append(x$grobs, y$grobs)
+
+  x
+}
+
+#' @rdname bind
+#' @method cbind gtable
+#' @export
+cbind.gtable <- function(..., size = "max", z = NULL) {
+  gtables <- list(...)
+  if (!is.null(z)) {
+    gtables <- z_arrange_gtables(gtables, z)
+  }
+  Reduce(function(x, y) cbind_gtable(x, y, size = size), gtables)
+}
+
+cbind_gtable <- function(x, y, size = "max") {
+  if (length(x$heights) != length(y$heights)) {
+    cli::cli_abort("{.arg x} and {.arg y} must have the same number of rows")
+  }
+  x_col <- length(x$widths)
+  y_col <- length(y$widths)
+  if (x_col == 0) return(y)
+  if (y_col == 0) return(x)
+
+  lay_x <- unclass(x$layout)
+  lay_y <- unclass(y$layout)
+
+  x$layout <- new_data_frame(list(
+    t = c(lay_x$t, lay_y$t),
+    l = c(lay_x$l, lay_y$l + x_col),
+    b = c(lay_x$b, lay_y$b),
+    r = c(lay_x$r, lay_y$r + x_col),
+    z = c(lay_x$z, lay_y$z),
+    clip = c(lay_x$clip, lay_y$clip),
+    name = c(lay_x$name, lay_y$name)
+  ))
+
+  x$widths <- insert.unit(x$widths, y$widths)
+  x$colnames <- c(x$colnames, y$colnames)
+
+  size <- match.arg(size, c("first", "last", "max", "min"))
+  x$heights <- switch(size,
+    first = x$heights,
+    last = y$heights,
+    min = compare_unit(x$heights, y$heights, pmin),
+    max = compare_unit(x$heights, y$heights, pmax)
+  )
+
+  x$grobs <- append(x$grobs, y$grobs)
+
+  x
+}
+```
+
+Survived mutants:
+Mutant ID: rbind-cbind.R_rbind-cbind.R_004.R
+Mutation: 
+From line/col: 64/1
+To line/col: 100/1
+'+' -> '-'
+
+Mutant ID: rbind-cbind.R_rbind-cbind.R_005.R
+Mutation: 
+From line/col: 64/1
+To line/col: 100/1
+'+' -> '-'
+
+Mutant ID: rbind-cbind.R_rbind-cbind.R_009.R
+Mutation: 
+From line/col: 113/1
+To line/col: 149/1
+'+' -> '-'
+
+Mutant ID: rbind-cbind.R_rbind-cbind.R_010.R
+Mutation: 
+From line/col: 113/1
+To line/col: 149/1
+'+' -> '-'
+
+Mutant ID: rbind-cbind.R_rbind-cbind.R_012.R
+Mutation: deleted line 87
+
+Mutant ID: rbind-cbind.R_rbind-cbind.R_013.R
+Mutation: deleted line 41
+
+----------------------------------------
+
+Mutant rbind-cbind.R_rbind-cbind.R_004.R identified as EQUIVALENT
+Mutant rbind-cbind.R_rbind-cbind.R_005.R identified as EQUIVALENT
+Mutant rbind-cbind.R_rbind-cbind.R_009.R identified as EQUIVALENT
+Mutant rbind-cbind.R_rbind-cbind.R_010.R identified as EQUIVALENT
+Mutant rbind-cbind.R_rbind-cbind.R_012.R identified as EQUIVALENT
+Mutant rbind-cbind.R_rbind-cbind.R_013.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Trim off empty cells.
+#'
+#' This function detects rows and columns that does not contain any grobs and
+#' removes thewm from the gtable. If the rows and/or columns removed had a
+#' non-zero height/width the relative layout of the gtable may change.
+#'
+#' @param x a gtable object
+#'
+#' @return A gtable object
+#'
+#' @family gtable modification
+#'
+#' @export
+#'
+#' @examples
+#' library(grid)
+#' rect <- rectGrob(gp = gpar(fill = "black"))
+#' base <- gtable(unit(c(2, 2, 2), "cm"), unit(c(2, 2, 2), "cm"))
+#'
+#' center <- gtable_add_grob(base, rect, 2, 2)
+#' plot(center)
+#' plot(gtable_trim(center))
+#'
+#' col <- gtable_add_grob(base, rect, 1, 2, 3, 2)
+#' plot(col)
+#' plot(gtable_trim(col))
+#'
+#' row <- gtable_add_grob(base, rect, 2, 1, 2, 3)
+#' plot(row)
+#' plot(gtable_trim(row))
+gtable_trim <- function(x) {
+  check_gtable(x)
+  if (length(x) == 0) {
+    return(gtable(respect = x$respect, name = x$name, vp = x$vp))
+  }
+
+  layout <- unclass(x$layout)
+
+  w <- range(layout$l, layout$r)
+  h <- range(layout$t, layout$b)
+
+  x$widths <- x$widths[seq.int(w[1], w[2])]
+  x$heights <- x$heights[seq.int(h[1], h[2])]
+
+  layout$l <- layout$l - w[1] + 1
+  layout$r <- layout$r - w[1] + 1
+  layout$t <- layout$t - h[1] + 1
+  layout$b <- layout$b - h[1] + 1
+
+  x$layout <- new_data_frame(layout)
+
+  x
+}
+```
+
+Survived mutants:
+Mutant ID: trim.R_trim.R_002.R
+Mutation: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+
+Mutant ID: trim.R_trim.R_003.R
+Mutation: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+
+Mutant ID: trim.R_trim.R_004.R
+Mutation: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+
+Mutant ID: trim.R_trim.R_005.R
+Mutation: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+
+Mutant ID: trim.R_trim.R_006.R
+Mutation: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+
+Mutant ID: trim.R_trim.R_007.R
+Mutation: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+
+Mutant ID: trim.R_trim.R_008.R
+Mutation: 
+From line/col: 31/1
+To line/col: 53/1
+'+' -> '-'
+
+Mutant ID: trim.R_trim.R_009.R
+Mutation: 
+From line/col: 31/1
+To line/col: 53/1
+'-' -> '+'
+
+Mutant ID: trim.R_trim.R_011.R
+Mutation: deleted line 29
+
+Mutant ID: trim.R_trim.R_012.R
+Mutation: deleted line 24
+
+Mutant ID: trim.R_trim.R_014.R
+Mutation: deleted line 15
+
+----------------------------------------
+
+Mutant trim.R_trim.R_002.R identified as EQUIVALENT
+Mutant trim.R_trim.R_003.R identified as EQUIVALENT
+Mutant trim.R_trim.R_004.R identified as EQUIVALENT
+Mutant trim.R_trim.R_005.R identified as EQUIVALENT
+Mutant trim.R_trim.R_006.R identified as EQUIVALENT
+Mutant trim.R_trim.R_007.R identified as EQUIVALENT
+Mutant trim.R_trim.R_008.R identified as EQUIVALENT
+Mutant trim.R_trim.R_009.R identified as EQUIVALENT
+Mutant trim.R_trim.R_011.R identified as EQUIVALENT
+Mutant trim.R_trim.R_012.R identified as EQUIVALENT
+Mutant trim.R_trim.R_014.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+check_gtable <- function(x,
+                         ...,
+                         allow_null = FALSE,
+                         arg = caller_arg(x),
+                         call = caller_env()) {
+  if (!missing(x)) {
+    if (is.gtable(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a gtable object",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+check_unit <- function(x,
+                       ...,
+                       allow_null = FALSE,
+                       arg = caller_arg(x),
+                       call = caller_env()) {
+  if (!missing(x)) {
+    if (is.unit(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  stop_input_type(
+    x,
+    "a unit vector",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+neg_to_pos <- function(x, max) {
+  ifelse(x >= 0, x, max + 1 + x)
+}
+
+compare_unit <- function(x, y, comp = `=`) {
+  if (length(y) == 0) return(x)
+  if (length(x) == 0) return(y)
+  if (getRversion() >= "3.6" && (is.list(x) || is.list(y))) {
+    if (identical(comp, pmin)) {
+      return(unit.pmin(x, y))
+    }
+    if (identical(comp, pmax)) {
+      return(unit.pmax(x, y))
+    }
+    cli::cli_abort('comparison not supported')
+  }
+  # Below should be removed once the old grid unit implementation has been deprecated
+  x_attr <- attributes(x)
+  x_val <- unclass(x)
+  y_val <- unclass(y)
+
+  x_unit <- x_attr$unit
+  y_unit <- attr(x, "unit")
+
+  if (!all(x_unit == y_unit)) {
+    cli::cli_abort("comparison of units with different types currently not supported")
+  }
+
+  `attributes<-`(comp(x_val, y_val), x_attr)
+}
+
+
+insert.unit <- function(x, values, after = length(x)) {
+  lengx <- length(x)
+  if (lengx == 0) return(values)
+  if (length(values) == 0) return(x)
+
+  if (after <= 0) {
+    unit.c(values, x)
+  } else if (after >= lengx) {
+    unit.c(x, values)
+  } else {
+    unit.c(x[1L:after], values, x[(after + 1L):lengx])
+  }
+}
+
+"%||%" <- function(a, b) {
+  if (!is.null(a)) a else b
+}
+
+width_cm <- function(x) {
+  if (is.grob(x)) {
+    convertWidth(grobWidth(x), "cm", TRUE)
+  } else if (is.list(x)) {
+    vapply(x, width_cm, numeric(1))
+  } else if (is.unit(x)) {
+    convertWidth(x, "cm", TRUE)
+  } else {
+    cli::cli_abort("Unknown input")
+  }
+}
+height_cm <- function(x) {
+  if (is.grob(x)) {
+    convertWidth(grobHeight(x), "cm", TRUE)
+  } else if (is.list(x)) {
+    vapply(x, height_cm, numeric(1))
+  } else if (is.unit(x)) {
+    convertHeight(x, "cm", TRUE)
+  } else {
+    cli::cli_abort("Unknown input")
+  }
+}
+
+# Check that x is same length as g, or length 1
+len_same_or_1 <- function(x, n) {
+  length(x) == 1 || length(x) == n
+}
+
+```
+
+Survived mutants:
+Mutant ID: utils.R_utils.R_001.R
+Mutation: 
+From line/col: 1/1
+To line/col: 23/1
+'&&' -> '||'
+
+Mutant ID: utils.R_utils.R_002.R
+Mutation: 
+From line/col: 25/1
+To line/col: 47/1
+'&&' -> '||'
+
+Mutant ID: utils.R_utils.R_008.R
+Mutation: 
+From line/col: 53/1
+To line/col: 78/1
+'&&' -> '||'
+
+Mutant ID: utils.R_utils.R_009.R
+Mutation: 
+From line/col: 53/1
+To line/col: 78/1
+'>=' -> '<='
+
+Mutant ID: utils.R_utils.R_010.R
+Mutation: 
+From line/col: 53/1
+To line/col: 78/1
+'||' -> '&&'
+
+Mutant ID: utils.R_utils.R_022.R
+Mutation: deleted line 18
+
+Mutant ID: utils.R_utils.R_024.R
+Mutation: deleted line 116
+
+----------------------------------------
+
+Mutant utils.R_utils.R_001.R identified as EQUIVALENT
+Mutant utils.R_utils.R_002.R identified as EQUIVALENT
+Mutant utils.R_utils.R_008.R identified as EQUIVALENT
+Mutant utils.R_utils.R_009.R identified as EQUIVALENT
+Mutant utils.R_utils.R_010.R identified as EQUIVALENT
+Mutant utils.R_utils.R_022.R identified as EQUIVALENT
+Mutant utils.R_utils.R_024.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Normalise z values within a gtable object
+#'
+#' The z values within a gtable object can be any numeric values.
+#' This function will change them to integers (starting from 1),
+#' preserving the original order.
+#'
+#' Ties are handled by the `"first"` method: the first occurrence
+#' of a value wins.
+#'
+#' @param x A gtable object
+#' @param i The z value to start counting up from (default is 1)
+#'
+#' @noRd
+z_normalise <- function(x, i = 1) {
+  layout <- unclass(x$layout)
+  layout$z <- rank(layout$z, ties.method = "first") + i - 1
+  x$layout <- new_data_frame(layout)
+  x
+}
+
+
+#' Arrange the z values within gtable objects
+#'
+#' This is usually used before rbinding or cbinding the gtables together.
+#' The resulting z values will be normalized.
+#'
+#' Ties are handled by the `"first"` method: the first occurrence
+#' of a value wins.
+#'
+#' @param gtables A list of gtable objects
+#' @param z A numeric vector of relative z values
+#'
+#' @noRd
+z_arrange_gtables <- function(gtables, z) {
+  if (length(gtables) != length(z)) {
+    cli::cli_abort("{.arg gtables} and {.arg z} must be the same length")
+  }
+
+  # Keep track of largest z value encountered so far
+  zmax <- 0
+  # Go through each gtable, in the order of z
+  for (i in order(z)) {
+    # max() gives a warning if zero-length input
+    if (nrow(gtables[[i]]$layout) > 0) {
+      gtables[[i]] <- z_normalise(gtables[[i]], zmax + 1)
+      zmax <- max(.subset2(gtables[[i]]$layout, "z"))
+    }
+  }
+
+  gtables
+}
+```
+
+Survived mutants:
+Mutant ID: z.R_z.R_006.R
+Mutation: deleted line 33
+
+Mutant ID: z.R_z.R_007.R
+Mutation: deleted line 30
+
+Mutant ID: z.R_z.R_008.R
+Mutation: deleted line 4
+
+Mutant ID: z.R_z.R_009.R
+Mutation: deleted line 29
+
+----------------------------------------
+
+Mutant z.R_z.R_006.R identified as EQUIVALENT
+Mutant z.R_z.R_007.R identified as EQUIVALENT
+Mutant z.R_z.R_008.R identified as EQUIVALENT
+Mutant z.R_z.R_009.R identified as EQUIVALENT
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+#' Normalise z values within a gtable object
+#'
+#' The z values within a gtable object can be any numeric values.
+#' This function will change them to integers (starting from 1),
+#' preserving the original order.
+#'
+#' Ties are handled by the `"first"` method: the first occurrence
+#' of a value wins.
+#'
+#' @param x A gtable object
+#' @param i The z value to start counting up from (default is 1)
+#'
+#' @noRd
+z_normalise <- function(x, i = 1) {
+  layout <- unclass(x$layout)
+  layout$z <- rank(layout$z, ties.method = "first") + i - 1
+  x$layout <- new_data_frame(layout)
+  x
+}
+
+
+#' Arrange the z values within gtable objects
+#'
+#' This is usually used before rbinding or cbinding the gtables together.
+#' The resulting z values will be normalized.
+#'
+#' Ties are handled by the `"first"` method: the first occurrence
+#' of a value wins.
+#'
+#' @param gtables A list of gtable objects
+#' @param z A numeric vector of relative z values
+#'
+#' @noRd
+z_arrange_gtables <- function(gtables, z) {
+  if (length(gtables) != length(z)) {
+    cli::cli_abort("{.arg gtables} and {.arg z} must be the same length")
+  }
+
+  # Keep track of largest z value encountered so far
+  zmax <- 0
+  # Go through each gtable, in the order of z
+  for (i in order(z)) {
+    # max() gives a warning if zero-length input
+    if (nrow(gtables[[i]]$layout) > 0) {
+      gtables[[i]] <- z_normalise(gtables[[i]], zmax + 1)
+      zmax <- max(.subset2(gtables[[i]]$layout, "z"))
+    }
+  }
+
+  gtables
+}
+```
+
+Survived mutants:
+Mutant ID: zzz.R_zzz.R_004.R
+Mutation: deleted line 3
+
+----------------------------------------
+
+
+Analyzing mutants with OpenAI API...
+Prompt being sent to OpenAI:
+----------------------------------------
+Determine if the following mutants are equivalent to the original code. An equivalent mutant has the same behavior as the original code under all possible inputs. For each mutant, respond with 'EQUIVALENT' or 'NOT EQUIVALENT', followed by a brief reason why.
+
+Original code:
+```
+release_extra_revdeps <- function() {
+  c(
+    "ggplot2"
+  )
+}
+```
+
+Survived mutants:
+Mutant ID: zzz.R_zzz.R_004.R
+Mutation: deleted line 3
+
+----------------------------------------
+
+
+Mutation Testing Summary:
+  Total mutants:    246
+  Killed:           110
+  Survived:         136
+  Equivalent:       135
+  Mutation Score:   44.72%
+  Adjusted Score:   99.10% (excluding equivalent mutants)
