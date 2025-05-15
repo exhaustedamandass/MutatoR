@@ -364,16 +364,11 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
 
   run_tests <- function(pkg_dir) {
     # Close any open graphics devices before running tests
-    if (requireNamespace("grDevices", quietly = TRUE)) {
-      while (grDevices::dev.cur() > 1) grDevices::dev.off()
-    }
+    grDevices::pdf(NULL)
+    on.exit(grDevices::dev.off(), add = TRUE)
+
     old_wd <- getwd()
-    on.exit({
-      setwd(old_wd)
-      if (requireNamespace("grDevices", quietly = TRUE)) {
-        while (grDevices::dev.cur() > 1) grDevices::dev.off()
-      }
-    }, add = TRUE)
+    on.exit(setwd(old_wd), add = TRUE)
     setwd(pkg_dir)
 
     loaded <- tryCatch(
