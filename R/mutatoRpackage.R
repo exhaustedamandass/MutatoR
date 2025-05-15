@@ -364,11 +364,16 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
 
   run_tests <- function(pkg_dir) {
     # Close any open graphics devices before running tests
-    grDevices::pdf(NULL)
-    on.exit(grDevices::dev.off(), add = TRUE)
-
+    if (requireNamespace("grDevices", quietly = TRUE)) {
+      while (grDevices::dev.cur() > 1) grDevices::dev.off()
+    }
     old_wd <- getwd()
-    on.exit(setwd(old_wd), add = TRUE)
+    on.exit({
+      setwd(old_wd)
+      if (requireNamespace("grDevices", quietly = TRUE)) {
+        while (grDevices::dev.cur() > 1) grDevices::dev.off()
+      }
+    }, add = TRUE)
     setwd(pkg_dir)
 
     loaded <- tryCatch(
@@ -394,28 +399,60 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
     passed
   }
 
-
-  # options(
-  #   future.devices.onMisuse = "warning",   # or "ignore"
-  #   future.connections.onMisuse = "ignore" # similar check for open file‑conns
-  # )
-
   # Set up parallel processing
-  future::plan(future::multisession, 
-               workers = min(cores, length(mutants)),
-               earlySignal = TRUE)
-
-  mutant_ids <- names(mutants)
-  pkg_dirs <- sapply(mutants, function(x) x$pkg)
-  pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
-
-  # Run tests in parallel with progress bar
-  parallel_results <- furrr::future_map(
-    pkg_dir_list,
-    function(pkg) suppressMessages(suppressWarnings(run_tests(pkg))),
-    .progress = TRUE,
-    .options = furrr::furrr_options(seed = TRUE)
-  )
+  if (cores > 1 && length(mutants) > 1) {
+    tryCatch({
+      future::plan(future::multisession, 
+                 workers = min(cores, length(mutants)),
+                 earlySignal = FALSE)
+      
+      mutant_ids <- names(mutants)
+      pkg_dirs <- sapply(mutants, function(x) x$pkg)
+      pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
+      
+      # Run tests in parallel with progress bar
+      parallel_results <- tryCatch({
+        furrr::future_map(
+          pkg_dir_list,
+          function(pkg) {
+            tryCatch(
+              suppressMessages(suppressWarnings(run_tests(pkg))),
+              error = function(e) {
+                message("Worker error: ", e$message)
+                FALSE  # Return FALSE to mark the mutant as killed
+              }
+            )
+          },
+          .progress = TRUE,
+          .options = furrr::furrr_options(seed = TRUE)
+        )
+      }, error = function(e) {
+        message("Parallel processing error: ", e$message)
+        message("Falling back to sequential processing...")
+        NULL
+      })
+      
+      # Fallback to sequential if parallel processing failed
+      if (is.null(parallel_results)) {
+        future::plan(future::sequential)
+        parallel_results <- lapply(pkg_dir_list, function(pkg) {
+          suppressMessages(suppressWarnings(run_tests(pkg)))
+        })
+      }
+    }, finally = {
+      # Make sure we always clean up the future plan
+      future::plan(future::sequential)
+    })
+  } else {
+    # Run sequentially if only one core or one mutant
+    mutant_ids <- names(mutants)
+    pkg_dirs <- sapply(mutants, function(x) x$pkg)
+    pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
+    
+    parallel_results <- lapply(pkg_dir_list, function(pkg) {
+      suppressMessages(suppressWarnings(run_tests(pkg)))
+    })
+  }
 
   # Process the parallel test results
   package_mutants <- list()
@@ -481,7 +518,6 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
   }
 
   # Clean up the parallel workers
-  future::plan(future::sequential)
   gc()  # Force garbage collection to clean up connections
 
   # Summarize test results
