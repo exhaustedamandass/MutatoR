@@ -6,15 +6,23 @@ delete_line_mutants <- function(src_file,
                                 start_idx = 1) {
   if (is.null(file_base)) file_base <- basename(src_file)
   lines     <- readLines(src_file)
+  
+  # Filter out empty lines and comment lines
   non_empty <- which(nzchar(lines))
-  count     <- min(max_del, length(lines))
-  if (length(non_empty) == 0) {
-    warning("No non-empty lines to delete.")
+  non_comment <- which(!grepl("^\\s*#", lines))
+  
+  # Only keep lines that are both non-empty and non-comments
+  valid_lines <- intersect(non_empty, non_comment)
+  
+  count <- min(max_del, length(valid_lines))
+  if (length(valid_lines) == 0) {
+    warning("No valid lines to delete (all lines are empty or comments).")
     return(list())
   }
+  
   mutants <- vector("list", count)
   for (i in seq_len(count)) {
-    idx      <- sample(non_empty, 1)
+    idx      <- sample(valid_lines, 1)
     out_file <- file.path(out_dir, sprintf("%s_%03d.R", file_base, start_idx + i - 1))
     writeLines(lines[-idx], out_file)
     mutants[[i]] <- list(
@@ -60,6 +68,11 @@ identify_equivalent_mutants <- function(src_file, survived_mutants, api_config =
     mutants_by_file[[file_name]][[id]] <- survived_mutants[[id]]
   }
   
+  # Track counts for each category
+  equiv_count <- 0
+  not_equiv_count <- 0
+  unknown_count <- 0
+  
   # Process each source file
   for (file_name in names(mutants_by_file)) {
     file_mutants <- mutants_by_file[[file_name]]
@@ -87,31 +100,51 @@ identify_equivalent_mutants <- function(src_file, survived_mutants, api_config =
     # Process response
     if (!is.null(response)) {
       parsed <- response
+      
+      cat("Answer received from OpenAI API\n")
+      cat("----------------------------------------\n")
+      cat(parsed$choices[[1]]$message$content)
+      cat("\n----------------------------------------\n\n")
+      
       if (!is.null(parsed$choices) && length(parsed$choices) > 0) {
         # Extract equivalent mutants information from response
         equivalent_analysis <- parsed$choices[[1]]$message$content
         
         # Update the mutants with equivalence information
         for (mid in names(file_mutants)) {
-          # Simple pattern matching to find equivalence judgments
-          pattern <- paste0(mid, ".*equivalent")
-          if (grepl(pattern, equivalent_analysis, ignore.case = TRUE)) {
+          if (grepl(paste0(mid, ".*EQUIVALENT"), equivalent_analysis, ignore.case = TRUE) && 
+              !grepl(paste0(mid, ".*NOT EQUIVALENT"), equivalent_analysis, ignore.case = TRUE)) {
             survived_mutants[[mid]]$equivalent <- TRUE
+            survived_mutants[[mid]]$equivalence_status <- "EQUIVALENT"
+            equiv_count <- equiv_count + 1
             cat(sprintf("Mutant %s identified as EQUIVALENT\n", mid))
-          } else if (grepl(
-            paste0(mid, ".*not equivalent"),
-            equivalent_analysis,
-            ignore.case = TRUE
-          )) {
+          } else if (grepl(paste0(mid, ".*NOT EQUIVALENT"), equivalent_analysis, ignore.case = TRUE)) {
             survived_mutants[[mid]]$equivalent <- FALSE
+            survived_mutants[[mid]]$equivalence_status <- "NOT EQUIVALENT"
+            not_equiv_count <- not_equiv_count + 1
+            cat(sprintf("Mutant %s identified as NOT EQUIVALENT\n", mid))
+          } else if (grepl(paste0(mid, ".*DONT KNOW"), equivalent_analysis, ignore.case = TRUE)) {
+            survived_mutants[[mid]]$equivalent <- NA
+            survived_mutants[[mid]]$equivalence_status <- "DONT KNOW"
+            unknown_count <- unknown_count + 1
+            cat(sprintf("Mutant %s: DONT KNOW\n", mid))
           } else {
             # Default to unknown if no clear determination
             survived_mutants[[mid]]$equivalent <- NA
+            survived_mutants[[mid]]$equivalence_status <- "DONT KNOW"
+            unknown_count <- unknown_count + 1
+            cat(sprintf("Mutant %s: No clear determination, marking as DONT KNOW\n", mid))
           }
         }
       }
     }
   }
+  
+  cat("\nEquivalence Analysis Summary:\n")
+  cat(sprintf("  Equivalent:     %d\n", equiv_count))
+  cat(sprintf("  Not Equivalent: %d\n", not_equiv_count))
+  cat(sprintf("  Uncertain:      %d\n", unknown_count))
+  cat("\n")
   
   return(survived_mutants)
 }
@@ -133,8 +166,12 @@ create_equivalent_mutant_prompt <- function(original_code, mutant_details) {
   prompt <- paste0(
     "Determine if the following mutants are equivalent to the original code. ",
     "An equivalent mutant has the same behavior as the original code under all ",
-    "possible inputs. For each mutant, respond with 'EQUIVALENT' or ",
-    "'NOT EQUIVALENT', followed by a brief reason why.\n\n",
+    "possible inputs.\n\n",
+    "Be conservative in your assessment. For each mutant, respond with one of these options:\n",
+    "- 'EQUIVALENT': Only if you are certain the mutant is functionally identical to the original code\n",
+    "- 'NOT EQUIVALENT': Only if you are certain the mutant changes behavior for some inputs\n",
+    "- 'DONT KNOW': If you are uncertain or cannot determine equivalence\n\n",
+    "Only answer with certainty if you are sure. If there's any doubt, use 'DONT KNOW'.\n\n",
     "Original code:\n```\n", original_code, "\n```\n\n",
     "Survived mutants:\n", mutant_info
   )
@@ -152,34 +189,40 @@ create_equivalent_mutant_prompt <- function(original_code, mutant_details) {
 #' @return API response as text, or NULL if request failed
 call_openai_api <- function(prompt, config) {
   tryCatch({
+    # Create the request body without temperature parameter
+    request_body <- list(
+      model = config$model,
+      messages = list(
+        list(
+          role = "system",
+          content = paste0(
+            "You are an expert in program analysis, ",
+            "particularly in identifying equivalent mutants in code."
+          )
+        ),
+        list(
+          role = "user",
+          content = prompt
+        )
+      )
+    )
+    
+    # Convert to JSON with proper settings
+    json_body <- jsonlite::toJSON(request_body, auto_unbox = TRUE)
+    
+    # Make the API request
     response <- httr::POST(
       url = "https://api.openai.com/v1/chat/completions",
       httr::add_headers(
         "Content-Type" = "application/json",
         "Authorization" = paste("Bearer", config$api_key)
       ),
-      body = jsonlite::toJSON(
-        list(
-          model = config$model,
-          messages = list(
-            list(
-              role = "system",
-              content = paste0(
-                "You are an expert in program analysis, ",
-                "particularly in identifying equivalent mutants in code."
-              )
-            ),
-            list(
-              role = "user",
-              content = prompt
-            )
-          ),
-          temperature = 0.1
-        ),
-        auto_unbox = TRUE
-      ),
+      body = json_body,
       encode = "json"
     )
+    
+    # Check for HTTP errors
+    httr::stop_for_status(response)
     
     if (httr::status_code(response) == 200) {
       return(httr::content(response, as = "parsed", type = "application/json"))
@@ -241,7 +284,6 @@ get_openai_config <- function() {
 
   list(api_key = api_key, model = model)
 }
-
 
 # Generate AST-based and line-deletion mutants for a single R file
 mutate_file <- function(src_file, out_dir = "mutations") {
@@ -357,6 +399,12 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
     passed
   }
 
+
+  # options(
+  #   future.devices.onMisuse = "warning",   # or "ignore"
+  #   future.connections.onMisuse = "ignore" # similar check for open file‑conns
+  # )
+
   # Set up parallel processing
   future::plan(future::multisession, 
                workers = min(cores, length(mutants)),
@@ -406,8 +454,10 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
   # Filter survived mutants
   survived_mutants <- package_mutants[unlist(test_results)]
   
-  # Set default values for equivalent mutants
+  # Initialize counters
   equivalent <- 0
+  not_equivalent <- 0
+  uncertain <- 0
   
   # Identify equivalent mutants among survived mutants only if detectEqMutants is TRUE
   if (detectEqMutants && length(survived_mutants) > 0) {
@@ -427,6 +477,9 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
         # Update the main package_mutants list with equivalence information
         for (id in names(file_mutants)) {
           package_mutants[[id]]$equivalent <- file_mutants[[id]]$equivalent
+          if (!is.null(file_mutants[[id]]$equivalence_status)) {
+            package_mutants[[id]]$equivalence_status <- file_mutants[[id]]$equivalence_status
+          }
         }
       }
     }
@@ -444,6 +497,8 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
   # Calculate equivalent mutants only if detectEqMutants is TRUE
   if (detectEqMutants) {
     equivalent <- sum(sapply(package_mutants, function(m) isTRUE(m$equivalent)), na.rm = TRUE)
+    not_equivalent <- sum(sapply(package_mutants, function(m) isFALSE(m$equivalent)), na.rm = TRUE)
+    uncertain <- sum(sapply(package_mutants, function(m) is.na(m$equivalent) && !is.null(m$equivalent)), na.rm = TRUE)
   }
   
   adjusted_survived <- survived - equivalent
@@ -461,6 +516,8 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
   # Only print equivalent mutants and adjusted score if detectEqMutants is TRUE
   if (detectEqMutants) {
     cat(sprintf("  Equivalent:       %d\n", equivalent))
+    cat(sprintf("  Not Equivalent:   %d\n", not_equivalent))
+    cat(sprintf("  Uncertain:        %d\n", uncertain))
     cat(sprintf("  Mutation Score:   %.2f%%\n", mutation_score))
     cat(sprintf("  Adjusted Score:   %.2f%% (excluding equivalent mutants)\n", adjusted_mutation_score))
   } else {

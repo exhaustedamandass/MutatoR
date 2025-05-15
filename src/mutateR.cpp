@@ -47,9 +47,11 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp, bool is_insid
     int n_protected = 0;
 
     for (int i = 0; i < n; ++i) {
-        auto [mut, ok] = mutator.applyMutation(expr_sexp, operators, i);
+        auto result = mutator.applyMutation(expr_sexp, operators, i);
+        auto mut = result.first;
+        auto ok = result.second;
         if (ok) {
-            PROTECT(mut); ++n_protected;
+            // PROTECT(mut); ++n_protected;
             mutants.push_back(mut);
         }
     }
@@ -59,7 +61,8 @@ extern "C" SEXP C_mutate_single(SEXP expr_sexp, SEXP src_ref_sexp, bool is_insid
     for (R_xlen_t i = 0; i < m; ++i)
         SET_VECTOR_ELT(res, i, mutants[i]);
 
-    UNPROTECT(n_protected);   // res is now reachable from R, others are inside res
+    // UNPROTECT(n_protected);   // res is now reachable from R, others are inside res
+    UNPROTECT(1 + m);         // res + every mutant
     return res;
 }
 
