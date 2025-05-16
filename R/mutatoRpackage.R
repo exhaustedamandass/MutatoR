@@ -363,15 +363,17 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
   }
 
   run_tests <- function(pkg_dir) {
-    # Close any open graphics devices before running tests
-    if (requireNamespace("grDevices", quietly = TRUE)) {
-      while (grDevices::dev.cur() > 1) grDevices::dev.off()
-    }
+    # Remember which devices were already open
+    orig_dev <- grDevices::dev.list()  # NULL or a named integer vector
+    
     old_wd <- getwd()
     on.exit({
       setwd(old_wd)
-      if (requireNamespace("grDevices", quietly = TRUE)) {
-        while (grDevices::dev.cur() > 1) grDevices::dev.off()
+      # Close only the devices that were *not* in orig_dev
+      open_now <- grDevices::dev.list()
+      if (length(open_now)) {
+        to_close <- setdiff(open_now, orig_dev)
+        for (d in to_close) try(grDevices::dev.off(d), silent = TRUE)
       }
     }, add = TRUE)
     setwd(pkg_dir)
