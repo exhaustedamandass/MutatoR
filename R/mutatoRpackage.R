@@ -342,9 +342,6 @@ mutate_file <- function(src_file, out_dir = "mutations") {
 # High-level: mutate every R file in a package, run tests in parallel, and summarize
 mutate_package <- function(pkg_dir, cores = parallel::detectCores(), 
                            isFullLog = FALSE, detectEqMutants = FALSE) {
-  ## 1. clean up previous leftovers right at the start
-  unlink(list.files(tempdir(), "^mut_pkg_", full.names = TRUE), recursive = TRUE)
-                           
   r_files <- list.files(file.path(pkg_dir, "R"),
                         pattern   = "\\.R$",
                         full.names = TRUE)
@@ -402,11 +399,9 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
     passed
   }
 
-
   # Set up parallel processing
-  future::plan(future.callr::callr, 
+  future::plan(future::multisession, 
                workers = min(cores, length(mutants)),
-               gc      = TRUE,          # Enable garbage collection after each result
                earlySignal = TRUE)
 
   mutant_ids <- names(mutants)
@@ -415,13 +410,8 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
 
   # Run tests in parallel with progress bar
   parallel_results <- furrr::future_map(
-    mutant_ids,
-    function(id) {
-      dir <- pkg_dir_list[[id]]
-      out <- suppressMessages(suppressWarnings(run_tests(dir)))
-      unlink(dir, recursive = TRUE, force = TRUE)   # free disk immediately
-      out
-    },
+    pkg_dir_list,
+    function(pkg) suppressMessages(suppressWarnings(run_tests(pkg))),
     .progress = TRUE,
     .options = furrr::furrr_options(seed = TRUE)
   )
