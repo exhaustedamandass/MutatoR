@@ -399,60 +399,28 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
     passed
   }
 
-  # Set up parallel processing
-  if (cores > 1 && length(mutants) > 1) {
-    tryCatch({
-      future::plan(future::multisession, 
-                 workers = min(cores, length(mutants)),
-                 earlySignal = FALSE)
-      
-      mutant_ids <- names(mutants)
-      pkg_dirs <- sapply(mutants, function(x) x$pkg)
-      pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
-      
-      # Run tests in parallel with progress bar
-      parallel_results <- tryCatch({
-        furrr::future_map(
-          pkg_dir_list,
-          function(pkg) {
-            tryCatch(
-              suppressMessages(suppressWarnings(run_tests(pkg))),
-              error = function(e) {
-                message("Worker error: ", e$message)
-                FALSE  # Return FALSE to mark the mutant as killed
-              }
-            )
-          },
-          .progress = TRUE,
-          .options = furrr::furrr_options(seed = TRUE)
-        )
-      }, error = function(e) {
-        message("Parallel processing error: ", e$message)
-        message("Falling back to sequential processing...")
-        NULL
-      })
-      
-      # Fallback to sequential if parallel processing failed
-      if (is.null(parallel_results)) {
-        future::plan(future::sequential)
-        parallel_results <- lapply(pkg_dir_list, function(pkg) {
-          suppressMessages(suppressWarnings(run_tests(pkg)))
-        })
-      }
-    }, finally = {
-      # Make sure we always clean up the future plan
-      future::plan(future::sequential)
-    })
-  } else {
-    # Run sequentially if only one core or one mutant
-    mutant_ids <- names(mutants)
-    pkg_dirs <- sapply(mutants, function(x) x$pkg)
-    pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
-    
-    parallel_results <- lapply(pkg_dir_list, function(pkg) {
-      suppressMessages(suppressWarnings(run_tests(pkg)))
-    })
-  }
+
+  ## 1. clean up previous leftovers right at the start
+unlink(list.files(tempdir(), "^mut_pkg_", full.names = TRUE), recursive = TRUE)
+
+## 2. tell future to GC after every result
+future::plan(future::multisession,
+             workers = min(cores, length(mutants)),
+             gc      = TRUE,          # <-- new
+             earlySignal = TRUE)
+
+## 3. delete the temp copy as soon as a mutant is done
+parallel_results <- furrr::future_map(
+  mutant_ids,
+  function(id) {
+    dir <- pkg_dir_list[[id]]
+    out <- suppressMessages(suppressWarnings(run_tests(dir)))
+    unlink(dir, recursive = TRUE, force = TRUE)   # free disk immediately
+    out
+  },
+  .progress = TRUE,
+  .options  = furrr::furrr_options(seed = TRUE)
+)
 
   # Process the parallel test results
   package_mutants <- list()
@@ -518,6 +486,7 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
   }
 
   # Clean up the parallel workers
+  future::plan(future::sequential)
   gc()  # Force garbage collection to clean up connections
 
   # Summarize test results
