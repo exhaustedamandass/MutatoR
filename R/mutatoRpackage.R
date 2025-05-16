@@ -342,6 +342,9 @@ mutate_file <- function(src_file, out_dir = "mutations") {
 # High-level: mutate every R file in a package, run tests in parallel, and summarize
 mutate_package <- function(pkg_dir, cores = parallel::detectCores(), 
                            isFullLog = FALSE, detectEqMutants = FALSE) {
+  ## 1. clean up previous leftovers right at the start
+  unlink(list.files(tempdir(), "^mut_pkg_", full.names = TRUE), recursive = TRUE)
+                           
   r_files <- list.files(file.path(pkg_dir, "R"),
                         pattern   = "\\.R$",
                         full.names = TRUE)
@@ -400,27 +403,28 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
   }
 
 
-  ## 1. clean up previous leftovers right at the start
-unlink(list.files(tempdir(), "^mut_pkg_", full.names = TRUE), recursive = TRUE)
+  # Set up parallel processing
+  future::plan(future::multisession, 
+               workers = min(cores, length(mutants)),
+               gc      = TRUE,          # Enable garbage collection after each result
+               earlySignal = TRUE)
 
-## 2. tell future to GC after every result
-future::plan(future::multisession,
-             workers = min(cores, length(mutants)),
-             gc      = TRUE,          # <-- new
-             earlySignal = TRUE)
+  mutant_ids <- names(mutants)
+  pkg_dirs <- sapply(mutants, function(x) x$pkg)
+  pkg_dir_list <- setNames(as.list(pkg_dirs), mutant_ids)
 
-## 3. delete the temp copy as soon as a mutant is done
-parallel_results <- furrr::future_map(
-  mutant_ids,
-  function(id) {
-    dir <- pkg_dir_list[[id]]
-    out <- suppressMessages(suppressWarnings(run_tests(dir)))
-    unlink(dir, recursive = TRUE, force = TRUE)   # free disk immediately
-    out
-  },
-  .progress = TRUE,
-  .options  = furrr::furrr_options(seed = TRUE)
-)
+  # Run tests in parallel with progress bar
+  parallel_results <- furrr::future_map(
+    mutant_ids,
+    function(id) {
+      dir <- pkg_dir_list[[id]]
+      out <- suppressMessages(suppressWarnings(run_tests(dir)))
+      unlink(dir, recursive = TRUE, force = TRUE)   # free disk immediately
+      out
+    },
+    .progress = TRUE,
+    .options = furrr::furrr_options(seed = TRUE)
+  )
 
   # Process the parallel test results
   package_mutants <- list()
