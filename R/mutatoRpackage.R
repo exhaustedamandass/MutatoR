@@ -404,7 +404,7 @@ mutate_package <- function(pkg_dir, cores = parallel::detectCores(),
 
 
   # Set up parallel processing
-  future::plan(future::multisession, 
+  future::plan(future.callr::callr, 
                workers = min(cores, length(mutants)),
                gc      = TRUE,          # Enable garbage collection after each result
                earlySignal = TRUE)
