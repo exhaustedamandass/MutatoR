@@ -1,5 +1,7 @@
 # mutator
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/mutator)](https://CRAN.R-project.org/package=mutator)
 [![R-CMD-check](https://github.com/PRL-PRG/mutator/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PRL-PRG/mutator/actions/workflows/R-CMD-check.yaml)
 [![r-universe](https://prl-prg.r-universe.dev/mutator/badges/version)](https://prl-prg.r-universe.dev/mutator)
 [![Codecov test
@@ -163,16 +165,19 @@ name: mutation-testing
 
 jobs:
   mutation:
-    uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.0
+    uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.2
     with:
       target-margin: "0.10" # sample to +/-10 percentage points
       fail-under: "75" # fail CI below a 75% mutation score
 ```
 
-Pin to a released tag such as `@v0.2.0`; the workflow is versioned with
-the mutator package, so the tag matches the package version. Set
-`deploy-badge: true` (with `contents: write` permission) to publish a
-shields.io badge. See the [Continuous integration
+Pin to a released tag such as `@v0.2.2`; the workflow is versioned with
+the mutator package, so the tag matches the package version. It installs
+mutator from CRAN and falls back to the matching GitHub tag when CRAN
+cannot provide it; `mutator-source: r-universe` or
+`mutator-source: github` picks another source. Set `deploy-badge: true`
+(with `contents: write` permission) to publish a shields.io badge. See
+the [Continuous integration
 vignette](https://prl-prg.github.io/mutator/articles/continuous-integration.html)
 for every input, threshold guidance, and badge setup. From an installed
 copy, open it with

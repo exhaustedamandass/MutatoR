@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mutator</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
       <h1>Continuous integration</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/PRL-PRG/mutator/blob/v0.2.1/vignettes/continuous-integration.Rmd" class="external-link"><code>vignettes/continuous-integration.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/PRL-PRG/mutator/blob/main/vignettes/continuous-integration.Rmd" class="external-link"><code>vignettes/continuous-integration.Rmd</code></a></small>
       <div class="d-none name"><code>continuous-integration.Rmd</code></div>
     </div>
 
@@ -93,10 +93,10 @@ repository:</p>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="at">  </span><span class="fu">mutation</span><span class="kw">:</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.0</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.2</span></span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="at">      </span><span class="fu">target-margin</span><span class="kw">:</span><span class="at"> </span><span class="st">"0.10"</span></span></code></pre></div>
-<p>Pin to a released tag such as <code>@v0.2.0</code>. The reusable
+<p>Pin to a released tag such as <code>@v0.2.2</code>. The reusable
 workflow lives in the mutator package repository and is versioned with
 the package, so the tag you pin matches a mutator release. Bump the tag
 in your caller when you want to move to a newer release. You can also
@@ -192,10 +192,35 @@ relying on covr internals.</td>
 <td>Branch the badge JSON is deployed to.</td>
 </tr>
 <tr class="even">
+<td><code>mutator-source</code></td>
+<td><code>cran</code></td>
+<td>Where mutator is installed from: <code>cran</code>,
+<code>r-universe</code>, <code>github</code>, or <code>local</code>. See
+below.</td>
+</tr>
+<tr class="odd">
+<td><code>mutator-ref</code></td>
+<td>the matching release tag</td>
+<td>Git ref used by the <code>github</code> source and by the
+fallback.</td>
+</tr>
+<tr class="even">
+<td><code>mutator-fallback</code></td>
+<td><code>true</code></td>
+<td>Install from GitHub when CRAN or r-universe cannot provide
+mutator.</td>
+</tr>
+<tr class="odd">
+<td><code>r-universe-repo</code></td>
+<td><code>https://prl-prg.r-universe.dev</code></td>
+<td>Repository consulted when <code>mutator-source</code> is
+<code>r-universe</code>.</td>
+</tr>
+<tr class="even">
 <td><code>mutator-spec</code></td>
-<td><code>github::PRL-PRG/mutator</code></td>
-<td>pak spec used to install mutator, for example
-<code>any::mutator</code> once it is on CRAN.</td>
+<td><code>""</code></td>
+<td>Explicit pak spec, overriding <code>mutator-source</code>
+entirely.</td>
 </tr>
 <tr class="odd">
 <td><code>install-imputesrcref</code></td>
@@ -212,18 +237,81 @@ locations.</td>
 </table>
 </div>
 <div class="section level2">
+<h2 id="where-mutator-is-installed-from">Where mutator is installed from<a class="anchor" aria-label="anchor" href="#where-mutator-is-installed-from"></a>
+</h2>
+<p>By default the workflow installs the released mutator from CRAN. If
+that install fails – most importantly while a release is still working
+its way through CRAN, but also when a source build fails on the runner –
+it retries against the GitHub tag matching the workflow you pinned, logs
+a warning on the run, and carries on. Nothing has to change in your
+caller for the fallback to happen.</p>
+<p>Set <code>mutator-source</code> to pick a different source:</p>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th>Value</th>
+<th>Installs</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<code>cran</code> (default)</td>
+<td>The released version from CRAN, with the GitHub fallback.</td>
+</tr>
+<tr class="even">
+<td><code>r-universe</code></td>
+<td>The build from <a href="https://prl-prg.r-universe.dev" class="external-link uri">https://prl-prg.r-universe.dev</a>, which tracks the
+development version, with the GitHub fallback.</td>
+</tr>
+<tr class="odd">
+<td><code>github</code></td>
+<td>
+<code>PRL-PRG/mutator</code> at <code>mutator-ref</code>. No
+fallback, since this is already the fallback source.</td>
+</tr>
+<tr class="even">
+<td><code>local</code></td>
+<td>Nothing: the package under test <em>is</em> mutator, so the checkout
+provides it.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="at">  </span><span class="fu">mutation</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.2</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="at">      </span><span class="fu">mutator-source</span><span class="kw">:</span><span class="at"> r-universe</span></span></code></pre></div>
+<p><code>mutator-ref</code> fixes which commit the <code>github</code>
+source and the fallback use. It defaults to the tag the workflow is
+versioned with, so a caller pinned to <code>@v0.2.2</code> also falls
+back to mutator <code>v0.2.2</code> rather than to a moving
+<code>main</code>. Point it at <code>main</code> to track development,
+at the cost of reproducibility:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="at">      </span><span class="fu">mutator-source</span><span class="kw">:</span><span class="at"> github</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="at">      </span><span class="fu">mutator-ref</span><span class="kw">:</span><span class="at"> main</span></span></code></pre></div>
+<p>Set <code>mutator-fallback: false</code> to fail the job instead of
+falling back, which is the right choice when you specifically want to
+test against the released package. For anything the four sources do not
+cover, <code>mutator-spec</code> takes a raw <a href="https://pak.r-lib.org" class="external-link">pak</a> spec and overrides
+<code>mutator-source</code>; no fallback is attempted for it.</p>
+</div>
+<div class="section level2">
 <h2 id="enforcing-a-minimum-mutation-score">Enforcing a minimum mutation score<a class="anchor" aria-label="anchor" href="#enforcing-a-minimum-mutation-score"></a>
 </h2>
 <p>Set <code>fail-under</code> to the percentage below which the job
 should fail. The workflow computes the mutation score, and if it is
 below the threshold the job exits non-zero, which blocks the pull
 request:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="at">  </span><span class="fu">mutation</span><span class="kw">:</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.0</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="at">      </span><span class="fu">fail-under</span><span class="kw">:</span><span class="at"> </span><span class="st">"75"</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="at">      </span><span class="fu">target-margin</span><span class="kw">:</span><span class="at"> </span><span class="st">"0.05"</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="at">  </span><span class="fu">mutation</span><span class="kw">:</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.2</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="at">      </span><span class="fu">fail-under</span><span class="kw">:</span><span class="at"> </span><span class="st">"75"</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="at">      </span><span class="fu">target-margin</span><span class="kw">:</span><span class="at"> </span><span class="st">"0.05"</span></span></code></pre></div>
 <p>Two points make a threshold gate reliable:</p>
 <ol style="list-style-type: decimal">
 <li>Reduce sampling noise. The score is estimated from a sample of
@@ -249,16 +337,16 @@ uploaded artifact regardless of whether a threshold is set.</p>
 <p>Set <code>deploy-badge: true</code> and grant the caller job
 <code>contents: write</code>. The workflow writes a <a href="https://shields.io/endpoint" class="external-link">shields.io endpoint</a> JSON file and
 deploys it to <code>gh-pages</code> (or <code>badge-branch</code>):</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="at">  </span><span class="fu">mutation</span><span class="kw">:</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="at">    </span><span class="fu">permissions</span><span class="kw">:</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> write</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.0</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="at">      </span><span class="fu">deploy-badge</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="at">  </span><span class="fu">mutation</span><span class="kw">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="at">    </span><span class="fu">permissions</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> write</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.2</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="at">      </span><span class="fu">deploy-badge</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>Reference the badge in your README, replacing
 <code>OWNER/REPO</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="al">![mutator](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/OWNER/REPO/gh-pages/mutation-score.json)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="al">![mutator](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/OWNER/REPO/gh-pages/mutation-score.json)</span></span></code></pre></div>
 <p>This reads the JSON straight from <code>badge-branch</code> via
 <code>raw.githubusercontent.com</code>, so no GitHub Pages setup is
 needed. If you instead fetch it through a pkgdown Pages site
@@ -284,8 +372,8 @@ GitHub, which is provided automatically. You only need to set
 to a branch. Pull request runs never deploy the badge.</p>
 <p>If your package depends on packages that are not on CRAN, pass them
 through <code>extra-packages</code> as pak specs:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="at">      </span><span class="fu">extra-packages</span><span class="kw">:</span><span class="at"> </span><span class="st">"github::owner/dependency, any::somePackage"</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="at">      </span><span class="fu">extra-packages</span><span class="kw">:</span><span class="at"> </span><span class="st">"github::owner/dependency, any::somePackage"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="tuning-the-run">Tuning the run<a class="anchor" aria-label="anchor" href="#tuning-the-run"></a>

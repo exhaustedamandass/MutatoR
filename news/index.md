@@ -1,6 +1,21 @@
 # Changelog
 
+## mutator 0.2.2
+
+- The reusable GitHub Actions workflow now installs mutator from CRAN by
+  default, instead of from the tip of the GitHub repository. A new
+  `mutator-source` input selects `cran` (default), `r-universe`,
+  `github`, or `local` (mutator is the package under test). When CRAN or
+  r-universe cannot provide the package, the workflow falls back to
+  `PRL-PRG/mutator` at the tag given by the new `mutator-ref` input,
+  which defaults to the release the workflow is versioned with; set
+  `mutator-fallback: false` to fail instead. The existing `mutator-spec`
+  input still accepts a raw pak spec and now overrides `mutator-source`;
+  it no longer defaults to GitHub.
+
 ## mutator 0.2.1
+
+CRAN release: 2026-08-02
 
 This release addresses feedback received from CRAN during the review of
 the initial submission:

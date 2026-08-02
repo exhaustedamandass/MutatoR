@@ -28,12 +28,12 @@ name: mutation-testing
 
 jobs:
   mutation:
-    uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.0
+    uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.2
     with:
       target-margin: "0.10"
 ```
 
-Pin to a released tag such as `@v0.2.0`. The reusable workflow lives in
+Pin to a released tag such as `@v0.2.2`. The reusable workflow lives in
 the mutator package repository and is versioned with the package, so the
 tag you pin matches a mutator release. Bump the tag in your caller when
 you want to move to a newer release. You can also pin to a branch (for
@@ -59,9 +59,57 @@ All inputs are optional.
 | `badge-label` | `mutator` | Label shown on the shields.io badge. |
 | `deploy-badge` | `false` | Publish a badge. Requires `contents: write`. |
 | `badge-branch` | `gh-pages` | Branch the badge JSON is deployed to. |
-| `mutator-spec` | `github::PRL-PRG/mutator` | pak spec used to install mutator, for example `any::mutator` once it is on CRAN. |
+| `mutator-source` | `cran` | Where mutator is installed from: `cran`, `r-universe`, `github`, or `local`. See below. |
+| `mutator-ref` | the matching release tag | Git ref used by the `github` source and by the fallback. |
+| `mutator-fallback` | `true` | Install from GitHub when CRAN or r-universe cannot provide mutator. |
+| `r-universe-repo` | `https://prl-prg.r-universe.dev` | Repository consulted when `mutator-source` is `r-universe`. |
+| `mutator-spec` | `""` | Explicit pak spec, overriding `mutator-source` entirely. |
 | `install-imputesrcref` | `true` | Install the optional imputesrcref package to refine mutant locations. |
 | `r-version` | `release` | R version passed to `setup-r`. |
+
+## Where mutator is installed from
+
+By default the workflow installs the released mutator from CRAN. If that
+install fails – most importantly while a release is still working its
+way through CRAN, but also when a source build fails on the runner – it
+retries against the GitHub tag matching the workflow you pinned, logs a
+warning on the run, and carries on. Nothing has to change in your caller
+for the fallback to happen.
+
+Set `mutator-source` to pick a different source:
+
+| Value | Installs |
+|----|----|
+| `cran` (default) | The released version from CRAN, with the GitHub fallback. |
+| `r-universe` | The build from <https://prl-prg.r-universe.dev>, which tracks the development version, with the GitHub fallback. |
+| `github` | `PRL-PRG/mutator` at `mutator-ref`. No fallback, since this is already the fallback source. |
+| `local` | Nothing: the package under test *is* mutator, so the checkout provides it. |
+
+``` yaml
+jobs:
+  mutation:
+    uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.2
+    with:
+      mutator-source: r-universe
+```
+
+`mutator-ref` fixes which commit the `github` source and the fallback
+use. It defaults to the tag the workflow is versioned with, so a caller
+pinned to `@v0.2.2` also falls back to mutator `v0.2.2` rather than to a
+moving `main`. Point it at `main` to track development, at the cost of
+reproducibility:
+
+``` yaml
+    with:
+      mutator-source: github
+      mutator-ref: main
+```
+
+Set `mutator-fallback: false` to fail the job instead of falling back,
+which is the right choice when you specifically want to test against the
+released package. For anything the four sources do not cover,
+`mutator-spec` takes a raw [pak](https://pak.r-lib.org) spec and
+overrides `mutator-source`; no fallback is attempted for it.
 
 ## Enforcing a minimum mutation score
 
@@ -72,7 +120,7 @@ the job exits non-zero, which blocks the pull request:
 ``` yaml
 jobs:
   mutation:
-    uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.0
+    uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.2
     with:
       fail-under: "75"
       target-margin: "0.05"
@@ -108,7 +156,7 @@ jobs:
   mutation:
     permissions:
       contents: write
-    uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.0
+    uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@v0.2.2
     with:
       deploy-badge: true
 ```
