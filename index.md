@@ -2,6 +2,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/mutator)](https://CRAN.R-project.org/package=mutator)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/mutator)](https://CRAN.R-project.org/package=mutator)
 [![R-CMD-check](https://github.com/PRL-PRG/mutator/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PRL-PRG/mutator/actions/workflows/R-CMD-check.yaml)
 [![r-universe](https://prl-prg.r-universe.dev/mutator/badges/version)](https://prl-prg.r-universe.dev/mutator)
 [![Codecov test
